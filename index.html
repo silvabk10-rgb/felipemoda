@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Felipe Modas</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="catalogo.js"></script>
+  <script defer src="loja.js"></script>
+</head>
+<body>
+  <header id="inicio" class="bar" tabindex="-1"><a class="brand" href="#inicio">Felipe Modas</a><button id="open-cart">Carrinho <span id="count">0</span></button></header>
+  <main>
+    <section class="intro"><p>Moda feminina</p><h1>Básicos de todo dia</h1><a href="#catalogo">Ver coleção</a></section>
+    <section id="catalogo" class="catalog" aria-labelledby="catalog-title">
+      <div class="toolbar"><h2 id="catalog-title">Coleção</h2><label><span class="sr">Buscar peças</span><input id="search" type="search" placeholder="Buscar peças"></label></div>
+      <nav id="filters" aria-label="Categorias"></nav>
+      <p id="results" role="status"></p>
+      <div id="products" class="grid"></div>
+      <button id="more" hidden>Ver mais peças</button>
+    </section>
+  </main>
+  <footer><a class="brand" href="#inicio">Felipe Modas</a></footer>
+  <dialog id="cart" aria-labelledby="cart-title">
+    <div class="cart-head"><h2 id="cart-title">Carrinho</h2><form method="dialog"><button aria-label="Fechar carrinho">×</button></form></div>
+    <div id="cart-items"></div>
+    <div class="subtotal"><strong>Subtotal</strong><strong id="subtotal"></strong></div>
+    <button id="buy" class="buy" type="button" disabled>Comprar</button>
+  </dialog>
+  <div id="notice" class="sr" role="status"></div>
+</body>
+</html>
