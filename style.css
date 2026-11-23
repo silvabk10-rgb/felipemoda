@@ -60,7 +60,6 @@ nav button:hover:not([aria-pressed=true]),#more:hover{background:#f5e6ec}
 .store-footer p{margin:.65rem 0 0;color:var(--muted)}
 .store-contact h2{font:600 1rem/1.5 system-ui,sans-serif;margin:0}
 .store-contact p{margin:.25rem 0 0;overflow-wrap:anywhere}
-.store-contact .contact-note{font-size:.875rem}
 .store-footer nav,.policies nav{gap:.6rem 1.15rem}
 .store-footer nav a,.policies a,.policies + footer a{color:var(--wine);text-underline-offset:.2em}
 .policies{max-width:54rem;margin:auto;padding:2rem max(4vw,1rem) 3rem}
