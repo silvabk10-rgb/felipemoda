@@ -29,7 +29,7 @@ Em 24 de novembro de 2026, a Felipe Modas adotou o preço regular das fichas aut
 | `variants` | Uma entrada por combinação em estoque próprio. Use `id` e `sku` exclusivos por variante, `color`, `size` e `stock` inteiro. Mantenha o ID estável depois da primeira venda. O serviço comercial desconta do saldo físico as unidades comprometidas em seus registros. |
 | `images` | Galeria ordenada com caminhos locais em `src`, descrição real em `alt` e `color` quando a imagem retratar uma cor específica. Indique a permissão e a origem do arquivo no registro de ativos. O primeiro arquivo é a capa. |
 | `shipping` | Complete peso e dimensões embalados, com as respectivas unidades, caso a modalidade de frete contratada os exija. |
-| `status` | As 12 fichas estão em `listed`, com fotos e preços públicos. `draft` identifica cadastros em preparação, e `active` habilita a compra quando há saldos próprios e checkout configurado. |
+| `status` | As 12 fichas estão em `active`, com compra por variante. `draft` identifica cadastros em preparação. `listed` publica fotos e preços com consulta de disponibilidade. |
 
 A coleta guarda `supplierSizes` e `supplierColors` dentro de `source` para conferência. As combinações e os saldos efetivos devem vir da contagem da Felipe Modas. `sizeGuide` traz equivalências aproximadas na numeração brasileira. `measurements` descreve dimensões reais da peça em centímetros. Campos desconhecidos permanecem vazios até conferência da etiqueta, do lote ou do material técnico.
 
@@ -39,7 +39,7 @@ O proprietário da Felipe Modas autorizou o uso comercial das galerias de Via Lu
 
 A capa é sempre o primeiro arquivo de `images`. O atributo opcional `color` associa a foto a um tom identificado do modelo. Uma foto de grupo, uma tonalidade ambígua ou uma imagem do mesmo modelo em cor ausente da grade verificada permanece acessível na galeria geral. Na Via Luxo, `source.photoColors` registra os tons conferidos nas fotos. Os dois fornecedores têm variações documentadas em `source.supplierVariantPairs`, com 29 referências da Via Luxo e 41 da DaLuz. Cada referência identifica o tamanho e a cor publicados. Quando o seletor oferece apenas tamanho, `color` fica nulo e a ficha identifica a única lavagem da peça. O SKU do fornecedor permite conferir a origem.
 
-A grade da Via Luxo ainda tem 13 combinações para conferência física. São o Letícia floral vermelho em tamanho único, dez combinações de cor e tamanho da Dani e a Mariana nas numerações 34 e 38. As 70 referências documentadas nos dois fornecedores podem receber saldo quando a Felipe Modas informar sua contagem por variação.
+Em 24/11/2026, a Felipe Modas confirmou 10.000 unidades por combinação. As 70 combinações documentadas receberam essa quantidade inicial no canal. Na Via Luxo, as listas separadas de cores e tamanhos sugerem outros 13 cruzamentos. São o Letícia floral vermelho em tamanho único, dez combinações da Dani e a Mariana nas numerações 34 e 38. Essas opções precisam de confirmação da combinação exata para inclusão no catálogo.
 
 Seis fichas da Via Luxo possuem medidas da peça em centímetros. Dez das doze fichas têm equivalências de numeração. A calça Mariana usa medida por tamanho numérico, e a calça Baya traz sua grade numérica. Para o vestido Lara, o GG equivale ao 44; o comprimento desse tamanho permanece sem medida publicada.
 

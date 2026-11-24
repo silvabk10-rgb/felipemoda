@@ -142,10 +142,14 @@
 .st-facts>div, .st-order dl>div { display:flex; justify-content:space-between; align-items:baseline; gap:13px; padding:6px 0; }
 .st-facts dd, .st-order dd { margin:0; text-align:right; }
 .st-facts dt { color:var(--st-muted); }
-.st-table { overflow:auto; }
-.st-table table { width:100%; border-collapse:collapse; text-align:left; font-size:.8rem; }
-.st-table caption { text-align:left; margin-bottom:8px; font-weight:600; }
-.st-table th,.st-table td { border-bottom:1px solid var(--st-line); padding:8px; }
+.st-table { max-width:100%; margin:3px 0 12px; border:1px solid var(--st-line); }
+.st-table table { width:100%; border-collapse:collapse; font-size:.86rem; line-height:1.45; font-variant-numeric:tabular-nums; }
+.st-table caption { text-align:left; padding:13px 14px; background:var(--st-cream); font:1.28rem/1.25 var(--st-display); }
+.st-size-brand { display:block; margin-bottom:4px; font:600 .68rem/1.4 system-ui,sans-serif; letter-spacing:.11em; text-transform:uppercase; color:var(--st-muted); }
+.st-table th,.st-table td { padding:9px clamp(4px,.6vw,11px); border-top:1px solid var(--st-line); text-align:center; overflow-wrap:anywhere; hyphens:auto; }
+.st-table th:first-child { text-align:left; padding-left:clamp(7px,1vw,14px); }
+.st-table thead th { font-size:.78rem; color:var(--st-muted); font-weight:600; }
+.st-table td.st-size-unknown,.st-measure-note { color:var(--st-muted); font-size:.8rem; }
 .st-related { margin-top:clamp(40px,7vw,100px); }
 .st-related h2 { font-size:clamp(2rem,3.2vw,3.4rem); margin-bottom:18px; }
 .st-cart-layout { display:grid; grid-template-columns:minmax(0,1fr) minmax(300px,.57fr); gap:clamp(25px,5vw,75px); align-items:start; }

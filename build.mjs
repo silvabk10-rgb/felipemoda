@@ -87,6 +87,9 @@ async function build() {
   const archive=JSON.parse(old.replace(/^\s*const\s+catalogo\s*=\s*/,'').replace(/;\s*$/,''));
   await rm(outDir,{force:true,recursive:true});
   await mkdir(outDir,{recursive:true});
+  if (/^[a-f0-9]{40}$/i.test(process.env.COMMIT_REF ?? '')) {
+    await writeFile(path.join(outDir,'versao.txt'),process.env.COMMIT_REF.toLowerCase()+'\n');
+  }
   async function copyFlat(folder,match){
     const dst=path.join(outDir,folder);await mkdir(dst,{recursive:true});
     for(const entry of await readdir(path.join(root,folder),{withFileTypes:true})){
@@ -106,7 +109,7 @@ async function build() {
   const campaignActive=checkoutEnabled&&campaign.enabled&&(!campaign.startsAt||Date.now()>=Date.parse(campaign.startsAt))&&(!campaign.endsAt||Date.now()<=Date.parse(campaign.endsAt));
   const [store,info]=await Promise.all([
     buildStore({outDir,products,layout,banners:headers,legacyCatalog:adaptLegacy(archive),shippingRates,checkoutEnabled,couponEnabled:campaignActive,origin:'https://felipemodasbr.com'}),
-    buildInstitutional({outDir,layout,checkoutEnabled,shippingRates,remotePhotos:false})
+    buildInstitutional({outDir,layout,checkoutEnabled,shippingRates,remotePhotos:false,products})
   ]);
   await writeFile(path.join(outDir,'index.html'),layout({title:'Felipe Modas',path:'/',description:'Conheça a seleção de vestidos, conjuntos e calças femininas da Felipe Modas.',body:home(normalizeProducts(products),campaignActive?campaign:null)}));
   await writeFile(path.join(outDir,'404.html'),layout({title:'Página não encontrada',path:'/404.html',description:'Volte à coleção da Felipe Modas.',body:'<section class="fm-notfound"><h1>Página não encontrada</h1><p>Explore a coleção ou procure a peça pelo nome.</p><a class="fm-cta" href="/busca/">Buscar uma peça</a></section>'}));
