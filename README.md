@@ -14,17 +14,20 @@ Requer Node.js 22.11 ou posterior. Execute `npm ci`, `npm test` e `npm run build
 | `/arte/` na prévia | Estúdio Canvas de campanhas, edição das camadas e exportação PNG |
 | `/arte/marca.html` na prévia | Ateliê Canvas do logotipo |
 | `data/curadoria.json` e `data/GUIA-CURADORIA.md` | Doze fichas, dados de referência e instruções de importação e ativação |
-| `commerce/config.mjs` | Campanha e tabela de frete por CEP |
+| `commerce/config.mjs` | Campanha e modalidades de frete com preço fixo por pedido |
+| `/checkout/` | Finalização em uma página, escolha de frete, formas de pagamento habilitadas e acompanhamento do pedido |
 | `institucional/build.mjs` | Cadastro da empresa, contato e políticas |
 | `docs/identidade.md`, `docs/fotografia.md` | Paleta, aplicação da marca, direção de arte e origem dos ativos |
 | `docs/operacao.md`, `docs/comercio.md` | Atendimento, homologação, pagamentos e publicação |
 
 ## Catálogo e prévias
 
-As 12 fichas foram conferidas nas páginas dos fornecedores. Os preços de referência, as propostas e os saldos de terceiros ficam fora do conteúdo servido ao navegador. As medidas aparecem apenas nas fichas para as quais a fonte forneceu esses dados. As campanhas exibem fotografia editorial original. Insira fotografias autorizadas da peça em `assets/products/` para habilitar sua galeria. As matrizes PNG de fotografia são entregues no kit original.
+O preço de cada uma das 12 fichas corresponde ao preço principal de varejo conferido no respectivo fornecedor. A loja aprovou esses valores em 24/11/2026. Descontos exclusivos do fornecedor, como Pix, não são condições da Felipe Modas. As medidas e equivalências são específicas de cada modelo.
 
-O arquivo histórico `catalogo.js` conserva as 235 referências da Stella Basic. Seus preços e saldos vieram de uma coleta de terceiros. O build usa seus identificadores para recuperar a seleção do carrinho anterior. Produtos com preço, saldo, grade e fotos próprios podem ser cadastrados na coleção ativa.
+As galerias usam fotografias de produto dos fornecedores, com uso autorizado pelo lojista. Os arquivos WebP são servidos pelo próprio site. Cada entrada da galeria conserva a origem para auditoria. As imagens editoriais de campanha têm uso e origem descritos separadamente em `docs/fotografia.md`.
 
-Pull requests da branch de trabalho geram uma prévia conforme a configuração da Netlify. Na prévia os modelos em curadoria são consultáveis por categoria e nome, com fichas tipográficas quando não há foto autorizada. O build comercial exige os dados empresariais e comerciais descritos na documentação. Configure a razão social, o endereço, preços, saldos, fotos e frete antes de habilitar o pagamento. O CNPJ, e-mail e WhatsApp reproduzem o cadastro existente da loja.
+As fichas com `status: listed` aparecem com fotos e preço e oferecem consulta de disponibilidade à loja. Para habilitar a compra, informe a contagem própria de cada variante e homologue as formas de pagamento na conta da loja. O frete aprovado é fixo por pedido, com PAC a R$ 23,00 ou SEDEX a R$ 48,00. As 235 referências históricas da Stella Basic permanecem em `catalogo.js` para migrar a seleção do carrinho anterior.
 
-A proposta de cupom BEMVINDA10 permanece desativada. O checkout preparado usa Pix pela Pagar.me mediante homologação. Os testes automatizados usam um provedor controlado e não iniciam cobranças reais.
+As prévias de pull requests seguem a configuração de acesso da equipe na Netlify. Confira o cadastro empresarial e os requisitos operacionais em `docs/operacao.md` e `docs/comercio.md` antes da abertura comercial.
+
+A proposta de cupom BEMVINDA10 permanece desativada. O cliente informa contato e endereço, escolhe a entrega e seleciona a forma de pagamento na mesma página. A configuração do servidor define a oferta de Pix e cartão de crédito em uma parcela. A Pagar.me (Stone) precisa habilitar a modalidade no estabelecimento e confirmar a transação. Os testes automatizados usam um provedor controlado e não iniciam cobranças reais.

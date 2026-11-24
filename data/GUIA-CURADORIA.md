@@ -2,11 +2,11 @@
 
 `curadoria.json` reúne doze modelos conferidos em 24 de novembro de 2026. São quatro vestidos, quatro conjuntos e quatro calças. Cada ficha tem um SKU da Felipe Modas e uma URL permanente de origem. Os nomes e as descrições comerciais foram redigidos para a loja. As tabelas se referem exclusivamente ao modelo em que aparecem.
 
-## Decisão de preço
+## Preços de venda aprovados
 
-Os valores abaixo servem como ponto de partida editável. A proposta inicial de cada peça é igual ao preço de varejo observado na ficha de referência, antes de condições como Pix. Verifique custo de aquisição, impostos, frete subsidiado e margem da Felipe Modas para aprovar ou substituir cada proposta. A edição de uma proposta, por si só, não altera a oferta da loja.
+Em 24 de novembro de 2026, a Felipe Modas adotou o preço regular das fichas autorizadas. Os valores abaixo são os preços da vitrine. Nos seis modelos Via Luxo, o preço condicionado ao Pix da referência fica apenas na pesquisa interna. A loja usa `priceCents` para exibir o preço aprovado em reais.
 
-| SKU | Peça | Referência | Proposta inicial |
+| SKU | Peça | Referência | Preço aprovado |
 |---|---|---|---:|
 | FM-V01 | Vestido longo floral Letícia | Via Luxo Store | R$ 169,90 |
 | FM-V02 | Vestido jeans Lara escuro | Via Luxo Store | R$ 169,90 |
@@ -21,7 +21,7 @@ Os valores abaixo servem como ponto de partida editável. A proposta inicial de 
 | FM-C03 | Calça de alfaiataria Maelis | DaLuz | R$ 139,00 |
 | FM-C04 | Calça jeans estonada Baya | DaLuz | R$ 89,00 |
 
-## Campos para ativação por SKU
+## Da vitrine à venda por variante
 
 | Campo | Preenchimento |
 |---|---|
@@ -29,15 +29,17 @@ Os valores abaixo servem como ponto de partida editável. A proposta inicial de 
 | `variants` | Uma entrada por combinação em estoque próprio. Use `id` e `sku` exclusivos por variante, `color`, `size` e `stock` inteiro. Mantenha o ID estável depois da primeira venda. O serviço comercial desconta do saldo físico as unidades comprometidas em seus registros. |
 | `images` | Galeria ordenada com caminhos locais em `src`, descrição real em `alt` e `color` quando a imagem retratar uma cor específica. Indique a permissão e a origem do arquivo no registro de ativos. O primeiro arquivo é a capa. |
 | `shipping` | Complete peso e dimensões embalados, com as respectivas unidades, caso a modalidade de frete contratada os exija. |
-| `status` | Mantenha `draft` até aprovar preço, fotos e estoque. Use `active` quando a ficha estiver apta para a vitrine e o checkout estiver configurado para o SKU. |
+| `status` | As 12 fichas estão em `listed`, com fotos e preços públicos. `draft` identifica cadastros em preparação, e `active` habilita a compra quando há saldos próprios e checkout configurado. |
 
 A coleta guarda `supplierSizes` e `supplierColors` dentro de `source` para conferência. As combinações e os saldos efetivos devem vir da contagem da Felipe Modas. `sizeGuide` traz equivalências aproximadas na numeração brasileira. `measurements` descreve dimensões reais da peça em centímetros. Campos desconhecidos permanecem vazios até conferência da etiqueta, do lote ou do material técnico.
 
 ## Fotografias
 
-Cada ficha guarda, em `source.referenceImage`, uma imagem de pesquisa com correspondência ao modelo. A galeria pública deve receber as fotografias próprias ou os arquivos licenciados fornecidos para revenda. O fato de a loja possuir a peça não estabelece as condições de uso das fotografias das lojas pesquisadas. A DaLuz informa que atua no varejo e relata uso indevido de suas imagens por terceiros [em seu FAQ](https://www.daluzloja.com.br/duvidasfrequentes). As páginas da Via Luxo identificam as imagens como fotografias da própria referência. A pesquisa não localizou um pacote com autorização pública de republicação.
+O proprietário da Felipe Modas autorizou o uso comercial das galerias de Via Luxo e DaLuz em 24/11/2026. As 179 fotos dos 12 modelos estão em WebP em `assets/products/`. As galerias têm 83 fotos da Via Luxo e 96 da DaLuz. Cada item em `images` contém o caminho local, texto alternativo e dimensões do derivado. A URL da foto original ocupa a mesma posição em `source.galleryUrls`. A origem da ficha, a autorização e a data ficam em `source`.
 
-Ao receber os arquivos, registre quem autorizou, data, usos cobertos e referência do comprovante. Mantenha os originais e exporte derivados em WebP/AVIF sem retirar sinais de autoria. Confira a correspondência de cor em cada arquivo antes de associá-lo à variante.
+A capa é sempre o primeiro arquivo de `images`. O atributo opcional `color` associa a foto a um tom identificado do modelo. Uma foto de grupo, uma tonalidade ambígua ou uma imagem do mesmo modelo em cor ausente da grade verificada permanece acessível na galeria geral. Na Via Luxo, `source.photoColors` registra os tons visualmente conferidos. Na DaLuz, `source.supplierVariantPairs` preserva as combinações publicadas na página de referência. Esses atributos apoiam a navegação e a conferência física. Para habilitar a compra, a loja precisa registrar a contagem de suas próprias variantes.
+
+Seis fichas da Via Luxo possuem medidas da peça em centímetros. Dez das doze fichas têm equivalências de numeração. A calça Mariana usa medida por tamanho numérico, e a calça Baya traz sua grade numérica. Para o vestido Lara, o GG equivale ao 44; o comprimento desse tamanho permanece sem medida publicada.
 
 ## Nova coleta ou atualização
 

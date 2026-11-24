@@ -1,4 +1,4 @@
-import { emailValid, normalizeEmail, reject } from './domain.mjs';
+import { CommerceError, emailValid, normalizeEmail, reject } from './domain.mjs';
 
 function field(form,key,min,max) {
   const value=String(form.get(key) ?? '').trim();
@@ -16,7 +16,7 @@ function validCPF(value) {
 export function customer(form, cep) {
   const name=field(form,'name',3,64);
   const document=field(form,'cpf',11,14).replace(/[.\-]/g,'');
-  const email=normalizeEmail(field(form,'email',3,254));
+  const email=normalizeEmail(field(form,'email',3,64));
   const phone=field(form,'phone',10,17).replace(/[()\s-]/g,'');
   const state=field(form,'uf',2,2).toUpperCase();
   if (!validCPF(document)) reject('cpf','Confira os onze dígitos do CPF.');
@@ -51,9 +51,17 @@ export function providerItems(quote) {
 }
 
 export function providerPayload(order, person) {
-  return {code:order.id,closed:true,currency:'BRL',customer:person,items:providerItems(order.quote),
-    shipping:{amount:order.quote.shippingCents,description:'Entrega',recipient_name:person.name,address:person.address},
-    payments:[{payment_method:'pix',amount:order.quote.totalCents,pix:{expires_in:1800}}]};
+  const card=order.paymentMethod==='card';
+  const buyer=card ? {customer_id:order.providerCustomerId} : {customer:person};
+  const payment=card ? {payment_method:'credit_card',credit_card:{card_id:order.providerCardId,operation_type:'auth_and_capture',installments:1,auto_recovery:false}}
+    : {payment_method:'pix',pix:{expires_in:1800}};
+  return {code:order.id,closed:true,currency:'BRL',...buyer,items:providerItems(order.quote),
+    shipping:{amount:order.quote.shippingCents,description:order.quote.shippingLabel || 'Entrega',recipient_name:person.name,address:person.address},
+    payments:[{...payment,amount:order.quote.totalCents}]};
+}
+
+export class InvalidProviderOrder extends CommerceError {
+  constructor() { super('provider_validation','O provedor não aceitou os dados do pedido.',422); }
 }
 
 export async function pagarme(cfg,path,options={}) {
@@ -69,7 +77,11 @@ export async function pagarme(cfg,path,options={}) {
     reject('pending_check','Não foi possível consultar o pagamento agora. Guarde o link do pedido e consulte novamente.',503);
   }
   if (!response.ok) {
-    // Mesmo após timeout/recusa HTTP, o saldo só é liberado com estado terminal verificado.
+    if (path==='orders' && options.body && response.status===422) {
+      const failure=await response.json().catch(()=>null);
+      if (failure?.errors && typeof failure.errors==='object' && Object.keys(failure.errors).length) throw new InvalidProviderOrder();
+    }
+    // Timeout, 409 e falhas técnicas são resultados indeterminados.
     reject('provider','O provedor não confirmou a solicitação. Consulte o pedido novamente ou fale com o atendimento.',503);
   }
   return await response.json();
@@ -80,20 +92,41 @@ export function applyProvider(order,remote) {
     || remote.code!==order.id || remote.currency!=='BRL' || remote.amount!==order.quote.totalCents || remote.closed!==true) {
     reject('mismatch','O pagamento precisa de conferência pelo atendimento.',409);
   }
-  if (!['sending','pending','paid','refunded','declined','canceled'].includes(order.state)) reject('state','Pedido não iniciou um pagamento.',409);
+  if (!['sending','pending','paid','refunded','partially_refunded','disputed','declined','canceled'].includes(order.state)) reject('state','Pedido não iniciou um pagamento.',409);
   const charge=remote.charges?.length===1 ? remote.charges[0] : null;
-  if (!charge || charge.currency!=='BRL' || charge.amount!==order.quote.totalCents || String(charge.payment_method).toLowerCase()!=='pix') reject('charge','A cobrança precisa de conferência.',409);
+  const expectedMethod=order.paymentMethod==='card'?'credit_card':'pix';
+  if (!charge || charge.currency!=='BRL' || charge.amount!==order.quote.totalCents || String(charge.payment_method).toLowerCase()!==expectedMethod || (order.providerChargeId && charge.id!==order.providerChargeId)) reject('charge','A cobrança precisa de conferência.',409);
   let state='pending';
-  if (charge.status==='refunded' || (charge.refunded_amount ?? 0)>0) state='refunded';
+  const financialStates=[charge.status,charge.last_transaction?.status];
+  const previouslyPaid=['paid','partially_refunded'].includes(order.state) || Boolean(charge.paid_at) || charge.paid_amount>0;
+  // canceled_amount também pode ser uma autorização desfeita antes da captura.
+  const refunded=charge.refunded_amount ?? (previouslyPaid?charge.canceled_amount:null);
+  if (financialStates.includes('chargedback')) state='disputed';
+  else if (financialStates.includes('refunded') || refunded===order.quote.totalCents) state='refunded';
+  else if (financialStates.includes('partial_refunded') || Number.isInteger(refunded) && refunded>0 && refunded<order.quote.totalCents) state='partially_refunded';
   else if (remote.status==='paid' && charge.status==='paid' && charge.paid_amount===order.quote.totalCents) state='paid';
   else if (remote.status==='failed' && charge.status==='failed') state='declined';
   else if (remote.status==='canceled' && ['failed','canceled'].includes(charge.status)) state='canceled';
 
   // Respostas fora de ordem não podem desfazer estados já confirmados.
-  if (order.state==='refunded' || order.state==='paid' && state!=='refunded') return;
+  const reversals=['refunded','partially_refunded','disputed'];
+  if (['disputed','refunded'].includes(order.state)) return;
+  if (order.state==='partially_refunded' && !['refunded','disputed'].includes(state)) return;
+  if (order.state==='paid' && !reversals.includes(state)) return;
   if (['declined','canceled'].includes(order.state) && ['pending','declined','canceled'].includes(state)) return;
   order.providerId=remote.id;
+  if (/^ch_[a-z0-9]+$/i.test(charge.id??'')) order.providerChargeId=charge.id;
   order.state=state;
-  order.pix=state==='pending' ? String(charge.last_transaction?.qr_code ?? '').slice(0,1500) : '';
+  order.pix=expectedMethod==='pix' && state==='pending' ? String(charge.last_transaction?.qr_code ?? '').slice(0,1500) : '';
   order.pixExpires=charge.last_transaction?.expires_at ?? null;
+  order.pixQrUrl=expectedMethod==='pix' && state==='pending'?safeQrUrl(charge.last_transaction?.qr_code_url):null;
+}
+
+export function safeQrUrl(value) {
+  if (typeof value !== 'string' || value.length>2048) return null;
+  try {
+    const uri=new URL(value);
+    const permitted=/(^|\.)(pagar\.me|stone\.com\.br)$/.test(uri.hostname);
+    return permitted && uri.protocol==='https:' && !uri.username && !uri.password && !uri.port ? uri.href : null;
+  } catch { return null; }
 }

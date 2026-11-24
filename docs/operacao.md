@@ -2,24 +2,25 @@
 
 ## Cadastro empresarial
 
-O proprietário confirmou o uso do CNPJ já existente na loja. As páginas de identificação usam esse cadastro central e os canais de atendimento do site.
+O proprietário confirmou a razão social e o uso do CNPJ já existente na loja. As páginas de identificação usam esse cadastro central e os canais de atendimento do site.
 
 | Campo | Registro para a loja |
 |---|---|
 | Nome comercial | Felipe Modas |
+| Razão social | 68.293.261 LUIS FILIPE CARDOSO DO AMARAL |
 | CNPJ | 68.293.261/0001-80 |
 | E-mail | felipemodas.atendimento.rj@gmail.com |
 | WhatsApp | (21) 97462-3058 |
-| Razão social e endereço empresarial completo | Transcrever do comprovante atualizado de inscrição no CNPJ, com CEP, antes da abertura comercial. |
+| Endereço cadastral | 10A Rua Rua Tiradentes, 23, Centro, Porto Seguro/BA, CEP 45810-000 |
 | Horário de atendimento e redes sociais | Informar somente se confirmados. |
 
-O cadastro fica no objeto `company` de `institucional/build.mjs`. Preencha `legalName` e `address` com os dados públicos do estabelecimento. O endereço para o consumidor devolver uma peça pode ser diferente. Envie a orientação logística diretamente à pessoa após a solicitação.
+O cadastro fica no objeto `company` de `institucional/build.mjs`. Em 24/11/2026, CNPJ.biz e CNPJá exibiam a matriz como ativa e coincidiam quanto a logradouro, número, bairro, município, UF e CEP. As duas consultas trazem a grafia “10A Rua Rua Tiradentes” e não indicam complemento. A loja autorizou publicar o endereço cadastral. O atendimento usa os canais da loja. Oriente a postagem ou coleta de uma devolução individualmente após a solicitação. [CNPJ.biz](https://cnpj.biz/68293261000180) · [CNPJá](https://cnpja.com/office/68293261000180).
 
 Ao alterar o nome comercial, o telefone ou o domínio, confira também o cabeçalho, o rodapé, o checkout e o canonical das páginas. Ao alterar o WhatsApp, atualize o texto de exibição e a URL com o telefone internacional.
 
 ## Políticas e páginas
 
-As nove rotas institucionais são geradas por `buildInstitutional({outDir, layout, checkoutEnabled, remotePhotos})`. A função devolve a lista de caminhos gerados. A lista `footerGroups` organiza os links e `institutionalPaths` identifica as rotas canônicas atuais. O arquivo `/politicas.html` mantém os destinos antigos com os fragmentos `#termos`, `#privacidade`, `#seguranca`, `#entrega` e `#trocas`.
+As nove rotas institucionais são geradas por `buildInstitutional({outDir, layout, checkoutEnabled, remotePhotos, shippingRates})`. A função devolve a lista de caminhos gerados. A lista `footerGroups` organiza os links e `institutionalPaths` identifica as rotas canônicas atuais. O arquivo `/politicas.html` mantém os destinos antigos com os fragmentos `#termos`, `#privacidade`, `#seguranca`, `#entrega` e `#trocas`.
 
 | Quem atualiza | Quando revisar | Onde revisar |
 |---|---|---|
@@ -28,7 +29,9 @@ As nove rotas institucionais são geradas por `buildInstitutional({outDir, layou
 | Comercial | Nova condição de troca por preferência, cupom ou forma de pagamento | Termos, checkout e oferta em que a condição se aplica. |
 | Responsável pela privacidade | Mudança de hospedagem, fotos externas, pagamentos, analytics, mídias ou serviços de atendimento | Privacidade, Cookies e preferências e lista efetiva de parceiros e dados. |
 
-`checkoutEnabled` começa desligado. Ative a seção de tratamento de dados para pedidos somente quando o checkout correspondente estiver habilitado. O texto atual dessa seção pressupõe pagamento via Pagar.me e entrega de mercadoria física. Ajuste-o se os operadores, os campos ou a finalidade mudarem. Se as fotografias dos produtos forem solicitadas a um servidor externo, passe `remotePhotos: true` para informar o tráfego dessa visita.
+O frete aprovado é único por pedido, com PAC por R$ 23,00 ou SEDEX por R$ 48,00. Atualize `shippingRates` em `commerce/config.mjs` para mudar as modalidades e seus valores. O checkout e as páginas de entrega, termos e FAQ usam essa fonte. Não há prazo de transporte definido para publicação. O atendimento pode informar a previsão para o CEP consultado.
+
+A página `/checkout/` reúne contato, endereço, frete, revisão e as formas de pagamento configuradas no servidor. A consulta de endereço por CEP usa ViaCEP no servidor. A página de privacidade identifica o serviço. `checkoutEnabled` indica que a vitrine tem catálogo ativo e modo compatível com o ambiente. O servidor verifica as credenciais de sua própria configuração antes de qualquer pagamento. A geração do código Pix deixa o pagamento pendente. A autorização de cartão requer uma resposta confirmada do provedor. O parcelamento disponível para o cartão é de uma parcela. Na opção de cartão, a Pagar.me (Stone) recebe os dados de cartão diretamente do navegador para tokenização. A loja usa o identificador retornado. Ajuste-o se os operadores, os campos ou a finalidade mudarem. Se as fotografias dos produtos forem solicitadas a um servidor externo, passe `remotePhotos: true` para informar o tráfego dessa visita.
 
 O site não precisa solicitar autorização publicitária para uma integração que não existe. Se a loja incorporar medição ou publicidade que dependa de consentimento, adicione controles para aceitar, recusar ou personalizar as categorias com igual facilidade, bloqueie as chamadas antes da escolha e permita revisar a decisão em Cookies e preferências.
 

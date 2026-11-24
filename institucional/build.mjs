@@ -1,6 +1,7 @@
 import { copyFile, mkdir, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { shippingRates as configuredShipping } from '../commerce/config.mjs';
 
 const source = dirname(fileURLToPath(import.meta.url));
 export const company = {
@@ -9,8 +10,8 @@ export const company = {
   email: 'felipemodas.atendimento.rj@gmail.com',
   whatsApp: '(21) 97462-3058',
   whatsAppUrl: 'https://wa.me/5521974623058',
-  legalName: '',
-  address: '',
+  legalName: '68.293.261 LUIS FILIPE CARDOSO DO AMARAL',
+  address: '10A Rua Rua Tiradentes, 23, Centro, Porto Seguro/BA, CEP 45810-000',
   hours: '',
   social: [],
 };
@@ -41,7 +42,7 @@ function details(question, answer) {
 function storeIdentity() {
   const fields = [
     ['Nome comercial', company.name], ['Razão social', company.legalName], ['CNPJ', company.cnpj],
-    ['Endereço empresarial', company.address], ['Horário de atendimento', company.hours]
+    ['Endereço cadastral', company.address], ['Horário de atendimento', company.hours]
   ].filter(([, value]) => value);
   return '<dl class="fm-info-facts">' + fields.map(([label, value]) => '<div><dt>' + escape(label) + '</dt><dd>' + escape(value) + '</dd></div>').join('') + '</dl>';
 }
@@ -49,9 +50,17 @@ const returnsLink = link('/trocas-e-devolucoes/', 'Trocas e devoluções');
 const helpLink = link('/atendimento/', 'Atendimento');
 const cookiesLink = link('/cookies/', 'Cookies e preferências');
 
-function contentPages({ checkoutEnabled, remotePhotos }) {
+function contentPages({ checkoutEnabled, remotePhotos, shippingRates }) {
+  const reais = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+  const shippingChoices = shippingRates.map(rate => escape(rate.label) + ' por ' + reais.format(rate.priceCents / 100)).join(' ou ');
+  const shippingText = shippingChoices
+    ? 'Você pode escolher ' + shippingChoices + '. O frete tem valor fixo e é cobrado uma única vez por pedido.'
+    : 'Consulte as opções de entrega para o seu pedido no atendimento.';
+  const paymentText = checkoutEnabled
+    ? 'Para os itens disponíveis à compra, você revisa as peças, informa os dados de entrega e escolhe o frete em uma única página. As formas disponíveis aparecem antes da confirmação. No Pix, você gera o código para pagar. No cartão de crédito, quando oferecido, o valor é cobrado em uma parcela. A Pagar.me (Stone) processa o pagamento.'
+    : 'O pagamento online está indisponível no momento. Você pode consultar a disponibilidade de uma peça pelo ' + helpLink + '.';
   const checkoutPrivacy = checkoutEnabled
-    ? section('Ao comprar', p('Para fechar um pedido, utilizamos seu nome, CPF, e-mail, telefone e endereço para identificar a compra, calcular a entrega, processar o pagamento e atender suas solicitações. O serviço de pagamento Pagar.me recebe as informações necessárias à transação. O serviço de entrega recebe os dados de destinatário e endereço necessários ao envio.') + p('Esses tratamentos servem à contratação, à entrega, ao atendimento após a compra e ao cumprimento de obrigações fiscais e legais.'))
+    ? section('Ao comprar', p('Para fechar um pedido, utilizamos seu nome, CPF, e-mail, telefone e endereço para identificar a compra, organizar a entrega, processar o pagamento e atender suas solicitações. O serviço de pagamento Pagar.me (Stone) recebe as informações necessárias à transação. Quando você escolhe cartão de crédito, o navegador envia os dados do cartão diretamente à Pagar.me para gerar um identificador de pagamento. A loja recebe esse identificador. O serviço de entrega recebe os dados de destinatário e endereço necessários ao envio.') + p('Esses tratamentos servem à contratação, à entrega, ao atendimento após a compra e ao cumprimento de obrigações fiscais e legais.'))
     : '';
   return [
     article('/sobre/', 'Sobre a Felipe Modas', 'Vestidos, conjuntos e calças que deixam espaço para o seu jeito de vestir.',
@@ -63,10 +72,11 @@ function contentPages({ checkoutEnabled, remotePhotos }) {
       '<div class="fm-info-channels"><div><h2>WhatsApp</h2>' + p(escape(company.whatsApp)) + p(whatsApp('Iniciar conversa')) + '</div><div><h2>E-mail</h2>' + p(mail(company.email)) + p('Envie sua dúvida e guarde a conversa para consultar a resposta.') + '</div></div>' +
       section('Dúvidas sobre uma peça', p('Envie o nome ou a referência do modelo, a cor e o tamanho que você procura. Se a dúvida for sobre caimento, indique a medida que gostaria de comparar.')) +
       section('Ajuda com um pedido', p('Informe o número da compra, se tiver, e descreva o que aconteceu. Para pedir devolução, basta identificar a compra e comunicar sua decisão. Evite enviar senhas, código de segurança ou foto do seu cartão.') + p(mail('Pedir ajuda com meu pedido', 'Atendimento sobre pedido')), 'pedido') +
-      section('Dados da loja', storeIdentity())),
+      section('Dados da loja', storeIdentity() + p('O atendimento é feito pelos canais desta página. Para devolver uma peça, solicite à equipe as instruções de postagem ou coleta.'))),
     article('/entregas/', 'Entregas e frete', 'Confira o que observar antes do envio e como pedir ajuda se a sua encomenda atrasar.',
-      section('Disponibilidade e prazo', p('A Felipe Modas trabalha com estoque próprio à pronta entrega. A disponibilidade depende do modelo, da cor e do tamanho. O tempo de transporte varia conforme o destino e o serviço de envio.') +
-      p('Para as peças habilitadas à compra, consulte o valor do frete e o prazo para o seu CEP antes de confirmar o pedido. Se a cotação não aparecer, ' + whatsApp('consulte a equipe sobre a entrega') + '.')) +
+      section('Modalidades e valores', p(shippingText)) +
+      section('Disponibilidade e prazo', p('A Felipe Modas trabalha com estoque próprio à pronta entrega. A disponibilidade depende do modelo, da cor e do tamanho.') +
+      p('O prazo varia conforme o destino e a modalidade escolhida. Para confirmar a previsão antes da compra, ' + whatsApp('fale com a equipe e informe seu CEP') + '.')) +
       section('Confira o endereço', p('Revise o CEP, logradouro, número, complemento, bairro e nome da pessoa que receberá a compra. Se perceber um erro depois da confirmação, entre em contato assim que possível para verificarmos se ainda é possível alterar a entrega.')) +
       section('Pedido atrasado ou com divergência', p('Se o prazo informado na compra terminou, a embalagem chegou danificada ou você recebeu outra peça, fale com a equipe informando o número da compra. Guarde a confirmação do pedido e, se possível, uma foto da embalagem ou do item.') + p(link('/atendimento/#pedido', 'Solicitar atendimento sobre a entrega')))),
     article('/trocas-e-devolucoes/', 'Trocas e devoluções', 'Saiba como devolver uma compra feita pela internet, solicitar uma troca ou comunicar um defeito.',
@@ -78,9 +88,10 @@ function contentPages({ checkoutEnabled, remotePhotos }) {
       section('Defeito ou item diferente do pedido', p('Conte o que aconteceu e identifique a peça. Em caso de vício aparente de produto durável, o prazo legal de reclamação é de 90 dias a partir da entrega. Para um vício oculto, a contagem começa quando ele se torna evidente. Decorrido o prazo legal de reparo, em regra de até 30 dias, você pode escolher substituição, restituição do valor ou abatimento proporcional, conforme o CDC. Há hipóteses legais de solução imediata.') +
       p('Se uma peça diferente da ofertada foi entregue, você pode exigir o cumprimento da oferta, aceitar equivalente ou pedir cancelamento e restituição, nos termos do CDC.') + p(link(urls.cdc, 'Consultar o Código de Defesa do Consumidor')))),
     article('/privacidade/', 'Privacidade', 'Entenda quais dados são usados na sua visita e como falar com a Felipe Modas sobre eles.',
-      section('Quem cuida dos dados', p('A Felipe Modas é responsável pelo tratamento de dados da loja. Para qualquer questão de privacidade, envie uma mensagem para ' + mail(company.email, 'Privacidade e dados pessoais') + '.')) +
+      section('Quem cuida dos dados', p('A loja ' + escape(company.name) + ' é operada por ' + escape(company.legalName) + ', CNPJ ' + escape(company.cnpj) + ', responsável pelo tratamento dos dados pessoais. Para qualquer questão de privacidade, envie uma mensagem para ' + mail(company.email, 'Privacidade e dados pessoais') + '.')) +
       section('Durante a navegação', p('A infraestrutura de hospedagem recebe informações técnicas como endereço IP, data, horário e tipo de navegador para entregar as páginas e proteger o serviço.' + (remotePhotos ? ' Quando uma foto é carregada de um servidor externo, esse serviço recebe a requisição da imagem e os dados técnicos necessários para entregá-la.' : '')) +
       p('A sacola, os favoritos e os produtos vistos recentemente usam o armazenamento do seu navegador. Os identificadores guardados nele permitem recuperar suas escolhas. Você pode apagar essas informações em ' + cookiesLink + '.')) +
+      section('Ao consultar um CEP', p('Quando você usa o preenchimento de endereço, a loja envia apenas o CEP ao ViaCEP para localizar logradouro, bairro, cidade e estado. Você pode conferir e completar os campos manualmente.')) +
       section('Quando você entra em contato', p('Utilizamos o endereço de e-mail ou o número de telefone, as mensagens e os dados da compra que você decidir enviar para responder, localizar uma solicitação ou atender a um pedido. Os serviços de e-mail e WhatsApp processam a comunicação de acordo com suas próprias políticas.')) +
       checkoutPrivacy +
       section('Conservação e compartilhamento', p('As informações de atendimento são conservadas pelo período necessário para resolver a solicitação, cumprir obrigações legais e exercer direitos. Quando a finalidade se encerra, os registros podem ser eliminados ou anonimizados, ressalvadas as hipóteses de conservação previstas em lei. Dados podem ser fornecidos a autoridades quando houver obrigação legal.')) +
@@ -94,14 +105,15 @@ function contentPages({ checkoutEnabled, remotePhotos }) {
       section('Outras opções', p('As configurações de privacidade do navegador permitem bloquear ou excluir dados deste site. Se o armazenamento for bloqueado, suas escolhas poderão deixar de ser recuperadas em uma próxima visita.') + p(link('/privacidade/', 'Ler a política de privacidade')))),
     article('/termos-de-compra/', 'Termos de compra', 'Consulte as condições aplicáveis aos produtos e pedidos da Felipe Modas.',
       section('A loja e as ofertas', storeIdentity() + p('A descrição de cada peça indica os atributos confirmados para o modelo. Os preços de venda, quando disponíveis, são expressos em reais. Leia as informações da cor e do tamanho escolhidos. Para esclarecer uma característica antes da compra, use o ' + helpLink + '.')) +
-      section('Antes de confirmar', p('Confira a variante, a quantidade, os itens, o desconto eventualmente aplicado, o frete, o prazo e o total da compra. Corrija o endereço e os itens antes de enviar o pedido. Apenas promoções ativas, dentro de suas condições publicadas, podem ser utilizadas.') + p('As opções de pagamento disponíveis para uma compra são informadas antes da contratação. Adicionar uma peça à sacola não efetiva a compra. Guarde o número, o resumo do pedido e o comprovante de pagamento.')) +
-      section('Pedido e pagamento', p('O recebimento de um pedido e a aprovação de seu pagamento são etapas distintas. Se houver dúvida sobre um pagamento pendente ou uma tentativa recusada, informe o identificador do pedido ao atendimento antes de tentar pagar novamente.')) +
+      section('Antes de confirmar', p('Confira a variante, a quantidade, os itens, o desconto eventualmente aplicado, o frete, o prazo e o total da compra. Corrija o endereço e os itens antes de enviar o pedido. Apenas promoções ativas, dentro de suas condições publicadas, podem ser utilizadas.') + p(shippingText)) +
+      section('Pagamento do pedido', p(paymentText) + p('Um código Pix gerado indica que o pagamento está pendente. Para Pix e cartão, a aprovação do pedido depende da confirmação do provedor. Se já pagou e a situação ainda não mudou, guarde o comprovante e informe o número do pedido ao atendimento antes de tentar novamente.')) +
       section('Entrega, cancelamento e devolução', p('Consulte as condições de ' + link('/entregas/', 'entrega e frete') + ' e as instruções em ' + returnsLink + '. Para alterações ou cancelamentos, entre em contato com a identificação da compra. Os direitos previstos no Código de Defesa do Consumidor se aplicam às compras na loja.') + p(link(urls.decreto, 'Decreto sobre comércio eletrônico') + ' · ' + link(urls.cdc, 'Código de Defesa do Consumidor')))),
     article('/perguntas-frequentes/', 'Perguntas frequentes', 'Respostas para acompanhar sua escolha, da medida da peça ao atendimento depois da compra.',
       '<div class="fm-info-faq">' +
       details('Como escolho meu tamanho?', p('Compare suas medidas com as informações do modelo. O ' + link('/guia-de-medidas/', 'guia de medidas') + ' explica onde posicionar a fita. Se faltar uma medida específica na página, peça a conferência ao atendimento.')) +
       details('As peças são de pronta entrega?', p('A loja trabalha com estoque próprio à pronta entrega. A disponibilidade para compra depende da cor e do tamanho que você procura.')) +
-      details('Quanto custa o frete?', p('O valor depende do destino e da composição do pedido. Para peças disponíveis à compra, consulte a entrega para o seu CEP antes de pagar. Saiba mais em ' + link('/entregas/', 'Entregas e frete') + '.')) +
+      details('Quanto custa o frete?', p(shippingText) + p(link('/entregas/', 'Consultar as condições de entrega'))) +
+      details('Como faço o pagamento?', p(paymentText)) +
       details('Posso devolver uma peça comprada pela internet?', p('Sim. Você pode comunicar a desistência em até sete dias corridos do recebimento, com devolução gratuita e reembolso integral. Veja como solicitar em ' + returnsLink + '.')) +
       details('Como consulto uma compra ou um atraso?', p('Tenha o número do pedido em mãos e ' + link('/atendimento/#pedido', 'fale com a equipe sobre a sua compra') + '.')) +
       details('Como removo minha sacola ou meus favoritos?', p('Você pode remover itens individualmente ou apagar uma categoria de dados deste navegador em ' + cookiesLink + '.')) + '</div>'),
@@ -127,11 +139,11 @@ function legacyPolicy() {
   return article('/politicas.html', 'Políticas da loja', 'Consulte as condições e encontre o atendimento que procura.',
     rows.map(([id, title, href, subtitle]) => section(title, p(subtitle) + p(link(href, 'Consultar ' + title.toLowerCase())), id)).join(''));
 }
-export async function buildInstitutional({ outDir, layout, checkoutEnabled = false, remotePhotos = false }) {
+export async function buildInstitutional({ outDir, layout, checkoutEnabled = false, remotePhotos = false, shippingRates = configuredShipping }) {
   const assetDir = join(outDir, 'institucional');
   await mkdir(assetDir, { recursive: true });
   await Promise.all(['info.css', 'preferencias.js'].map(file => copyFile(join(source, file), join(assetDir, file))));
-  const pages = [...contentPages({ checkoutEnabled, remotePhotos }), legacyPolicy()];
+  const pages = [...contentPages({ checkoutEnabled, remotePhotos, shippingRates }), legacyPolicy()];
   for (const page of pages) {
     const path = page.path;
     const body = '<div class="fm-info-shell"><nav class="fm-info-crumb" aria-label="Caminho de navegação"><a href="/">Início</a><span aria-hidden="true">/</span><span aria-current="page">' + escape(page.title) + '</span></nav><div class="fm-info-grid">' + navigation(path) +

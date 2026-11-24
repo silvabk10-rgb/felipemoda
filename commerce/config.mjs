@@ -1,7 +1,10 @@
 import catalog from '../data/curadoria.json' with { type: 'json' };
 
-// Preencha somente faixas homologadas pela loja. Preços estão em centavos.
-export const shippingRates = [];
+// Tarifas nacionais aprovadas pela loja, em centavos.
+export const shippingRates = [
+  {id:'pac',label:'PAC',priceCents:2300},
+  {id:'sedex',label:'SEDEX',priceCents:4800}
+];
 export const campaign = {
   enabled: false,
   code: 'BEMVINDA10',

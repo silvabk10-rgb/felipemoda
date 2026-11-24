@@ -55,7 +55,12 @@ def merge(existing, incoming):
             item = by_origin[key]
             if any(item[field] != source_row[field] for field in IDENTITY):
                 raise ValueError(f"Identidade conflitante na origem de {source_row['sku']}")
-            item.update({field: source_row[field] for field in RESEARCH})
+            # Os dados da próxima coleta podem descrever apenas a permissão pública.
+            # A autorização do lojista continua válida para a galeria já cadastrada.
+            researched = {field: source_row[field] for field in RESEARCH}
+            if item.get("source", {}).get("photoPermission") == "merchant-authorized":
+                researched["source"] = {**source_row["source"], "photoPermission": "merchant-authorized"}
+            item.update(researched)
         else:
             # Uma coleta externa nunca inicia vendas, cria variantes ou aprova preços.
             item = {field: source_row[field] for field in IDENTITY + RESEARCH}

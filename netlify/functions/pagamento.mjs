@@ -1,5 +1,6 @@
-import { CommerceError,fingerprint,readToken,reject,reserve } from '../../commerce/domain.mjs';
-import { applyProvider, customer, pagarme, providerPayload } from '../../commerce/provider.mjs';
+import { CommerceError,reject } from '../../commerce/domain.mjs';
+import { customer,pagarme } from '../../commerce/provider.mjs';
+import { getPrivateOrder,reconcile,reserveForCustomer,submitPayment } from '../../commerce/payment.mjs';
 import { configuration,openLedger,privateHeaders,readSmall,sameOrigin } from '../../commerce/runtime.mjs';
 import { checkoutPage } from '../../commerce/view.mjs';
 
@@ -14,33 +15,17 @@ export async function payment(request,context,dependencies={configuration,openLe
     sameOrigin(request);
     const cfg=dependencies.configuration(request,context);
     sandbox=cfg.mode==='sandbox';
-    const id=readToken(url.searchParams.get('t'),cfg.secret);
     const ledger=await dependencies.openLedger(cfg.mode);
-    order=(await ledger.read()).orders[id];
-    if(!order) reject('missing','Pedido não encontrado.',404);
-    let remote;
+    order=await getPrivateOrder(ledger,url.searchParams.get('t'),cfg);
     if(request.method==='POST') {
+      if((order.paymentMethod??'pix')!=='pix' || cfg.pixEnabled===false) reject('method','Esta forma de pagamento está indisponível.',409);
       if (!request.headers.get('content-type')?.includes('application/x-www-form-urlencoded')) reject('body','Formato de dados inválido.',415);
       const person=customer(new URLSearchParams(await readSmall(request)),order.input.cep);
-      const buyer={emailKey:fingerprint(cfg.secret,'email:'+person.email),documentKey:fingerprint(cfg.secret,'cpf:'+person.document)};
-      order=await ledger.change(data=>reserve(data,id,buyer,fingerprint(cfg.secret,JSON.stringify(person)),cfg));
-      if(order.state==='sending' && !order.providerId) {
-        const window=sandbox?4*60*1000:23*60*60*1000;
-        if(cfg.now()-order.submittedAt >= window) reject('reconcile','O pagamento está em conferência. O atendimento pode consultar pelo número do pedido.',409);
-        remote=await dependencies.pagarme(cfg,'orders',{id,body:providerPayload(order,person)});
-      }
+      order=await ledger.change(data=>reserveForCustomer(data,order.id,person,cfg));
+      order=await submitPayment(order,person,ledger,cfg,dependencies.pagarme);
+      return new Response(null,{status:303,headers:{...privateHeaders,Location:location}});
     }
-    if (!remote && order.state==='sending' && !order.providerId) {
-      const found=await dependencies.pagarme(cfg,'orders?size=2&code='+encodeURIComponent(id));
-      if (!Array.isArray(found?.data) || found.data.length>1) reject('reconcile','O pedido precisa de conferência pelo atendimento.',409);
-      const match=found.data[0];
-      if (match && match.code===id && /^or_[a-z0-9]+$/i.test(match.id)) remote=await dependencies.pagarme(cfg,'orders/'+match.id);
-    }
-    if(!remote && order.providerId && ['pending','sending'].includes(order.state)) {
-      remote=await dependencies.pagarme(cfg,'orders/'+encodeURIComponent(order.providerId));
-    }
-    if(remote) order=await ledger.change(data=>{applyProvider(data.orders[id],remote);return data.orders[id];});
-    if(request.method==='POST') return new Response(null,{status:303,headers:{...privateHeaders,Location:url.pathname+url.search}});
+    order=await reconcile(order,ledger,cfg,dependencies.pagarme);
     return html(order,'',sandbox,200,location);
   } catch(error) {
     const known=error instanceof CommerceError;

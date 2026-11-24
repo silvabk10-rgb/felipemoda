@@ -42,6 +42,7 @@ export function normalizeProducts(input) {
     seen.add(slug);
     const category = unifyCategory(p.category);
     const activated = p.status === 'active';
+    const listed = p.status === 'listed';
     const images = (p.images || []).flatMap(img => {
       const source = typeof img === 'string' ? img : img.src || img.url;
       const src = localImage(source);
@@ -53,7 +54,7 @@ export function normalizeProducts(input) {
       stock:activated && Number.isSafeInteger(v.stock) && v.stock >= 0 ? v.stock : null
     }));
     const priceList = variants.map(v => v.priceCents).filter(validCents);
-    const officialPrice = activated && validCents(p.priceCents) ? p.priceCents : null;
+    const officialPrice = (activated || listed) && validCents(p.priceCents) ? p.priceCents : null;
     const measurements = (Array.isArray(p.measurements) ? p.measurements : []).filter(row => row && typeof row.name === 'string' && row.values && typeof row.values === 'object').map(row =>
       ({name:cleanText(row.name), unit:cleanText(row.unit), values:Object.fromEntries(Object.entries(row.values).filter(([k,v])=>k.length<40 && ['string','number'].includes(typeof v)))}));
     const sizeGuide = Object.fromEntries(Object.entries(p.sizeGuide || {}).filter(([key,v])=>key.length < 40 && ['string','number'].includes(typeof v)));
@@ -66,7 +67,7 @@ export function normalizeProducts(input) {
       colors:cleanNames([...variants.map(v => v.color), ...cleanNames(p.displayColors || p.colors)]),
       images, variants, priceCents:priceList.length ? Math.min(...priceList) : officialPrice,
       varyingPrice:new Set(priceList).size > 1, isNew:p.isNew === true, legacy:p.legacy === true,
-      status:activated ? 'active' : 'editorial'
+      status:activated || listed ? p.status : 'editorial'
     }];
   });
 }
@@ -116,6 +117,13 @@ export function filterProducts(products, params) {
     if (query.some(word => !terms.includes(word))) return false;
     if (sizes.length && !p.sizes.some(s => sizes.includes(fold(s)))) return false;
     if (colors.length && !p.colors.some(c => colors.includes(fold(c)))) return false;
+    if (p.status === 'listed') {
+      // Model attributes describe the garment. The approved price applies to the whole model.
+      if (stock) return false;
+      if (minC === null && maxC === null) return true;
+      return validCents(p.priceCents) && (minC === null || p.priceCents >= minC) &&
+        (maxC === null || p.priceCents <= maxC);
+    }
     if (minC !== null || maxC !== null || stock || (sizes.length && colors.length && p.variants.length)) {
       // Price, availability, size and color must refer to the same variant.
       return p.variants.some(v => (!sizes.length || sizes.includes(fold(v.size))) &&

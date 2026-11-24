@@ -41,3 +41,7 @@ As 16 matrizes PNG sem texto estão em `assets/campaign/originais/`. Os sufixos 
 Use `picture` com arte mobile abaixo do ponto de quebra da composição, dimensões reservadas, carregamento prioritário somente no primeiro slide e carregamento sob demanda nas imagens fora da primeira tela. Os arquivos WebP entregues somam 2.024.548 bytes. O primeiro slide horizontal tem 99.698 bytes.
 
 **Proveniência e condição de uso.** Criação assistida por IA, sob encomenda para comunicação editorial da Felipe Modas. Sem bancos de imagem, marcas-d’água ou arquivos de terceiros. Este registro descreve a origem e o uso pretendido; mantenha os comprovantes de autorização do fornecedor junto às futuras fotos reais dos produtos.
+
+## Galerias dos produtos
+
+Para as doze fichas de Via Luxo Store e DaLuz, o lojista confirmou em 24/11/2026 que as fotos dos fornecedores estão autorizadas para uso nesta loja. A referência de cada arquivo consta na galeria do respectivo SKU em `data/curadoria.json`. A conversão em WebP preserva a proporção e os elementos da fotografia original.

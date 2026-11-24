@@ -1,4 +1,4 @@
-import {esc, renderCard, picturePanel, renderMedia, priceHTML, money, canBuy, categoryLabels, productURL, icon, sorted, localImage} from './core.mjs';
+import {esc, fold, renderCard, picturePanel, renderMedia, priceHTML, money, canBuy, categoryLabels, productURL, icon, sorted, localImage} from './core.mjs';
 const plural = n => n + (n === 1 ? ' peça' : ' peças');
 export const crumbs = (label, middle) => '<nav class="st-crumbs" aria-label="Caminho de navegação"><a href="/">Início</a><span aria-hidden="true">/</span>' + (middle ? '<a href="' + esc(middle.url) + '">' + esc(middle.name) + '</a><span aria-hidden="true">/</span>' : '') + '<span aria-current="page">' + esc(label) + '</span></nav>';
 export const grid = cards => '<div class="st-grid" data-grid>' + cards.map(renderCard).join('') + '</div>';
@@ -52,9 +52,19 @@ export function buyBox(p, links, prefix='pdp') {
   const potential = p.variants.some(canBuy);
   if (!potential) {
     const stockKnown = p.variants.length > 0 && p.variants.every(v=>v.stock === 0);
-    const attrs = [[p.colors.length===1?'Cor do modelo':'Cores do modelo',p.colors],[p.sizes.length===1?'Tamanho do modelo':'Tamanhos do modelo',p.sizes]].filter(([,a])=>a.length);
-    const wa = 'https://wa.me/5521974623058?text=' + encodeURIComponent('Olá, gostaria de consultar preço e disponibilidade de '+p.name+(p.sku ? ' ('+p.sku+')' : '')+'.');
-    return '<div class="st-buybox">' + attrs.map(([label,values])=>'<dl class="st-model"><dt>' + esc(label) + '</dt><dd>' + values.map(v=>'<span>' + esc(v) + '</span>').join('') + '</dd></dl>').join('') + '<a class="st-action st-wide" href="' + esc(wa) + '">' + (stockKnown ? 'Consultar reposição' : 'Consultar disponibilidade') + '</a><a href="' + links.measures + '" class="st-under">Guia de medidas</a></div>';
+    const attr = (label,values,render) => values.length ? '<dl class="st-model"><dt>'+label+'</dt><dd>'+values.map(render).join('')+'</dd></dl>' : '';
+    const chip = value => '<span>'+esc(value)+'</span>';
+    const colorChip = color => {
+      const photo = p.status === 'listed' ? p.images.findIndex(img=>img.color && fold(img.color)===fold(color)) : -1;
+      if(photo < 0) return chip(color);
+      return '<button type="button" data-model-color="'+esc(color)+'" data-color-photo="'+photo+'" aria-label="Ver a peça na cor '+esc(color)+'" aria-pressed="'+(photo === 0)+'">'+esc(color)+'</button>';
+    };
+    const attributes = attr(p.colors.length===1?'Cor do modelo':'Cores do modelo',p.colors,colorChip) +
+      attr(p.sizes.length===1?'Tamanho do modelo':'Tamanhos do modelo',p.sizes,chip);
+    const request = p.priceCents ? 'a disponibilidade de ' : 'o preço e a disponibilidade de ';
+    const wa = 'https://wa.me/5521974623058?text=' + encodeURIComponent('Olá, gostaria de consultar '+request+p.name+(p.sku ? ' ('+p.sku+')' : '')+'.');
+    const actionStyle = p.status === 'listed' ? 'st-action st-outline st-wide' : 'st-action st-wide';
+    return '<div class="st-buybox">' + attributes + '<a class="' + actionStyle + '" href="' + esc(wa) + '">' + (stockKnown ? 'Consultar reposição' : 'Consultar disponibilidade') + '</a><a href="' + links.measures + '" class="st-under">Guia de medidas</a></div>';
   }
   const group = (label,key,values) => values.length ? fieldset(label,values.map((v,i)=>'<label class="st-choice"><input type="radio" name="' + key + '" value="' + esc(v) + '" required><span>' + esc(v) + '</span></label>').join('')) : '';
   const colors = sorted(p.variants.map(v=>v.color)); const sizes = sorted(p.variants.map(v=>v.size));

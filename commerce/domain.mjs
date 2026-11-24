@@ -16,6 +16,12 @@ export const normalizeEmail = value => String(value ?? '').trim().toLowerCase();
 export const emailValid = value => typeof value === 'string' && value.length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 export const freshLedger = () => ({ version: 1, orders: {} });
 
+export function normalizeCep(value) {
+  const cep = String(value ?? '').trim().replace(/^(\d{5})-(\d{3})$/, '$1$2');
+  if (!/^\d{8}$/.test(cep) || cep === '00000000') reject('cep', 'Informe um CEP válido com oito dígitos.');
+  return cep;
+}
+
 export function normalizeRequest(input) {
   if (!Array.isArray(input.items) || input.items.length < 1 || input.items.length > 50) reject('items', 'Confira os itens da sua sacola.');
   const quantities = new Map();
@@ -26,16 +32,22 @@ export function normalizeRequest(input) {
     quantities.set(item.variantId, quantity);
   }
   const items = [...quantities].sort(([a],[b]) => a.localeCompare(b)).map(([variantId,quantity]) => ({variantId,quantity}));
-  const cep = String(input.cep ?? '').trim().replace(/^(\d{5})-(\d{3})$/, '$1$2');
-  if (!/^\d{8}$/.test(cep)) reject('cep', 'Informe um CEP de oito dígitos.');
+  const cep = normalizeCep(input.cep);
   const coupon = String(input.coupon ?? '').trim().toUpperCase();
   if (coupon.length > 40) reject('coupon', 'Confira o código do cupom.');
-  return { items, cep, coupon };
+  const shippingMethod = input.shippingMethod;
+  if (shippingMethod !== undefined && !['pac','sedex'].includes(shippingMethod)) reject('shipping_method','Selecione PAC ou SEDEX.');
+  return shippingMethod === undefined ? {items,cep,coupon} : {items,cep,coupon,shippingMethod};
 }
 
-const committed = new Set(['sending','pending','paid','refunded']);
+export function abandonedBeforeDispatch(order,now) {
+  return order.dispatchVersion===2 && order.state==='sending' && !order.gatewaySentAt && !order.providerId &&
+    now-(order.dispatchedAt??order.submittedAt)>60000;
+}
+
+const committed = new Set(['sending','pending','paid','refunded','partially_refunded','disputed']);
 export function calculate(input, ledger, cfg, buyer = {}, ignoreId) {
-  const others = Object.values(ledger.orders).filter(order => order.id !== ignoreId && committed.has(order.state));
+  const others = Object.values(ledger.orders).filter(order => order.id !== ignoreId && committed.has(order.state) && !abandonedBeforeDispatch(order,cfg.now()));
   const lines = input.items.map(({variantId, quantity}) => {
     const item = cfg.stock.get(variantId);
     if (!item) reject('unavailable', 'Esta variante ainda não está disponível para compra.', 409);
@@ -43,9 +55,10 @@ export function calculate(input, ledger, cfg, buyer = {}, ignoreId) {
     if (quantity > item.stock - used) reject('stock', 'A quantidade solicitada já não está disponível.', 409);
     return {variantId, quantity, name:item.name, unitCents:item.priceCents};
   });
-  const rate = cfg.rates.find(row => row.start <= input.cep && input.cep <= row.end);
-  if (!rate || !Number.isSafeInteger(rate.priceCents) || rate.priceCents < 0 || !Number.isInteger(rate.deliveryDays) || rate.deliveryDays < 1) {
-    reject('shipping', 'A entrega para este CEP ainda não tem cotação disponível.', 409);
+  normalizeCep(input.cep);
+  const rate = cfg.rates.find(row => row.id === (input.shippingMethod ?? 'pac'));
+  if (!rate || !Number.isSafeInteger(rate.priceCents) || rate.priceCents < 0) {
+    reject('shipping', 'A modalidade de entrega selecionada está indisponível.', 409);
   }
   const subtotalCents = lines.reduce((sum,line) => sum + line.unitCents * line.quantity, 0);
   if (!Number.isSafeInteger(subtotalCents) || subtotalCents > 999999999) reject('amount', 'O valor do pedido ultrapassa o limite para esta compra.');
@@ -58,13 +71,13 @@ export function calculate(input, ledger, cfg, buyer = {}, ignoreId) {
     if (camp.firstPurchaseOnly && !buyer.emailKey) reject('email', 'Informe seu e-mail para verificar o cupom.');
     if (camp.firstPurchaseOnly && others.some(order =>
       (order.buyer?.emailKey === buyer.emailKey || (buyer.documentKey && buyer.documentKey === order.buyer?.documentKey))
-      && (order.state === 'paid' || order.state === 'refunded' || Boolean(order.input.coupon))
+      && (['paid','refunded','partially_refunded','disputed'].includes(order.state) || Boolean(order.input.coupon))
     )) reject('ineligible', 'O cupom não está disponível para esta compra.');
     discountCents = Math.round(subtotalCents * camp.percent / 100);
   }
   const totalCents = subtotalCents - discountCents + rate.priceCents;
   if (!Number.isSafeInteger(totalCents) || totalCents < 1 || totalCents > 999999999) reject('amount', 'Confira os valores da compra.');
-  return {lines,subtotalCents,discountCents,shippingCents:rate.priceCents,totalCents,deliveryDays:rate.deliveryDays};
+  return {lines,subtotalCents,discountCents,shippingCents:rate.priceCents,totalCents,deliveryDays:null,shippingMethod:rate.id,shippingLabel:rate.label};
 }
 
 export function checkoutIdentity(key, secret) {
@@ -87,6 +100,7 @@ export function begin(ledger, input, emailKey, id, cfg) {
     return existing;
   }
   for (const draft of Object.values(ledger.orders)) {
+    if (abandonedBeforeDispatch(draft,cfg.now())) draft.state='canceled';
     if (draft.state === 'draft' && cfg.now() - draft.createdAt > 24*60*60*1000) delete ledger.orders[draft.id];
   }
   const quote = calculate(input, ledger, cfg, {emailKey});
@@ -96,6 +110,9 @@ export function begin(ledger, input, emailKey, id, cfg) {
 }
 
 export function reserve(ledger,id,buyer,detailsHash,cfg) {
+  for(const other of Object.values(ledger.orders)) {
+    if(abandonedBeforeDispatch(other,cfg.now())) other.state='canceled';
+  }
   const order = ledger.orders[id];
   if (!order) reject('missing','Pedido não encontrado.',404);
   if (order.state !== 'draft') {
@@ -104,8 +121,16 @@ export function reserve(ledger,id,buyer,detailsHash,cfg) {
   }
   if (cfg.now() > order.createdAt + 30*60*1000) reject('expired','O prazo desta sacola terminou. Volte à loja para atualizar os valores.',409);
   if (order.input.coupon && order.buyer.emailKey !== buyer.emailKey) reject('email','Informe o mesmo e-mail usado no cupom.');
-  const quote = calculate(order.input, ledger, cfg, buyer, id);
-  if (JSON.stringify(quote) !== JSON.stringify(order.quote)) reject('changed','Os valores ou as condições mudaram. Confira a sacola novamente.',409);
+  const oldQuote = order.quote;
+  const legacy = !oldQuote.shippingMethod && !order.input.shippingMethod;
+  // Pedidos abertos antes das modalidades nacionais conservam o frete cotado até o vencimento.
+  const effective = legacy ? {...cfg,rates:[{id:'pac',label:'Entrega',priceCents:oldQuote.shippingCents}]} : cfg;
+  const fresh = calculate(order.input, ledger, effective, buyer, id);
+  const changed = ['subtotalCents','shippingCents','discountCents','totalCents'].some(key => fresh[key] !== oldQuote[key])
+    || JSON.stringify(fresh.lines) !== JSON.stringify(oldQuote.lines)
+    || (!legacy && fresh.shippingMethod !== oldQuote.shippingMethod);
+  if (changed) reject('changed','Os valores ou as condições mudaram. Confira a sacola novamente.',409);
+  const quote = legacy ? oldQuote : fresh;
   Object.assign(order,{quote,buyer,detailsHash,state:'sending',submittedAt:cfg.now()});
   return order;
 }

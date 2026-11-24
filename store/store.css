@@ -101,8 +101,9 @@
 .st-filter-dialog { max-width:460px; max-height:100dvh; height:100dvh; margin:0 0 0 auto; }
 .st-product { display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,.85fr); align-items:start; gap:clamp(30px,6vw,95px); }
 .st-main-media { width:100%; }
+.st-gallery { min-width:0; }
 .st-zoom { width:100%; height:100%; border:0; padding:0; background:none; cursor:zoom-in; }
-.st-thumbs { display:flex; gap:8px; padding:9px 2px; overflow-x:auto; }
+.st-thumbs { display:flex; min-width:0; max-width:100%; gap:8px; padding:9px 2px; overflow-x:auto; }
 .st-thumbs button { flex:0 0 57px; aspect-ratio:4/5; padding:0; border:1px solid transparent; background:var(--st-cream); cursor:pointer; }
 .st-thumbs img { display:block; width:100%; height:100%; object-fit:cover; }
 .st-thumbs button[aria-pressed="true"] { outline:1px solid var(--st-ink); outline-offset:1px; }
@@ -121,7 +122,10 @@
 .st-model { margin:0 0 12px; }
 .st-model dt, .st-facts dt, .st-buy-actions label, .st-order label, .st-freight label { font-size:.82rem; }
 .st-model dd { display:flex; flex-wrap:wrap; gap:5px; margin:4px 0 0; }
-.st-model dd span { padding:5px 9px; border:1px solid var(--st-line); font-size:.82rem; }
+.st-model dd { align-items:center; }
+.st-model dd span, .st-model dd button { padding:5px 9px; border:1px solid var(--st-line); font-size:.82rem; }
+.st-model dd button { min-height:44px; min-width:44px; background:#fff; cursor:pointer; }
+.st-model dd button[aria-pressed="true"] { background:var(--st-ink); color:#fff; border-color:var(--st-ink); }
 .st-selection { font-size:.85rem; }
 .st-buy-actions { display:flex; align-items:end; gap:12px; }
 .st-buy-actions label { width:80px; }

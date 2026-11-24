@@ -82,6 +82,7 @@ img {max-width:100%;height:auto}
 .fm-footer a {display:block;font-size:.83rem;padding:4px 0;overflow-wrap:anywhere}
 .fm-footer a:hover{text-decoration:underline}
 .fm-footer-brand p {font-size:.85rem;color:#cfc3b5;margin:14px 0}
+.fm-seller{min-width:0}.fm-seller address{font-style:normal;margin-top:.35rem;line-height:1.5}
 .fm-bottom {display:flex;justify-content:space-between;gap:20px;max-width:1540px;margin:36px auto 0;border-top:1px solid #595147;padding:17px 0 0;color:#d3c9bd;font-size:.72rem}
 .fm-notfound {padding:13vh var(--pad);text-align:center}.fm-notfound h1 {font:3.5rem var(--font-display);margin:0}
 @media(max-width:940px){

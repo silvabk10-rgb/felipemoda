@@ -1,14 +1,18 @@
 import { campaign, inventory, shippingRates } from './config.mjs';
 import { freshLedger, reject } from './domain.mjs';
 
-export function configuration(request,context) {
-  const mode=process.env.FM_COMMERCE_MODE;
-  const secret=process.env.FM_COMMERCE_SECRET;
-  const key=mode==='sandbox'?process.env.PAGARME_TEST_SECRET_KEY:process.env.PAGARME_SECRET_KEY;
+export function configuration(request,context,env=process.env) {
+  const mode=env.FM_COMMERCE_MODE;
+  const secret=env.FM_COMMERCE_SECRET;
+  const key=mode==='sandbox'?env.PAGARME_TEST_SECRET_KEY:env.PAGARME_SECRET_KEY;
   const enabled=mode==='sandbox' ? /^sk_test_[\w-]+$/.test(key??'')
     : mode==='live' && context?.deploy?.published === true && new URL(request.url).hostname==='felipemodasbr.com' && /^sk_(?!test_)[\w-]+$/.test(key??'');
   if (!enabled || !secret || secret.length<32) reject('closed','A finalização da compra está indisponível no momento.',503);
-  return {mode,key,secret,stock:inventory(),rates:shippingRates,campaign,now:Date.now};
+  const publicKey=mode==='sandbox'?env.PAGARME_TEST_PUBLIC_KEY:env.PAGARME_PUBLIC_KEY;
+  const validPublic=mode==='sandbox'?/^pk_test_[\w-]+$/.test(publicKey??''):/^pk_(?!test_)[\w-]+$/.test(publicKey??'');
+  const cardEnabled=env.FM_CARD_ENABLED==='true' && validPublic;
+  const pixEnabled=env.FM_PIX_ENABLED!=='false';
+  return {mode,key,secret,pixEnabled,cardEnabled,cardPublicKey:cardEnabled?publicKey:null,stock:inventory(),rates:shippingRates,campaign,now:Date.now};
 }
 export async function openLedger(mode) {
   const {getStore}=await import('@netlify/blobs');
