@@ -1,0 +1,2543 @@
+[
+  {
+    "id": "fm-v01",
+    "sku": "FM-V01",
+    "slug": "vestido-longo-floral-leticia",
+    "name": "Vestido longo floral Letícia",
+    "category": "vestidos",
+    "summary": "A cintura marcada dá lugar a uma saia longa com movimento.",
+    "description": "O decote quadrado é emoldurado por alças que amarram no ombro. O franzido nas costas acomoda o busto, e o vestido tem forro interno.",
+    "fabric": "Algodão",
+    "composition": "100% algodão",
+    "fit": "Parte superior ajustada e saia solta.",
+    "measurements": [
+      {
+        "name": "Comprimento da peça",
+        "unit": "cm",
+        "values": {
+          "Único": 119
+        }
+      }
+    ],
+    "sizeGuide": {
+      "Único": "36 a 42"
+    },
+    "care": null,
+    "images": [
+      {
+        "src": "/assets/products/fm-v01/01.webp",
+        "alt": "Vestidos florais em vermelho e azul no cabide — Vestido longo floral Letícia.",
+        "width": 1201,
+        "height": 1600
+      },
+      {
+        "src": "/assets/products/fm-v01/02.webp",
+        "alt": "Estampas florais das duas cores lado a lado — Vestido longo floral Letícia.",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/assets/products/fm-v01/03.webp",
+        "alt": "Detalhe do lastex e da estampa azul — Vestido longo floral Letícia.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Floral azul"
+      },
+      {
+        "src": "/assets/products/fm-v01/04.webp",
+        "alt": "Decote quadrado e alças de amarração da versão vermelha — Vestido longo floral Letícia.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Floral vermelho"
+      },
+      {
+        "src": "/assets/products/fm-v01/05.webp",
+        "alt": "Detalhe do franzido e da estampa vermelha — Vestido longo floral Letícia.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Floral vermelho"
+      },
+      {
+        "src": "/assets/products/fm-v01/06.webp",
+        "alt": "Decote e estampa floral azul vistos de frente — Vestido longo floral Letícia.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Floral azul"
+      }
+    ],
+    "variants": [],
+    "priceCents": 16990,
+    "shipping": null,
+    "status": "listed",
+    "source": {
+      "name": "Via Luxo Store",
+      "url": "https://www.vialuxostore.com.br/vestido-longo-floral-lastex-leticia",
+      "verifiedAt": "2026-11-24",
+      "supplierSizes": [
+        "Único"
+      ],
+      "supplierColors": [
+        "Floral azul",
+        "Floral vermelho"
+      ],
+      "retailPriceCents": 16990,
+      "referenceImage": "https://images.tcdn.com.br/img/img_prod/1119565/vestido_longo_floral_lastex_leticia_1_20261123150054_7290f499ffdb.jpeg",
+      "photoPermission": "merchant-authorized",
+      "photoPermissionDate": "2026-11-24",
+      "referencePixPriceCents": 16141,
+      "photoColors": [
+        "Floral azul",
+        "Floral vermelho"
+      ],
+      "colorBasis": "Cores visíveis nas fotografias autorizadas do modelo. A disponibilidade própria é definida por variante.",
+      "galleryUrls": [
+        "https://images.tcdn.com.br/img/img_prod/1119565/vestido_longo_floral_lastex_leticia_1_20261123150054_7290f499ffdb.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/vestido_longo_floral_lastex_leticia_2_20261123150054_719ab7bee659.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/vestido_longo_floral_lastex_leticia_3_20261123150054_9182dcc8ab31.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/vestido_longo_floral_lastex_leticia_4_20261123150054_447bc5b367e0.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/vestido_longo_floral_lastex_leticia_5_20261123150054_7b1ec218c1b1.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/vestido_longo_floral_lastex_leticia_6_20261123150054_61f75c568386.jpeg"
+      ],
+      "supplierVariantPairs": [
+        {
+          "sourceSku": "97695",
+          "size": "Único",
+          "color": "Floral azul",
+          "originalVariant": "Tamanho: UNICO - Cor: AZUL",
+          "variantUrl": "https://www.vialuxostore.com.br/vestido-longo-floral-lastex-leticia?variant_id=97695"
+        }
+      ]
+    },
+    "pricingProposal": {
+      "priceCents": 16990,
+      "basis": "Preço regular da ficha de referência, adotado pela Felipe Modas.",
+      "approved": true,
+      "approvedAt": "2026-11-24"
+    }
+  },
+  {
+    "id": "fm-v02",
+    "sku": "FM-V02",
+    "slug": "vestido-jeans-lara-escuro",
+    "name": "Vestido jeans Lara escuro",
+    "category": "vestidos",
+    "summary": "Um vestido longo de jeans escuro com recortes horizontais.",
+    "description": "As costuras atravessam a saia em faixas. O busto tem camada dupla de tecido e decote em U. As alças ajustáveis e o elástico nas costas ajudam a acertar o caimento.",
+    "fabric": "Jeans",
+    "composition": "100% algodão",
+    "fit": "Cintura marcada e saia solta.",
+    "measurements": [
+      {
+        "name": "Comprimento do busto à barra",
+        "unit": "cm",
+        "values": {
+          "P": 130,
+          "M": 130,
+          "G": 133
+        }
+      }
+    ],
+    "sizeGuide": {
+      "P": "36/38",
+      "M": "40",
+      "G": "42",
+      "GG": "44"
+    },
+    "care": null,
+    "images": [
+      {
+        "src": "/assets/products/fm-v02/01.webp",
+        "alt": "Frente do vestido em corpo inteiro — Vestido jeans Lara escuro.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Jeans escuro"
+      },
+      {
+        "src": "/assets/products/fm-v02/02.webp",
+        "alt": "Costas do vestido jeans — Vestido jeans Lara escuro.",
+        "width": 1201,
+        "height": 1600,
+        "color": "Jeans escuro"
+      },
+      {
+        "src": "/assets/products/fm-v02/03.webp",
+        "alt": "Comprimento e caimento da saia — Vestido jeans Lara escuro.",
+        "width": 1199,
+        "height": 1600,
+        "color": "Jeans escuro"
+      },
+      {
+        "src": "/assets/products/fm-v02/04.webp",
+        "alt": "Alças e saia vistas de costas — Vestido jeans Lara escuro.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Jeans escuro"
+      },
+      {
+        "src": "/assets/products/fm-v02/05.webp",
+        "alt": "Saia longa em jeans escuro — Vestido jeans Lara escuro.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Jeans escuro"
+      },
+      {
+        "src": "/assets/products/fm-v02/06.webp",
+        "alt": "Vista frontal da saia em movimento — Vestido jeans Lara escuro.",
+        "width": 1199,
+        "height": 1600,
+        "color": "Jeans escuro"
+      },
+      {
+        "src": "/assets/products/fm-v02/07.webp",
+        "alt": "Cintura e decote vistos de frente — Vestido jeans Lara escuro.",
+        "width": 1201,
+        "height": 1600,
+        "color": "Jeans escuro"
+      },
+      {
+        "src": "/assets/products/fm-v02/08.webp",
+        "alt": "Costas e barra da peça — Vestido jeans Lara escuro.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Jeans escuro"
+      },
+      {
+        "src": "/assets/products/fm-v02/09.webp",
+        "alt": "Detalhe das alças e do busto nas costas — Vestido jeans Lara escuro.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Jeans escuro"
+      },
+      {
+        "src": "/assets/products/fm-v02/10.webp",
+        "alt": "Vista de frente com a peça vestida — Vestido jeans Lara escuro.",
+        "width": 1199,
+        "height": 1600,
+        "color": "Jeans escuro"
+      },
+      {
+        "src": "/assets/products/fm-v02/11.webp",
+        "alt": "Detalhe frontal do busto no cabide — Vestido jeans Lara escuro.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Jeans escuro"
+      },
+      {
+        "src": "/assets/products/fm-v02/12.webp",
+        "alt": "Lastex das costas no cabide — Vestido jeans Lara escuro.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Jeans escuro"
+      }
+    ],
+    "variants": [],
+    "priceCents": 16990,
+    "shipping": null,
+    "status": "listed",
+    "source": {
+      "name": "Via Luxo Store",
+      "url": "https://www.vialuxostore.com.br/vestidos/vestido-jeans-lara-escuro",
+      "verifiedAt": "2026-11-24",
+      "supplierSizes": [
+        "P",
+        "M",
+        "G",
+        "GG"
+      ],
+      "supplierColors": [
+        "Jeans escuro"
+      ],
+      "retailPriceCents": 16990,
+      "referenceImage": "https://images.tcdn.com.br/img/img_prod/1119565/vestido_jeans_lara_escuro_30027_1_0c0cfdd3dd1b50e1c4acff59d10bee43.jpeg",
+      "photoPermission": "merchant-authorized",
+      "photoPermissionDate": "2026-11-24",
+      "referencePixPriceCents": 16141,
+      "photoColors": [
+        "Jeans escuro"
+      ],
+      "colorBasis": "Cores visíveis nas fotografias autorizadas do modelo. A disponibilidade própria é definida por variante.",
+      "galleryUrls": [
+        "https://images.tcdn.com.br/img/img_prod/1119565/vestido_jeans_lara_escuro_30027_1_0c0cfdd3dd1b50e1c4acff59d10bee43.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/vestido_jeans_lara_escuro_30027_4_0059349599ef36b632ab6e1933f4a4a0.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/vestido_jeans_lara_escuro_30027_3_d4670b27fa9583088c3785fab112bb38.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/vestido_jeans_lara_escuro_30027_5_bf468878a0d2a7e3f03cff97d9e30068.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/vestido_jeans_lara_escuro_30027_6_c05e5ad571b56256311a8e842a4ce269.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/vestido_jeans_lara_escuro_30027_7_f84658d31520fe47996a469829d6439c.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/vestido_jeans_lara_escuro_30027_8_8d1c6031bde7bbbd675027a5239ba9cf.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/vestido_jeans_lara_escuro_30027_9_49ca37345f9dd7d57f09357d1eb2b9c2.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/vestido_jeans_lara_escuro_30027_10_764825e8af7d2bdc3f9a4bf9568cc556.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/vestido_jeans_lara_escuro_30027_11_ea9475b52bc29c1c9a1187b8a8e3e094.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/vestido_jeans_lara_escuro_30027_2_5b533327963af48c075bdbe62397ccdc.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/vestido_jeans_lara_escuro_30027_3_8a9b66eefb15a5d782a3017a28c11633.jpeg"
+      ],
+      "supplierVariantPairs": [
+        {
+          "sourceSku": "30027-61027",
+          "size": "P",
+          "color": null,
+          "originalVariant": "Tamanho: P"
+        },
+        {
+          "sourceSku": "30027-61029",
+          "size": "M",
+          "color": null,
+          "originalVariant": "Tamanho: M"
+        },
+        {
+          "sourceSku": "30027-61031",
+          "size": "G",
+          "color": null,
+          "originalVariant": "Tamanho: G"
+        },
+        {
+          "sourceSku": "30027-61033",
+          "size": "GG",
+          "color": null,
+          "originalVariant": "Tamanho: GG"
+        }
+      ]
+    },
+    "pricingProposal": {
+      "priceCents": 16990,
+      "basis": "Preço regular da ficha de referência, adotado pela Felipe Modas.",
+      "approved": true,
+      "approvedAt": "2026-11-24"
+    },
+    "measurementNote": "Comprimento medido do busto à barra. A numeração GG corresponde ao 44 e não tem comprimento informado na ficha técnica."
+  },
+  {
+    "id": "fm-v03",
+    "sku": "FM-V03",
+    "slug": "vestido-listras-astoria",
+    "name": "Vestido listrado Astoria",
+    "category": "vestidos",
+    "summary": "Listras e amarração dão ritmo a este vestido de viscose.",
+    "description": "A amarração permite ajustar a peça. O detalhe com elastano nas costas acompanha o corpo. A referência de numeração informada para este modelo vai, aproximadamente, até o 42.",
+    "fabric": "Viscose",
+    "composition": null,
+    "fit": "Amarração com ajuste nas costas.",
+    "measurements": [],
+    "sizeGuide": {
+      "U": "Veste, em média, até o 42"
+    },
+    "care": null,
+    "images": [
+      {
+        "src": "/assets/products/vestido-listras-astoria/01.webp",
+        "alt": "Vestido listrado Astoria, azul — frente.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Azul"
+      },
+      {
+        "src": "/assets/products/vestido-listras-astoria/02.webp",
+        "alt": "Vestido listrado Astoria, verde esmeralda — saia em movimento.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Verde esmeralda"
+      },
+      {
+        "src": "/assets/products/vestido-listras-astoria/03.webp",
+        "alt": "Vestido listrado Astoria, bege — costas e amarração.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Bege"
+      },
+      {
+        "src": "/assets/products/vestido-listras-astoria/04.webp",
+        "alt": "Vestido listrado Astoria, verde esmeralda — frente no espelho.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Verde esmeralda"
+      },
+      {
+        "src": "/assets/products/vestido-listras-astoria/05.webp",
+        "alt": "Vestido listrado Astoria, preto — costas e amarração.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Preto"
+      },
+      {
+        "src": "/assets/products/vestido-listras-astoria/06.webp",
+        "alt": "Vestido listrado Astoria, preto — saia em movimento.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Preto"
+      },
+      {
+        "src": "/assets/products/vestido-listras-astoria/07.webp",
+        "alt": "Vestido listrado Astoria, azul claro — detalhe do decote e das listras.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Azul claro"
+      },
+      {
+        "src": "/assets/products/vestido-listras-astoria/08.webp",
+        "alt": "Vestido listrado Astoria, azul claro — costas.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Azul claro"
+      },
+      {
+        "src": "/assets/products/vestido-listras-astoria/09.webp",
+        "alt": "Vestido listrado Astoria, azul claro — saia em movimento.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Azul claro"
+      },
+      {
+        "src": "/assets/products/vestido-listras-astoria/10.webp",
+        "alt": "Vestido listrado Astoria, rosa claro — costas e amarração.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Rosa claro"
+      },
+      {
+        "src": "/assets/products/vestido-listras-astoria/11.webp",
+        "alt": "Vestido listrado Astoria, azul — saia em movimento.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Azul"
+      },
+      {
+        "src": "/assets/products/vestido-listras-astoria/12.webp",
+        "alt": "Vestido listrado Astoria, rosa claro — frente.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Rosa claro"
+      },
+      {
+        "src": "/assets/products/vestido-listras-astoria/13.webp",
+        "alt": "Vestido listrado Astoria, azul — costas.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Azul"
+      },
+      {
+        "src": "/assets/products/vestido-listras-astoria/14.webp",
+        "alt": "Vestido listrado Astoria, verde esmeralda — frente.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Verde esmeralda"
+      },
+      {
+        "src": "/assets/products/vestido-listras-astoria/15.webp",
+        "alt": "Vestido listrado Astoria, verde esmeralda — costas e amarração.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Verde esmeralda"
+      },
+      {
+        "src": "/assets/products/vestido-listras-astoria/16.webp",
+        "alt": "Vestido listrado Astoria, bege — frente.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Bege"
+      }
+    ],
+    "variants": [],
+    "priceCents": 10900,
+    "shipping": null,
+    "status": "listed",
+    "source": {
+      "name": "DaLuz",
+      "url": "https://www.daluzloja.com.br/todos-os-produtos/vestido/vestido-listras-astoria",
+      "verifiedAt": "2026-11-24",
+      "supplierSizes": [
+        "U"
+      ],
+      "supplierColors": [
+        "Preto",
+        "Azul claro",
+        "Rosa claro",
+        "Verde esmeralda",
+        "Bege",
+        "Azul"
+      ],
+      "retailPriceCents": 10900,
+      "referenceImage": "https://images.tcdn.com.br/img/img_prod/610417/vestido_listras_astoria_1_20261117124902_ec901debdc50.jpeg",
+      "photoPermission": "merchant-authorized",
+      "photoPermissionDate": "2026-11-24",
+      "supplierVariantPairs": [
+        {
+          "sourceSku": "31098-160360",
+          "size": "U",
+          "color": "Preto"
+        },
+        {
+          "sourceSku": "31098-160362",
+          "size": "U",
+          "color": "Azul Claro"
+        },
+        {
+          "sourceSku": "31098-160364",
+          "size": "U",
+          "color": "Rosa Claro"
+        },
+        {
+          "sourceSku": "31098-160366",
+          "size": "U",
+          "color": "Verde Esmeralda"
+        },
+        {
+          "sourceSku": "31098-160368",
+          "size": "U",
+          "color": "Bege"
+        },
+        {
+          "sourceSku": "31098-160370",
+          "size": "U",
+          "color": "Azul"
+        }
+      ],
+      "measurementEvidence": "O fornecedor não publicou medidas em centímetros para este modelo.",
+      "galleryUrls": [
+        "https://images.tcdn.com.br/img/img_prod/610417/vestido_listras_astoria_1_20261117124902_ec901debdc50.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/vestido_listras_astoria_2_20261117124902_b6d8a6b60287.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/vestido_listras_astoria_3_20261117124902_e277a897c699.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/vestido_listras_astoria_4_20261117124902_7dc827671c4f.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/vestido_listras_astoria_5_20261117124902_d212cf41c666.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/vestido_listras_astoria_6_20261117124902_498972a40147.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/vestido_listras_astoria_7_20261117124902_7495ad56ff3c.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/vestido_listras_astoria_8_20261117124902_6bed0bb3d2b7.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/vestido_listras_astoria_9_20261117124902_811673249fbb.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/vestido_listras_astoria_10_20261117124902_b91457fb25a0.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/vestido_listras_astoria_11_20261117124902_1c9e64a40852.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/vestido_listras_astoria_12_20261117124902_26ae05ca8250.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/vestido_listras_astoria_13_20261117124902_fd40e276f8ec.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/vestido_listras_astoria_14_20261117124902_5047b2e1b39f.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/vestido_listras_astoria_15_20261117124902_9d6d093771f6.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/vestido_listras_astoria_16_20261117124902_dd01ef805e93.jpeg"
+      ]
+    },
+    "pricingProposal": {
+      "priceCents": 10900,
+      "basis": "Preço regular da ficha de referência, adotado pela Felipe Modas.",
+      "approved": true,
+      "approvedAt": "2026-11-24"
+    }
+  },
+  {
+    "id": "fm-v04",
+    "sku": "FM-V04",
+    "slug": "vestido-um-ombro-amara",
+    "name": "Vestido de um ombro Amara",
+    "category": "vestidos",
+    "summary": "O recorte de um ombro encontra o caimento do crepe.",
+    "description": "O corte de alfaiataria acompanha o decote assimétrico. A alça tem regulagem e o fechamento fica nas costas, com zíper.",
+    "fabric": "Crepe",
+    "composition": null,
+    "fit": "Alfaiataria de um ombro.",
+    "measurements": [],
+    "sizeGuide": {
+      "P": "36/38",
+      "M": "40/42",
+      "G": "42/44"
+    },
+    "care": null,
+    "images": [
+      {
+        "src": "/assets/products/vestido-um-ombro-amara/01.webp",
+        "alt": "Vestido de um ombro Amara, amarelo — frente no espelho.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Amarelo"
+      },
+      {
+        "src": "/assets/products/vestido-um-ombro-amara/02.webp",
+        "alt": "Vestido de um ombro Amara, vermelho — detalhe frontal.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Vermelho"
+      },
+      {
+        "src": "/assets/products/vestido-um-ombro-amara/03.webp",
+        "alt": "Vestido de um ombro Amara, branco — frente.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Branco"
+      },
+      {
+        "src": "/assets/products/vestido-um-ombro-amara/04.webp",
+        "alt": "Vestido de um ombro Amara, preto — frente.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Preto"
+      },
+      {
+        "src": "/assets/products/vestido-um-ombro-amara/05.webp",
+        "alt": "Vestido de um ombro Amara, amarelo — detalhe do busto e da saia.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Amarelo"
+      },
+      {
+        "src": "/assets/products/vestido-um-ombro-amara/06.webp",
+        "alt": "Vestido de um ombro Amara, vermelho — perfil no espelho.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Vermelho"
+      },
+      {
+        "src": "/assets/products/vestido-um-ombro-amara/07.webp",
+        "alt": "Vestido de um ombro Amara, amarelo — frente.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Amarelo"
+      },
+      {
+        "src": "/assets/products/vestido-um-ombro-amara/08.webp",
+        "alt": "Vestido de um ombro Amara, preto — perfil e costas.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Preto"
+      },
+      {
+        "src": "/assets/products/vestido-um-ombro-amara/09.webp",
+        "alt": "Vestido de um ombro Amara, branco — perfil e costas.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Branco"
+      },
+      {
+        "src": "/assets/products/vestido-um-ombro-amara/10.webp",
+        "alt": "Vestido de um ombro Amara, vermelho — frente.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Vermelho"
+      },
+      {
+        "src": "/assets/products/vestido-um-ombro-amara/11.webp",
+        "alt": "Vestido de um ombro Amara, amarelo — costas.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Amarelo"
+      },
+      {
+        "src": "/assets/products/vestido-um-ombro-amara/12.webp",
+        "alt": "Vestido de um ombro Amara, preto — frente.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Preto"
+      },
+      {
+        "src": "/assets/products/vestido-um-ombro-amara/13.webp",
+        "alt": "Vestido de um ombro Amara, vermelho — frente.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Vermelho"
+      },
+      {
+        "src": "/assets/products/vestido-um-ombro-amara/14.webp",
+        "alt": "Vestido de um ombro Amara, branco — frente.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Branco"
+      }
+    ],
+    "variants": [],
+    "priceCents": 9900,
+    "shipping": null,
+    "status": "listed",
+    "source": {
+      "name": "DaLuz",
+      "url": "https://www.daluzloja.com.br/todos-os-produtos/vestido/vestido-amara",
+      "verifiedAt": "2026-11-24",
+      "supplierSizes": [
+        "P",
+        "M",
+        "G"
+      ],
+      "supplierColors": [
+        "Amarelo",
+        "Branco",
+        "Vermelho",
+        "Preto"
+      ],
+      "retailPriceCents": 9900,
+      "referenceImage": "https://images.tcdn.com.br/img/img_prod/610417/vestido_amara_1_20261117102726_09e8e4041082.jpeg",
+      "photoPermission": "merchant-authorized",
+      "photoPermissionDate": "2026-11-24",
+      "supplierVariantPairs": [
+        {
+          "sourceSku": "31102-160382",
+          "size": "P",
+          "color": "Amarelo"
+        },
+        {
+          "sourceSku": "31102-160386",
+          "size": "G",
+          "color": "Amarelo"
+        },
+        {
+          "sourceSku": "31102-160388",
+          "size": "P",
+          "color": "Branco"
+        },
+        {
+          "sourceSku": "31102-160390",
+          "size": "M",
+          "color": "Branco"
+        },
+        {
+          "sourceSku": "31102-160392",
+          "size": "G",
+          "color": "Branco"
+        },
+        {
+          "sourceSku": "31102-160394",
+          "size": "P",
+          "color": "Vermelho"
+        },
+        {
+          "sourceSku": "31102-160396",
+          "size": "M",
+          "color": "Vermelho"
+        },
+        {
+          "sourceSku": "31102-160398",
+          "size": "G",
+          "color": "Vermelho"
+        },
+        {
+          "sourceSku": "31102-160400",
+          "size": "P",
+          "color": "Preto"
+        },
+        {
+          "sourceSku": "31102-160404",
+          "size": "G",
+          "color": "Preto"
+        }
+      ],
+      "measurementEvidence": "O fornecedor não publicou medidas em centímetros para este modelo.",
+      "galleryUrls": [
+        "https://images.tcdn.com.br/img/img_prod/610417/vestido_amara_1_20261117102726_09e8e4041082.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/vestido_amara_2_20261117102726_811c128dee3b.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/vestido_amara_3_20261117102726_45751094270e.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/vestido_amara_4_20261117102726_ca2b09ec23e0.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/vestido_amara_5_20261117102726_1b215034047f.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/vestido_amara_6_20261117102726_c058e08bd3de.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/vestido_amara_7_20261117102726_af4ed622d2ef.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/vestido_amara_8_20261117102726_5f793987d0d5.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/vestido_amara_9_20261117102726_856ec56cd9f2.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/vestido_amara_10_20261117102726_cecb064f497c.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/vestido_amara_11_20261117102726_0c3bbe7f48b0.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/vestido_amara_12_20261117102726_bc9d11de71f8.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/vestido_amara_13_20261117102726_f27883da070f.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/vestido_amara_14_20261117102726_6ef759f06e05.jpeg"
+      ]
+    },
+    "pricingProposal": {
+      "priceCents": 9900,
+      "basis": "Preço regular da ficha de referência, adotado pela Felipe Modas.",
+      "approved": true,
+      "approvedAt": "2026-11-24"
+    }
+  },
+  {
+    "id": "fm-cj01",
+    "sku": "FM-CJ01",
+    "slug": "conjunto-listrado-peplum-helena",
+    "name": "Conjunto listrado Helena",
+    "category": "conjuntos",
+    "summary": "A blusa com peplum encontra a amplitude da pantalona.",
+    "description": "As tiras frontais fecham a blusa de gola redonda. A barra passa do cós da pantalona, que tem forro, bolsos laterais e fechamento com botão e zíper.",
+    "fabric": "Viscose com poliamida",
+    "composition": "87% viscose e 13% poliamida",
+    "fit": "Blusa peplum e pantalona.",
+    "measurements": [
+      {
+        "name": "Comprimento da blusa",
+        "unit": "cm",
+        "values": {
+          "P": 58,
+          "M": 59,
+          "G": 60
+        }
+      },
+      {
+        "name": "Comprimento da calça",
+        "unit": "cm",
+        "values": {
+          "P": 109,
+          "M": 110,
+          "G": 111
+        }
+      }
+    ],
+    "sizeGuide": {
+      "P": "36/38",
+      "M": "40",
+      "G": "42"
+    },
+    "care": null,
+    "images": [
+      {
+        "src": "/assets/products/fm-cj01/01.webp",
+        "alt": "Conjunto listrado completo visto de frente — Conjunto listrado Helena.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Listrado azul-claro"
+      },
+      {
+        "src": "/assets/products/fm-cj01/02.webp",
+        "alt": "Parte de trás da blusa e da pantalona — Conjunto listrado Helena.",
+        "width": 1201,
+        "height": 1600,
+        "color": "Listrado azul-claro"
+      },
+      {
+        "src": "/assets/products/fm-cj01/03.webp",
+        "alt": "Amarrações na frente da blusa — Conjunto listrado Helena.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Listrado azul-claro"
+      },
+      {
+        "src": "/assets/products/fm-cj01/04.webp",
+        "alt": "Detalhe da perna e do cós — Conjunto listrado Helena.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Listrado azul-claro"
+      },
+      {
+        "src": "/assets/products/fm-cj01/05.webp",
+        "alt": "Largura da barra e comprimento — Conjunto listrado Helena.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Listrado azul-claro"
+      },
+      {
+        "src": "/assets/products/fm-cj01/06.webp",
+        "alt": "Vista de frente do conjunto vestido — Conjunto listrado Helena.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Listrado azul-claro"
+      },
+      {
+        "src": "/assets/products/fm-cj01/07.webp",
+        "alt": "Caimento da blusa e da pantalona — Conjunto listrado Helena.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Listrado azul-claro"
+      },
+      {
+        "src": "/assets/products/fm-cj01/08.webp",
+        "alt": "Conjunto visto em três quartos — Conjunto listrado Helena.",
+        "width": 1201,
+        "height": 1600,
+        "color": "Listrado azul-claro"
+      },
+      {
+        "src": "/assets/products/fm-cj01/09.webp",
+        "alt": "Blusa e calça lado a lado no cabide — Conjunto listrado Helena.",
+        "width": 1199,
+        "height": 1600,
+        "color": "Listrado azul-claro"
+      },
+      {
+        "src": "/assets/products/fm-cj01/10.webp",
+        "alt": "Fechamento na frente da calça — Conjunto listrado Helena.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Listrado azul-claro"
+      },
+      {
+        "src": "/assets/products/fm-cj01/11.webp",
+        "alt": "Blusa com amarrações no cabide — Conjunto listrado Helena.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Listrado azul-claro"
+      },
+      {
+        "src": "/assets/products/fm-cj01/12.webp",
+        "alt": "Vista da calça no cabide — Conjunto listrado Helena.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Listrado azul-claro"
+      }
+    ],
+    "variants": [],
+    "priceCents": 33990,
+    "shipping": null,
+    "status": "listed",
+    "source": {
+      "name": "Via Luxo Store",
+      "url": "https://www.vialuxostore.com.br/conjunto-listrado-blusa-peplum-e-calca-helena",
+      "verifiedAt": "2026-11-24",
+      "supplierSizes": [
+        "P",
+        "M",
+        "G"
+      ],
+      "supplierColors": [
+        "Listrado azul-claro"
+      ],
+      "retailPriceCents": 33990,
+      "referenceImage": "https://images.tcdn.com.br/img/img_prod/1119565/conjunto_listrado_blusa_peplum_e_cala_helena_1_20261118182849_1fa734767630.jpeg",
+      "photoPermission": "merchant-authorized",
+      "photoPermissionDate": "2026-11-24",
+      "referencePixPriceCents": 32291,
+      "photoColors": [
+        "Listrado azul-claro"
+      ],
+      "colorBasis": "Cores visíveis nas fotografias autorizadas do modelo. A disponibilidade própria é definida por variante.",
+      "galleryUrls": [
+        "https://images.tcdn.com.br/img/img_prod/1119565/conjunto_listrado_blusa_peplum_e_cala_helena_1_20261118182849_1fa734767630.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/conjunto_listrado_blusa_peplum_e_cala_helena_2_20261118182849_fb1431a493f8.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/conjunto_listrado_blusa_peplum_e_cala_helena_3_20261118182849_4a52eddacbb0.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/conjunto_listrado_blusa_peplum_e_cala_helena_4_20261118182849_1e3fb528ae36.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/conjunto_listrado_blusa_peplum_e_cala_helena_5_20261118182849_2ef07e8933d4.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/conjunto_listrado_blusa_peplum_e_cala_helena_6_20261118182849_248382ec59cd.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/conjunto_listrado_blusa_peplum_e_cala_helena_7_20261118182849_acfb51be3a7a.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/conjunto_listrado_blusa_peplum_e_cala_helena_8_20261118182849_6ffbc92b9bc8.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/conjunto_listrado_blusa_peplum_e_cala_helena_1_20261117164133_193a35efb423.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/conjunto_listrado_blusa_peplum_e_cala_helena_2_20261117164133_7cb3806853ba.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/conjunto_listrado_blusa_peplum_e_cala_helena_3_20261117164133_11224fc33607.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/conjunto_listrado_blusa_peplum_e_cala_helena_4_20261117164133_103bebbad09c.jpeg"
+      ],
+      "supplierVariantPairs": [
+        {
+          "sourceSku": "34879-97417",
+          "size": "P",
+          "color": "Listrado azul-claro",
+          "originalVariant": "Tamanho: P | Cor: AZUL"
+        },
+        {
+          "sourceSku": "34879-97419",
+          "size": "M",
+          "color": "Listrado azul-claro",
+          "originalVariant": "Tamanho: M | Cor: AZUL"
+        },
+        {
+          "sourceSku": "34879-97421",
+          "size": "G",
+          "color": "Listrado azul-claro",
+          "originalVariant": "Tamanho: G | Cor: AZUL"
+        }
+      ]
+    },
+    "pricingProposal": {
+      "priceCents": 33990,
+      "basis": "Preço regular da ficha de referência, adotado pela Felipe Modas.",
+      "approved": true,
+      "approvedAt": "2026-11-24"
+    }
+  },
+  {
+    "id": "fm-cj02",
+    "sku": "FM-CJ02",
+    "slug": "conjunto-listrado-com-cinto-isis",
+    "name": "Conjunto listrado com cinto Ísis",
+    "category": "conjuntos",
+    "summary": "O cinto no tom do conjunto marca o encontro das duas peças.",
+    "description": "A blusa listrada termina em peplum e fecha com zíper nas costas. A calça tem corte reto, bolsos laterais e passantes para o cinto que acompanha o conjunto.",
+    "fabric": null,
+    "composition": "50% algodão e 50% poliéster",
+    "fit": "Blusa levemente ajustada e calça reta.",
+    "measurements": [
+      {
+        "name": "Comprimento da blusa",
+        "unit": "cm",
+        "values": {
+          "P": 58,
+          "M": 59,
+          "G": 60
+        }
+      },
+      {
+        "name": "Comprimento da calça",
+        "unit": "cm",
+        "values": {
+          "P": 109,
+          "M": 110,
+          "G": 112
+        }
+      }
+    ],
+    "sizeGuide": {
+      "P": "36/38",
+      "M": "40",
+      "G": "42"
+    },
+    "care": null,
+    "images": [
+      {
+        "src": "/assets/products/fm-cj02/01.webp",
+        "alt": "Conjuntos no cabide em quatro cores — Conjunto listrado com cinto Ísis.",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/assets/products/fm-cj02/02.webp",
+        "alt": "Blusa e calça bege à frente das demais cores — Conjunto listrado com cinto Ísis.",
+        "width": 1199,
+        "height": 1600
+      },
+      {
+        "src": "/assets/products/fm-cj02/03.webp",
+        "alt": "Frente da blusa listrada bege — Conjunto listrado com cinto Ísis.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Listrado bege"
+      },
+      {
+        "src": "/assets/products/fm-cj02/04.webp",
+        "alt": "Cinto e parte da frente da calça bege — Conjunto listrado com cinto Ísis.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Listrado bege"
+      },
+      {
+        "src": "/assets/products/fm-cj02/05.webp",
+        "alt": "Costas da blusa bege com zíper — Conjunto listrado com cinto Ísis.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Listrado bege"
+      },
+      {
+        "src": "/assets/products/fm-cj02/06.webp",
+        "alt": "Vista da calça bege no cabide — Conjunto listrado com cinto Ísis.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Listrado bege"
+      },
+      {
+        "src": "/assets/products/fm-cj02/07.webp",
+        "alt": "Conjunto bege apresentado no cabide — Conjunto listrado com cinto Ísis.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Listrado bege"
+      },
+      {
+        "src": "/assets/products/fm-cj02/08.webp",
+        "alt": "Conjunto listrado azul no cabide — Conjunto listrado com cinto Ísis.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Listrado azul"
+      },
+      {
+        "src": "/assets/products/fm-cj02/09.webp",
+        "alt": "Conjunto listrado rosa no cabide — Conjunto listrado com cinto Ísis.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Listrado rosa"
+      },
+      {
+        "src": "/assets/products/fm-cj02/10.webp",
+        "alt": "Conjunto listrado verde no cabide — Conjunto listrado com cinto Ísis.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Listrado verde"
+      }
+    ],
+    "variants": [],
+    "priceCents": 25990,
+    "shipping": null,
+    "status": "listed",
+    "source": {
+      "name": "Via Luxo Store",
+      "url": "https://www.vialuxostore.com.br/conjunto-listrado-blusa-e-calca-com-cinto-isis",
+      "verifiedAt": "2026-11-24",
+      "supplierSizes": [
+        "P",
+        "M",
+        "G"
+      ],
+      "supplierColors": [
+        "Listrado bege",
+        "Listrado azul",
+        "Listrado rosa",
+        "Listrado verde"
+      ],
+      "retailPriceCents": 25990,
+      "referenceImage": "https://images.tcdn.com.br/img/img_prod/1119565/conjunto_listrado_blusa_e_cala_com_cinto_isis_1_20261123154609_af9933283cc0.jpeg",
+      "photoPermission": "merchant-authorized",
+      "photoPermissionDate": "2026-11-24",
+      "referencePixPriceCents": 24691,
+      "photoColors": [
+        "Listrado bege",
+        "Listrado azul",
+        "Listrado rosa",
+        "Listrado verde"
+      ],
+      "colorBasis": "Cores visíveis nas fotografias autorizadas do modelo. A disponibilidade própria é definida por variante.",
+      "galleryUrls": [
+        "https://images.tcdn.com.br/img/img_prod/1119565/conjunto_listrado_blusa_e_cala_com_cinto_isis_1_20261123154609_af9933283cc0.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/conjunto_listrado_blusa_e_cala_com_cinto_isis_2_20261123154609_8eb25fc0f99a.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/conjunto_listrado_blusa_e_cala_com_cinto_isis_3_20261123154609_ddcb987b77b3.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/conjunto_listrado_blusa_e_cala_com_cinto_isis_4_20261123154609_e2181a089a8f.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/conjunto_listrado_blusa_e_cala_com_cinto_isis_5_20261123154609_bb7ae79c635d.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/conjunto_listrado_blusa_e_cala_com_cinto_isis_6_20261123154609_7a4b73776f41.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/conjunto_listrado_blusa_e_cala_com_cinto_isis_7_20261123154609_5ad7658bd4b4.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/conjunto_listrado_blusa_e_cala_com_cinto_isis_8_20261123154609_2ef6ffe30a95.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/conjunto_listrado_blusa_e_cala_com_cinto_isis_9_20261123154609_9d5efd62dbb6.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/conjunto_listrado_blusa_e_cala_com_cinto_isis_10_20261123154609_325879cb2e59.jpeg"
+      ],
+      "supplierVariantPairs": [
+        {
+          "sourceSku": "34903-97655",
+          "size": "P",
+          "color": "Listrado azul",
+          "originalVariant": "Tamanho: P | Cor: AZUL"
+        },
+        {
+          "sourceSku": "34903-97661",
+          "size": "P",
+          "color": "Listrado bege",
+          "originalVariant": "Tamanho: P | Cor: BEGE"
+        },
+        {
+          "sourceSku": "34903-97667",
+          "size": "P",
+          "color": "Listrado rosa",
+          "originalVariant": "Tamanho: P | Cor: Rosa"
+        },
+        {
+          "sourceSku": "34903-97673",
+          "size": "P",
+          "color": "Listrado verde",
+          "originalVariant": "Tamanho: P | Cor: Verde Menta"
+        },
+        {
+          "sourceSku": "34903-97657",
+          "size": "M",
+          "color": "Listrado azul",
+          "originalVariant": "Tamanho: M | Cor: AZUL"
+        },
+        {
+          "sourceSku": "34903-97663",
+          "size": "M",
+          "color": "Listrado bege",
+          "originalVariant": "Tamanho: M | Cor: BEGE"
+        },
+        {
+          "sourceSku": "34903-97669",
+          "size": "M",
+          "color": "Listrado rosa",
+          "originalVariant": "Tamanho: M | Cor: Rosa"
+        },
+        {
+          "sourceSku": "34903-97675",
+          "size": "M",
+          "color": "Listrado verde",
+          "originalVariant": "Tamanho: M | Cor: Verde Menta"
+        },
+        {
+          "sourceSku": "34903-97659",
+          "size": "G",
+          "color": "Listrado azul",
+          "originalVariant": "Tamanho: G | Cor: AZUL"
+        },
+        {
+          "sourceSku": "34903-97665",
+          "size": "G",
+          "color": "Listrado bege",
+          "originalVariant": "Tamanho: G | Cor: BEGE"
+        },
+        {
+          "sourceSku": "34903-97671",
+          "size": "G",
+          "color": "Listrado rosa",
+          "originalVariant": "Tamanho: G | Cor: Rosa"
+        },
+        {
+          "sourceSku": "34903-97677",
+          "size": "G",
+          "color": "Listrado verde",
+          "originalVariant": "Tamanho: G | Cor: Verde Menta"
+        }
+      ]
+    },
+    "pricingProposal": {
+      "priceCents": 25990,
+      "basis": "Preço regular da ficha de referência, adotado pela Felipe Modas.",
+      "approved": true,
+      "approvedAt": "2026-11-24"
+    }
+  },
+  {
+    "id": "fm-cj03",
+    "sku": "FM-CJ03",
+    "slug": "conjunto-microsarja-orsay",
+    "name": "Conjunto de microsarja Orsay",
+    "category": "conjuntos",
+    "summary": "Microsarja em duas peças, com cropped sem alças e calça.",
+    "description": "Os botões decorativos marcam a frente do cropped tomara que caia. A parte traseira tem elastano. A calça do conjunto traz bolsos.",
+    "fabric": "Microsarja",
+    "composition": "Poliéster e elastano, em proporções não informadas.",
+    "fit": "Cropped tomara que caia.",
+    "measurements": [],
+    "sizeGuide": {
+      "P": "36/38",
+      "M": "40/42",
+      "G": "44"
+    },
+    "care": null,
+    "images": [
+      {
+        "src": "/assets/products/conjunto-microsarja-orsay/03.webp",
+        "alt": "Conjunto de microsarja Orsay, bege — frente.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Bege"
+      },
+      {
+        "src": "/assets/products/conjunto-microsarja-orsay/01.webp",
+        "alt": "Conjunto de microsarja Orsay, bege — detalhe da blusa e da calça.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Bege"
+      },
+      {
+        "src": "/assets/products/conjunto-microsarja-orsay/02.webp",
+        "alt": "Conjunto de microsarja Orsay, azul-marinho — detalhe da blusa e da calça.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Azul-marinho"
+      },
+      {
+        "src": "/assets/products/conjunto-microsarja-orsay/04.webp",
+        "alt": "Conjunto de microsarja Orsay, azul-marinho — frente no espelho.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Azul-marinho"
+      },
+      {
+        "src": "/assets/products/conjunto-microsarja-orsay/05.webp",
+        "alt": "Conjunto de microsarja Orsay, bege — costas.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Bege"
+      },
+      {
+        "src": "/assets/products/conjunto-microsarja-orsay/06.webp",
+        "alt": "Conjunto de microsarja Orsay, azul-marinho — detalhe das costas.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Azul-marinho"
+      },
+      {
+        "src": "/assets/products/conjunto-microsarja-orsay/07.webp",
+        "alt": "Conjunto de microsarja Orsay, bege — frente.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Bege"
+      },
+      {
+        "src": "/assets/products/conjunto-microsarja-orsay/08.webp",
+        "alt": "Conjunto de microsarja Orsay, azul-marinho — frente.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Azul-marinho"
+      },
+      {
+        "src": "/assets/products/conjunto-microsarja-orsay/09.webp",
+        "alt": "Conjunto de microsarja Orsay, bege — frente em movimento.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Bege"
+      },
+      {
+        "src": "/assets/products/conjunto-microsarja-orsay/10.webp",
+        "alt": "Conjunto de microsarja Orsay, azul-marinho — frente.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Azul-marinho"
+      },
+      {
+        "src": "/assets/products/conjunto-microsarja-orsay/11.webp",
+        "alt": "Conjunto de microsarja Orsay, bege — frente.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Bege"
+      },
+      {
+        "src": "/assets/products/conjunto-microsarja-orsay/12.webp",
+        "alt": "Conjunto de microsarja Orsay, azul-marinho — frente.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Azul-marinho"
+      },
+      {
+        "src": "/assets/products/conjunto-microsarja-orsay/13.webp",
+        "alt": "Conjunto de microsarja Orsay, azul-marinho — costas.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Azul-marinho"
+      }
+    ],
+    "variants": [],
+    "priceCents": 14900,
+    "shipping": null,
+    "status": "listed",
+    "source": {
+      "name": "DaLuz",
+      "url": "https://www.daluzloja.com.br/todos-os-produtos/conjunto/conjunto-arsay",
+      "verifiedAt": "2026-11-24",
+      "supplierSizes": [
+        "P",
+        "M",
+        "G"
+      ],
+      "supplierColors": [
+        "Azul-marinho",
+        "Bege"
+      ],
+      "retailPriceCents": 14900,
+      "referenceImage": "https://images.tcdn.com.br/img/img_prod/610417/conjunto_orsay_3_20261029104016_bf2deb13f775.jpeg",
+      "photoPermission": "merchant-authorized",
+      "photoPermissionDate": "2026-11-24",
+      "supplierVariantPairs": [
+        {
+          "sourceSku": "30777-159057",
+          "size": "P",
+          "color": "Azul Marinho"
+        },
+        {
+          "sourceSku": "30777-159059",
+          "size": "M",
+          "color": "Azul Marinho"
+        },
+        {
+          "sourceSku": "30777-159061",
+          "size": "G",
+          "color": "Azul Marinho"
+        },
+        {
+          "sourceSku": "30777-159067",
+          "size": "G",
+          "color": "Bege"
+        }
+      ],
+      "measurementEvidence": "O fornecedor não publicou medidas em centímetros para este modelo.",
+      "galleryUrls": [
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_orsay_3_20261029104016_bf2deb13f775.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_orsay_1_20261029104016_f64b435c6a61.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_orsay_2_20261029104016_20c86de5ca97.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_orsay_4_20261029104016_e051462ec5f1.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_orsay_5_20261029104016_87b6cfbc1ac6.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_orsay_6_20261029104016_ceebf02e0f04.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_orsay_7_20261029104016_9ec20a8a6a74.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_orsay_8_20261029104016_6009be31aa51.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_orsay_9_20261029104016_e1e41b4e1732.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_orsay_10_20261029104016_c6fd30f7d715.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_orsay_11_20261029104016_e15feb874e07.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_orsay_12_20261029104016_3c91ceb53e27.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_orsay_13_20261029104016_ff75b0e77b84.jpeg"
+      ]
+    },
+    "pricingProposal": {
+      "priceCents": 14900,
+      "basis": "Preço regular da ficha de referência, adotado pela Felipe Modas.",
+      "approved": true,
+      "approvedAt": "2026-11-24"
+    }
+  },
+  {
+    "id": "fm-cj04",
+    "sku": "FM-CJ04",
+    "slug": "conjunto-tres-pecas-reeve",
+    "name": "Conjunto de três peças Reeve",
+    "category": "conjuntos",
+    "summary": "Camisa, pantalona e lenço para usar juntos ou combinar separadamente.",
+    "description": "A camisa de algodão faz par com uma pantalona forrada. O lenço completa a produção e permite variar a composição do look.",
+    "fabric": "Algodão",
+    "composition": null,
+    "fit": "Calça pantalona com forro.",
+    "measurements": [],
+    "sizeGuide": {
+      "P": "36/38",
+      "M": "40/42",
+      "G": "44"
+    },
+    "care": null,
+    "images": [
+      {
+        "src": "/assets/products/conjunto-tres-pecas-reeve/19.webp",
+        "alt": "Conjunto de três peças Reeve, azul claro — frente com camisa.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Azul claro"
+      },
+      {
+        "src": "/assets/products/conjunto-tres-pecas-reeve/04.webp",
+        "alt": "Conjunto de três peças Reeve, azul claro — camisa fechada no espelho.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Azul claro"
+      },
+      {
+        "src": "/assets/products/conjunto-tres-pecas-reeve/13.webp",
+        "alt": "Conjunto de três peças Reeve, branco — frente no espelho.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Branco"
+      },
+      {
+        "src": "/assets/products/conjunto-tres-pecas-reeve/15.webp",
+        "alt": "Conjunto de três peças Reeve, azul claro — costas com camisa.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Azul claro"
+      },
+      {
+        "src": "/assets/products/conjunto-tres-pecas-reeve/20.webp",
+        "alt": "Conjunto de três peças Reeve, azul claro — detalhe da camisa.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Azul claro"
+      },
+      {
+        "src": "/assets/products/conjunto-tres-pecas-reeve/21.webp",
+        "alt": "Conjunto de três peças Reeve, branco — frente com lenço.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Branco"
+      },
+      {
+        "src": "/assets/products/conjunto-tres-pecas-reeve/22.webp",
+        "alt": "Conjunto de três peças Reeve, branco — perfil e costas.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Branco"
+      },
+      {
+        "src": "/assets/products/conjunto-tres-pecas-reeve/23.webp",
+        "alt": "Conjunto de três peças Reeve, branco — detalhe do lenço.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Branco"
+      },
+      {
+        "src": "/assets/products/conjunto-tres-pecas-reeve/01.webp",
+        "alt": "Conjunto de três peças Reeve, verde — camisa aberta.",
+        "width": 1120,
+        "height": 1493
+      },
+      {
+        "src": "/assets/products/conjunto-tres-pecas-reeve/02.webp",
+        "alt": "Conjunto de três peças Reeve, laranja — camisa fechada.",
+        "width": 1120,
+        "height": 1493
+      },
+      {
+        "src": "/assets/products/conjunto-tres-pecas-reeve/03.webp",
+        "alt": "Conjunto de três peças Reeve, azul-marinho — lenço como blusa.",
+        "width": 1120,
+        "height": 1493
+      },
+      {
+        "src": "/assets/products/conjunto-tres-pecas-reeve/05.webp",
+        "alt": "Conjunto de três peças Reeve, rosa claro — lenço como blusa.",
+        "width": 1120,
+        "height": 1493
+      },
+      {
+        "src": "/assets/products/conjunto-tres-pecas-reeve/06.webp",
+        "alt": "Conjunto de três peças Reeve, verde — detalhe da calça.",
+        "width": 1120,
+        "height": 1493
+      },
+      {
+        "src": "/assets/products/conjunto-tres-pecas-reeve/07.webp",
+        "alt": "Conjunto de três peças Reeve, laranja — perfil e costas.",
+        "width": 1120,
+        "height": 1493
+      },
+      {
+        "src": "/assets/products/conjunto-tres-pecas-reeve/08.webp",
+        "alt": "Conjunto de três peças Reeve, azul-marinho — frente.",
+        "width": 1120,
+        "height": 1493
+      },
+      {
+        "src": "/assets/products/conjunto-tres-pecas-reeve/09.webp",
+        "alt": "Conjunto de três peças Reeve, verde — frente com camisa aberta.",
+        "width": 1120,
+        "height": 1493
+      },
+      {
+        "src": "/assets/products/conjunto-tres-pecas-reeve/10.webp",
+        "alt": "Conjunto de três peças Reeve, azul-marinho — costas.",
+        "width": 1120,
+        "height": 1493
+      },
+      {
+        "src": "/assets/products/conjunto-tres-pecas-reeve/11.webp",
+        "alt": "Conjunto de três peças Reeve, rosa claro — frente.",
+        "width": 1120,
+        "height": 1493
+      },
+      {
+        "src": "/assets/products/conjunto-tres-pecas-reeve/12.webp",
+        "alt": "Conjunto de três peças Reeve, azul-marinho — frente no espelho.",
+        "width": 1120,
+        "height": 1493
+      },
+      {
+        "src": "/assets/products/conjunto-tres-pecas-reeve/14.webp",
+        "alt": "Conjunto de três peças Reeve, verde — calça e lenço.",
+        "width": 1120,
+        "height": 1493
+      },
+      {
+        "src": "/assets/products/conjunto-tres-pecas-reeve/16.webp",
+        "alt": "Conjunto de três peças Reeve, rosa claro — frente no espelho.",
+        "width": 1120,
+        "height": 1493
+      },
+      {
+        "src": "/assets/products/conjunto-tres-pecas-reeve/17.webp",
+        "alt": "Conjunto de três peças Reeve, verde — calça e lenço.",
+        "width": 1120,
+        "height": 1493
+      },
+      {
+        "src": "/assets/products/conjunto-tres-pecas-reeve/18.webp",
+        "alt": "Conjunto de três peças Reeve, rosa claro — costas.",
+        "width": 1120,
+        "height": 1493
+      },
+      {
+        "src": "/assets/products/conjunto-tres-pecas-reeve/24.webp",
+        "alt": "Conjunto de três peças Reeve, laranja — camisa fechada no espelho.",
+        "width": 1120,
+        "height": 1493
+      }
+    ],
+    "variants": [],
+    "priceCents": 18900,
+    "shipping": null,
+    "status": "listed",
+    "source": {
+      "name": "DaLuz",
+      "url": "https://www.daluzloja.com.br/todos-os-produtos/conjunto/conjunto-reeve",
+      "verifiedAt": "2026-11-24",
+      "supplierSizes": [
+        "P",
+        "M",
+        "G"
+      ],
+      "supplierColors": [
+        "Azul claro",
+        "Branco"
+      ],
+      "retailPriceCents": 18900,
+      "referenceImage": "https://images.tcdn.com.br/img/img_prod/610417/conjunto_reeve_19_20260826170051_3ea6c75b5222.jpeg",
+      "photoPermission": "merchant-authorized",
+      "photoPermissionDate": "2026-11-24",
+      "supplierVariantPairs": [
+        {
+          "sourceSku": "30101-155535",
+          "size": "M",
+          "color": "Azul Claro"
+        },
+        {
+          "sourceSku": "30101-155537",
+          "size": "G",
+          "color": "Azul Claro"
+        },
+        {
+          "sourceSku": "30101-155549",
+          "size": "G",
+          "color": "Branco"
+        }
+      ],
+      "measurementEvidence": "O fornecedor não publicou medidas em centímetros para este modelo.",
+      "galleryUrls": [
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_reeve_19_20260826170051_3ea6c75b5222.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_reeve_4_20260826170051_c8ce8b76f139.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_reeve_13_20260826170051_12351a61ac7a.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_reeve_15_20260826170051_82ed9c27b307.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_reeve_20_20260826170051_1d9415db0449.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_reeve_21_20260826170051_626d98167207.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_reeve_22_20260826170051_0ab43f5d6d8f.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_reeve_23_20260826170051_93b6fe7201c8.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_reeve_1_20260826170051_d93655f214c3.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_reeve_2_20260826170051_3ae0bed7f4e6.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_reeve_3_20260826170051_8c7366355ea5.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_reeve_5_20260826170051_e269b7278fbe.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_reeve_6_20260826170051_427f6b64772e.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_reeve_7_20260826170051_ea7e44fabc71.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_reeve_8_20260826170051_62e42fe0e1a0.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_reeve_9_20260826170051_fb521d4e6d8b.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_reeve_10_20260826170051_7ccc90148143.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_reeve_11_20260826170051_7a0486830286.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_reeve_12_20260826170051_db0c3fd31355.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_reeve_14_20260826170051_36dcdd227d26.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_reeve_16_20260826170051_1942e0d05c2f.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_reeve_17_20260826170051_ed27ca61acaf.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_reeve_18_20260826170051_b19ec54212bb.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/conjunto_reeve_24_20260826170051_0e9163008b3e.jpeg"
+      ]
+    },
+    "pricingProposal": {
+      "priceCents": 18900,
+      "basis": "Preço regular da ficha de referência, adotado pela Felipe Modas.",
+      "approved": true,
+      "approvedAt": "2026-11-24"
+    }
+  },
+  {
+    "id": "fm-c01",
+    "sku": "FM-C01",
+    "slug": "calca-wide-leg-alfaiataria-dani",
+    "name": "Calça de alfaiataria Dani",
+    "category": "calcas",
+    "summary": "Cintura alta e perna ampla em tecido de alfaiataria.",
+    "description": "Os passantes permitem usar a peça com cinto. Os bolsos dianteiros são funcionais, enquanto os traseiros são decorativos. Botão e zíper fecham a frente.",
+    "fabric": "Alfaiataria",
+    "composition": "90% poliéster e 10% elastano",
+    "fit": "Wide leg com cintura alta.",
+    "measurements": [
+      {
+        "name": "Comprimento da calça",
+        "unit": "cm",
+        "values": {
+          "P": 110.5,
+          "M": 113,
+          "G": 113.5
+        }
+      }
+    ],
+    "sizeGuide": {
+      "P": "36/38",
+      "M": "40",
+      "G": "42"
+    },
+    "care": null,
+    "images": [
+      {
+        "src": "/assets/products/fm-c01/01.webp",
+        "alt": "Frente da calça com a peça vestida — Calça de alfaiataria Dani.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Cinza chumbo"
+      },
+      {
+        "src": "/assets/products/fm-c01/02.webp",
+        "alt": "Comparação das cores preto, azul-marinho, cinza chumbo e mocha mousse — Calça de alfaiataria Dani.",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/assets/products/fm-c01/03.webp",
+        "alt": "Vista traseira do cós — Calça de alfaiataria Dani.",
+        "width": 960,
+        "height": 1280,
+        "color": "Cinza chumbo"
+      },
+      {
+        "src": "/assets/products/fm-c01/04.webp",
+        "alt": "Comprimento da calça vestida — Calça de alfaiataria Dani.",
+        "width": 960,
+        "height": 1280,
+        "color": "Cinza chumbo"
+      },
+      {
+        "src": "/assets/products/fm-c01/05.webp",
+        "alt": "Calças no cabide em diferentes cores — Calça de alfaiataria Dani.",
+        "width": 1201,
+        "height": 1600
+      },
+      {
+        "src": "/assets/products/fm-c01/06.webp",
+        "alt": "Vista lateral e traseira da peça — Calça de alfaiataria Dani.",
+        "width": 960,
+        "height": 1280,
+        "color": "Cinza chumbo"
+      },
+      {
+        "src": "/assets/products/fm-c01/07.webp",
+        "alt": "Barras e largura das pernas vistas de frente — Calça de alfaiataria Dani.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Cinza chumbo"
+      },
+      {
+        "src": "/assets/products/fm-c01/08.webp",
+        "alt": "Cós da calça mocha mousse no cabide — Calça de alfaiataria Dani.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Mocha mousse"
+      },
+      {
+        "src": "/assets/products/fm-c01/09.webp",
+        "alt": "Caimento nas costas — Calça de alfaiataria Dani.",
+        "width": 960,
+        "height": 1280,
+        "color": "Cinza chumbo"
+      },
+      {
+        "src": "/assets/products/fm-c01/10.webp",
+        "alt": "Frente do cós com passantes — Calça de alfaiataria Dani.",
+        "width": 959,
+        "height": 1280,
+        "color": "Cinza chumbo"
+      },
+      {
+        "src": "/assets/products/fm-c01/11.webp",
+        "alt": "Vista frontal em corpo inteiro — Calça de alfaiataria Dani.",
+        "width": 960,
+        "height": 1280,
+        "color": "Cinza chumbo"
+      },
+      {
+        "src": "/assets/products/fm-c01/12.webp",
+        "alt": "Bolso e caimento frontal — Calça de alfaiataria Dani.",
+        "width": 1201,
+        "height": 1600,
+        "color": "Cinza chumbo"
+      },
+      {
+        "src": "/assets/products/fm-c01/13.webp",
+        "alt": "Calça vestida de frente — Calça de alfaiataria Dani.",
+        "width": 960,
+        "height": 1280,
+        "color": "Cinza chumbo"
+      },
+      {
+        "src": "/assets/products/fm-c01/14.webp",
+        "alt": "Perfil da perna e do bolso — Calça de alfaiataria Dani.",
+        "width": 960,
+        "height": 1280,
+        "color": "Cinza chumbo"
+      },
+      {
+        "src": "/assets/products/fm-c01/15.webp",
+        "alt": "Detalhe frontal do gancho e dos bolsos — Calça de alfaiataria Dani.",
+        "width": 961,
+        "height": 1280,
+        "color": "Cinza chumbo"
+      },
+      {
+        "src": "/assets/products/fm-c01/16.webp",
+        "alt": "Amplo comprimento da perna — Calça de alfaiataria Dani.",
+        "width": 961,
+        "height": 1280,
+        "color": "Cinza chumbo"
+      },
+      {
+        "src": "/assets/products/fm-c01/17.webp",
+        "alt": "Calça rosa vestida de frente — Calça de alfaiataria Dani.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Rosa"
+      },
+      {
+        "src": "/assets/products/fm-c01/18.webp",
+        "alt": "Calça rosa vista de costas — Calça de alfaiataria Dani.",
+        "width": 1201,
+        "height": 1600,
+        "color": "Rosa"
+      },
+      {
+        "src": "/assets/products/fm-c01/19.webp",
+        "alt": "Vista lateral da perna — Calça de alfaiataria Dani.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Rosa"
+      },
+      {
+        "src": "/assets/products/fm-c01/20.webp",
+        "alt": "Vista de trás com jaqueta jeans — Calça de alfaiataria Dani.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Rosa"
+      },
+      {
+        "src": "/assets/products/fm-c01/21.webp",
+        "alt": "Calça rosa em corpo inteiro — Calça de alfaiataria Dani.",
+        "width": 1199,
+        "height": 1600,
+        "color": "Rosa"
+      },
+      {
+        "src": "/assets/products/fm-c01/22.webp",
+        "alt": "Vista de frente com jaqueta jeans — Calça de alfaiataria Dani.",
+        "width": 1201,
+        "height": 1600,
+        "color": "Rosa"
+      },
+      {
+        "src": "/assets/products/fm-c01/23.webp",
+        "alt": "Vista frontal do cós e da barra — Calça de alfaiataria Dani.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Rosa"
+      },
+      {
+        "src": "/assets/products/fm-c01/24.webp",
+        "alt": "Detalhe da calça preta no cabide — Calça de alfaiataria Dani.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Preto"
+      },
+      {
+        "src": "/assets/products/fm-c01/25.webp",
+        "alt": "Calça azul-marinho no cabide — Calça de alfaiataria Dani.",
+        "width": 960,
+        "height": 1280,
+        "color": "Azul-marinho"
+      },
+      {
+        "src": "/assets/products/fm-c01/26.webp",
+        "alt": "Calça cinza chumbo no cabide — Calça de alfaiataria Dani.",
+        "width": 960,
+        "height": 1280,
+        "color": "Cinza chumbo"
+      },
+      {
+        "src": "/assets/products/fm-c01/27.webp",
+        "alt": "Vista de trás da cintura alta — Calça de alfaiataria Dani.",
+        "width": 960,
+        "height": 1280,
+        "color": "Cinza chumbo"
+      },
+      {
+        "src": "/assets/products/fm-c01/28.webp",
+        "alt": "Cós alto e perna ampla vistos de frente — Calça de alfaiataria Dani.",
+        "width": 961,
+        "height": 1280,
+        "color": "Cinza chumbo"
+      },
+      {
+        "src": "/assets/products/fm-c01/29.webp",
+        "alt": "Comprimento da peça no corpo — Calça de alfaiataria Dani.",
+        "width": 960,
+        "height": 1280,
+        "color": "Cinza chumbo"
+      }
+    ],
+    "variants": [],
+    "priceCents": 13990,
+    "shipping": null,
+    "status": "listed",
+    "source": {
+      "name": "Via Luxo Store",
+      "url": "https://www.vialuxostore.com.br/calca/calca-alfaiataria-wide-leg-dani",
+      "verifiedAt": "2026-11-24",
+      "supplierSizes": [
+        "P",
+        "M",
+        "G"
+      ],
+      "supplierColors": [
+        "Cinza chumbo",
+        "Mocha mousse",
+        "Rosa",
+        "Preto",
+        "Azul-marinho"
+      ],
+      "retailPriceCents": 13990,
+      "referenceImage": "https://images.tcdn.com.br/img/img_prod/1119565/cala_alfaiataria_wide_leg_dani_1_20260120165316_852be575f189.jpeg",
+      "photoPermission": "merchant-authorized",
+      "photoPermissionDate": "2026-11-24",
+      "referencePixPriceCents": 13291,
+      "photoColors": [
+        "Cinza chumbo",
+        "Mocha mousse",
+        "Rosa",
+        "Preto",
+        "Azul-marinho"
+      ],
+      "colorBasis": "Cores visíveis nas fotografias autorizadas do modelo. A disponibilidade própria é definida por variante.",
+      "galleryUrls": [
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_alfaiataria_wide_leg_dani_1_20260120165316_852be575f189.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_alfaiataria_wide_leg_dani_2_20261002144250_94a6c144e515.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_alfaiataria_wide_leg_dani_3_20260120165316_d8ef2bd12890.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_alfaiataria_wide_leg_dani_4_20260120165316_7bd7b54bc3c3.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_alfaiataria_wide_leg_dani_5_20261002144250_a03fe67be54c.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_alfaiataria_wide_leg_dani_5_20260120165316_542636c6c174.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_alfaiataria_wide_leg_dani_7_20260120165316_c7a3275fec49.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_alfaiataria_wide_leg_dani_8_20261002144250_f862534b9d23.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_alfaiataria_wide_leg_dani_11_20260120165316_729577ded33f.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_alfaiataria_wide_leg_dani_6_20260120165316_8132cf29e4e7.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_alfaiataria_wide_leg_dani_8_20260120165316_1d88aab1bbe5.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_alfaiataria_wide_leg_dani_13_20260120165316_88520bbef260.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_alfaiataria_wide_leg_dani_10_20260120165316_58f50298ecc3.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_alfaiataria_wide_leg_dani_9_20260120165316_bcc67a6ee5ba.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_alfaiataria_wide_leg_dani_12_20260120165316_045ae44e0276.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_alfaiataria_wide_leg_dani_14_20260120165316_46ca65fe3b4d.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_alfaiataria_wide_leg_dani_1_20250819180459_b799184f89e9.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_alfaiataria_wide_leg_dani_4_20250819180355_3f54b2c93950.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_alfaiataria_wide_leg_dani_3_20250819180354_7c1d21831b8a.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_alfaiataria_wide_leg_dani_5_20250819180356_cb48727b8a75.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_alfaiataria_wide_leg_dani_6_20250819180356_37d9f3564561.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_alfaiataria_wide_leg_dani_7_20250819180357_fa722a5c2c81.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_alfaiataria_wide_leg_dani_9_20250819180359_d5686546d60e.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_alfaiataria_wide_leg_dani_12_20260119125041_395fbf435fc9.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_alfaiataria_wide_leg_dani_25_20260213164235_8a868528b73d.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_alfaiataria_wide_leg_dani_27_20260213164235_701b13514ff1.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_alfaiataria_wide_leg_dani_31_20260120165316_d58b74e057bb.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_alfaiataria_wide_leg_dani_32_20260120165316_5a657ce9140a.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_alfaiataria_wide_leg_dani_33_20260120165316_983ab4303f7c.jpeg"
+      ],
+      "supplierVariantPairs": [
+        {
+          "sourceSku": "31871-84691",
+          "size": "M",
+          "color": "Azul-marinho",
+          "originalVariant": "Tamanho: M | Cor: AZUL MARINHO"
+        },
+        {
+          "sourceSku": "31871-82179",
+          "size": "M",
+          "color": "Mocha mousse",
+          "originalVariant": "Tamanho: M | Cor: MOCHA MOUSSE"
+        },
+        {
+          "sourceSku": "31871-82181",
+          "size": "G",
+          "color": "Mocha mousse",
+          "originalVariant": "Tamanho: G | Cor: MOCHA MOUSSE"
+        },
+        {
+          "sourceSku": "31871-84693",
+          "size": "G",
+          "color": "Azul-marinho",
+          "originalVariant": "Tamanho: G | Cor: AZUL MARINHO"
+        },
+        {
+          "sourceSku": "31871-73469",
+          "size": "G",
+          "color": "Preto",
+          "originalVariant": "Tamanho: G | Cor: Preto"
+        }
+      ]
+    },
+    "pricingProposal": {
+      "priceCents": 13990,
+      "basis": "Preço regular da ficha de referência, adotado pela Felipe Modas.",
+      "approved": true,
+      "approvedAt": "2026-11-24"
+    }
+  },
+  {
+    "id": "fm-c02",
+    "sku": "FM-C02",
+    "slug": "calca-jeans-wide-leg-mariana",
+    "name": "Calça jeans wide leg Mariana",
+    "category": "calcas",
+    "summary": "Jeans de cintura alta com abertura ampla na perna.",
+    "description": "A peça combina o corte wide leg com uma pequena parcela de elastano. Há bolsos na frente e atrás, passantes no cós e fechamento frontal por botão e zíper.",
+    "fabric": "Jeans",
+    "composition": "99% algodão e 1% elastano",
+    "fit": "Wide leg de cintura alta.",
+    "measurements": [
+      {
+        "name": "Comprimento da calça",
+        "unit": "cm",
+        "values": {
+          "34": 108,
+          "36": 109,
+          "38": 110,
+          "40": 110,
+          "42": 112,
+          "44": 112
+        }
+      }
+    ],
+    "sizeGuide": {},
+    "care": null,
+    "images": [
+      {
+        "src": "/assets/products/fm-c02/01.webp",
+        "alt": "Vista frontal da calça jeans vestida — Calça jeans wide leg Mariana.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Jeans azul"
+      },
+      {
+        "src": "/assets/products/fm-c02/02.webp",
+        "alt": "Vista de costas com bolsos — Calça jeans wide leg Mariana.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Jeans azul"
+      },
+      {
+        "src": "/assets/products/fm-c02/03.webp",
+        "alt": "Calça vestida em corpo inteiro — Calça jeans wide leg Mariana.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Jeans azul"
+      },
+      {
+        "src": "/assets/products/fm-c02/04.webp",
+        "alt": "Cós e frente das pernas — Calça jeans wide leg Mariana.",
+        "width": 1201,
+        "height": 1600,
+        "color": "Jeans azul"
+      },
+      {
+        "src": "/assets/products/fm-c02/05.webp",
+        "alt": "Vista da parte de trás da peça — Calça jeans wide leg Mariana.",
+        "width": 1201,
+        "height": 1600,
+        "color": "Jeans azul"
+      },
+      {
+        "src": "/assets/products/fm-c02/06.webp",
+        "alt": "Detalhe da costura e dos bolsos traseiros — Calça jeans wide leg Mariana.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Jeans azul"
+      },
+      {
+        "src": "/assets/products/fm-c02/07.webp",
+        "alt": "Vista frontal da peça em pé — Calça jeans wide leg Mariana.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Jeans azul"
+      },
+      {
+        "src": "/assets/products/fm-c02/08.webp",
+        "alt": "Perfil do cós e da perna — Calça jeans wide leg Mariana.",
+        "width": 1201,
+        "height": 1600,
+        "color": "Jeans azul"
+      },
+      {
+        "src": "/assets/products/fm-c02/09.webp",
+        "alt": "Detalhe do botão e da costura do cós — Calça jeans wide leg Mariana.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Jeans azul"
+      },
+      {
+        "src": "/assets/products/fm-c02/10.webp",
+        "alt": "Jeans dobrado com a frente visível — Calça jeans wide leg Mariana.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Jeans azul"
+      },
+      {
+        "src": "/assets/products/fm-c02/11.webp",
+        "alt": "Detalhe frontal dos bolsos — Calça jeans wide leg Mariana.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Jeans azul"
+      },
+      {
+        "src": "/assets/products/fm-c02/12.webp",
+        "alt": "Detalhe de bolso traseiro e etiqueta — Calça jeans wide leg Mariana.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Jeans azul"
+      },
+      {
+        "src": "/assets/products/fm-c02/13.webp",
+        "alt": "Vista frontal do comprimento — Calça jeans wide leg Mariana.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Jeans azul"
+      },
+      {
+        "src": "/assets/products/fm-c02/14.webp",
+        "alt": "Vista frontal com os pés juntos — Calça jeans wide leg Mariana.",
+        "width": 1200,
+        "height": 1600,
+        "color": "Jeans azul"
+      }
+    ],
+    "variants": [],
+    "priceCents": 18890,
+    "shipping": null,
+    "status": "listed",
+    "source": {
+      "name": "Via Luxo Store",
+      "url": "https://www.vialuxostore.com.br/calca-wide-leg-jeans-mariana",
+      "verifiedAt": "2026-11-24",
+      "supplierSizes": [
+        "34",
+        "36",
+        "38",
+        "40",
+        "42",
+        "44"
+      ],
+      "supplierColors": [
+        "Jeans azul"
+      ],
+      "retailPriceCents": 18890,
+      "referenceImage": "https://images.tcdn.com.br/img/img_prod/1119565/cala_wide_leg_jeans_mariana_11_20261007180216_4203dc40dc0a.jpeg",
+      "photoPermission": "merchant-authorized",
+      "photoPermissionDate": "2026-11-24",
+      "referencePixPriceCents": 17946,
+      "photoColors": [
+        "Jeans azul"
+      ],
+      "colorBasis": "Cores visíveis nas fotografias autorizadas do modelo. A disponibilidade própria é definida por variante.",
+      "galleryUrls": [
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_wide_leg_jeans_mariana_11_20261007180216_4203dc40dc0a.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_wide_leg_jeans_mariana_12_20261007180216_c07562160903.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_wide_leg_jeans_mariana_1_20261007180216_863dd33145be.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_wide_leg_jeans_mariana_2_20261007180216_fb1fb205e4bc.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_wide_leg_jeans_mariana_4_20261007180216_025cb6d220e8.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_wide_leg_jeans_mariana_5_20261007180216_730eb418e501.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_wide_leg_jeans_mariana_7_20261007180216_d80e79d9e421.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_wide_leg_jeans_mariana_8_20261007180216_8134aa8de331.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_wide_leg_jeans_mariana_3_20261005153431_9aa1e86541ef.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_wide_leg_jeans_mariana_1_20261005153431_a4ec3f567ff9.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_wide_leg_jeans_mariana_10_20261007180216_0c49c61d7d46.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_wide_leg_jeans_mariana_2_20261005153431_61a3f9a9d299.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_wide_leg_jeans_mariana_13_20261007180216_3622d504f82e.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/1119565/cala_wide_leg_jeans_mariana_14_20261007180216_542eff6bb350.jpeg"
+      ],
+      "supplierVariantPairs": [
+        {
+          "sourceSku": "34691-95463",
+          "size": "36",
+          "color": null,
+          "originalVariant": "Tamanho: 36"
+        },
+        {
+          "sourceSku": "34691-95467",
+          "size": "40",
+          "color": null,
+          "originalVariant": "Tamanho: 40"
+        },
+        {
+          "sourceSku": "34691-95469",
+          "size": "42",
+          "color": null,
+          "originalVariant": "Tamanho: 42"
+        },
+        {
+          "sourceSku": "34691-95471",
+          "size": "44",
+          "color": null,
+          "originalVariant": "Tamanho: 44"
+        }
+      ]
+    },
+    "pricingProposal": {
+      "priceCents": 18890,
+      "basis": "Preço regular da ficha de referência, adotado pela Felipe Modas.",
+      "approved": true,
+      "approvedAt": "2026-11-24"
+    }
+  },
+  {
+    "id": "fm-c03",
+    "sku": "FM-C03",
+    "slug": "calca-alfaiataria-maelis",
+    "name": "Calça de alfaiataria Maelis",
+    "category": "calcas",
+    "summary": "Uma silhueta ampla em crepe de alfaiataria.",
+    "description": "O fecho em colchete mantém a frente da calça discreta. A amplitude da modelagem destaca a queda do crepe.",
+    "fabric": "Crepe de alfaiataria",
+    "composition": null,
+    "fit": "Ampla.",
+    "measurements": [],
+    "sizeGuide": {
+      "P": "36/38",
+      "M": "40",
+      "G": "42",
+      "GG": "44"
+    },
+    "care": null,
+    "images": [
+      {
+        "src": "/assets/products/calca-alfaiataria-maelis/14.webp",
+        "alt": "Calça de alfaiataria Maelis, branco — frente.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Branco"
+      },
+      {
+        "src": "/assets/products/calca-alfaiataria-maelis/01.webp",
+        "alt": "Calça de alfaiataria Maelis — frente.",
+        "width": 1120,
+        "height": 1493
+      },
+      {
+        "src": "/assets/products/calca-alfaiataria-maelis/02.webp",
+        "alt": "Calça de alfaiataria Maelis — detalhe do cós.",
+        "width": 1120,
+        "height": 1493
+      },
+      {
+        "src": "/assets/products/calca-alfaiataria-maelis/03.webp",
+        "alt": "Calça de alfaiataria Maelis, preto — frente.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Preto"
+      },
+      {
+        "src": "/assets/products/calca-alfaiataria-maelis/04.webp",
+        "alt": "Calça de alfaiataria Maelis — costas.",
+        "width": 1120,
+        "height": 1493
+      },
+      {
+        "src": "/assets/products/calca-alfaiataria-maelis/05.webp",
+        "alt": "Calça de alfaiataria Maelis — frente no espelho.",
+        "width": 1120,
+        "height": 1493
+      },
+      {
+        "src": "/assets/products/calca-alfaiataria-maelis/06.webp",
+        "alt": "Calça de alfaiataria Maelis, preto — detalhe do cós.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Preto"
+      },
+      {
+        "src": "/assets/products/calca-alfaiataria-maelis/07.webp",
+        "alt": "Calça de alfaiataria Maelis — frente.",
+        "width": 1120,
+        "height": 1493
+      },
+      {
+        "src": "/assets/products/calca-alfaiataria-maelis/08.webp",
+        "alt": "Calça de alfaiataria Maelis, preto — frente.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Preto"
+      },
+      {
+        "src": "/assets/products/calca-alfaiataria-maelis/09.webp",
+        "alt": "Calça de alfaiataria Maelis, branco — detalhe frontal.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Branco"
+      },
+      {
+        "src": "/assets/products/calca-alfaiataria-maelis/10.webp",
+        "alt": "Calça de alfaiataria Maelis — detalhe frontal no espelho.",
+        "width": 1120,
+        "height": 1493
+      },
+      {
+        "src": "/assets/products/calca-alfaiataria-maelis/11.webp",
+        "alt": "Calça de alfaiataria Maelis — perfil e costas.",
+        "width": 1120,
+        "height": 1493
+      },
+      {
+        "src": "/assets/products/calca-alfaiataria-maelis/12.webp",
+        "alt": "Calça de alfaiataria Maelis — frente no espelho.",
+        "width": 1120,
+        "height": 1493
+      },
+      {
+        "src": "/assets/products/calca-alfaiataria-maelis/13.webp",
+        "alt": "Calça de alfaiataria Maelis — detalhe do cós.",
+        "width": 1120,
+        "height": 1493
+      },
+      {
+        "src": "/assets/products/calca-alfaiataria-maelis/15.webp",
+        "alt": "Calça de alfaiataria Maelis, branco — detalhe do cós.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Branco"
+      },
+      {
+        "src": "/assets/products/calca-alfaiataria-maelis/16.webp",
+        "alt": "Calça de alfaiataria Maelis, branco — perfil.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Branco"
+      },
+      {
+        "src": "/assets/products/calca-alfaiataria-maelis/17.webp",
+        "alt": "Calça de alfaiataria Maelis — detalhe das pregas.",
+        "width": 1120,
+        "height": 1493
+      },
+      {
+        "src": "/assets/products/calca-alfaiataria-maelis/18.webp",
+        "alt": "Calça de alfaiataria Maelis, branco — frente.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Branco"
+      },
+      {
+        "src": "/assets/products/calca-alfaiataria-maelis/19.webp",
+        "alt": "Calça de alfaiataria Maelis — detalhe frontal.",
+        "width": 1120,
+        "height": 1493
+      },
+      {
+        "src": "/assets/products/calca-alfaiataria-maelis/20.webp",
+        "alt": "Calça de alfaiataria Maelis — frente.",
+        "width": 1120,
+        "height": 1493
+      },
+      {
+        "src": "/assets/products/calca-alfaiataria-maelis/21.webp",
+        "alt": "Calça de alfaiataria Maelis — costas.",
+        "width": 1120,
+        "height": 1493
+      }
+    ],
+    "variants": [],
+    "priceCents": 13900,
+    "shipping": null,
+    "status": "listed",
+    "source": {
+      "name": "DaLuz",
+      "url": "https://www.daluzloja.com.br/todos-os-produtos/calca/calca-maelis",
+      "verifiedAt": "2026-11-24",
+      "supplierSizes": [
+        "P",
+        "M",
+        "G",
+        "GG"
+      ],
+      "supplierColors": [
+        "Branco",
+        "Rosa champagne",
+        "Bege",
+        "Preto"
+      ],
+      "retailPriceCents": 13900,
+      "referenceImage": "https://images.tcdn.com.br/img/img_prod/610417/cala_maelis_14_20261111103802_afd574684e0a.jpeg",
+      "photoPermission": "merchant-authorized",
+      "photoPermissionDate": "2026-11-24",
+      "supplierVariantPairs": [
+        {
+          "sourceSku": "31003-159699",
+          "size": "P",
+          "color": "Branco"
+        },
+        {
+          "sourceSku": "31003-159701",
+          "size": "M",
+          "color": "Branco"
+        },
+        {
+          "sourceSku": "31003-159703",
+          "size": "G",
+          "color": "Branco"
+        },
+        {
+          "sourceSku": "31003-159705",
+          "size": "GG",
+          "color": "Branco"
+        },
+        {
+          "sourceSku": "31003-159715",
+          "size": "P",
+          "color": "Rosa Champagne"
+        },
+        {
+          "sourceSku": "31003-159717",
+          "size": "M",
+          "color": "Rosa Champagne"
+        },
+        {
+          "sourceSku": "31003-159719",
+          "size": "G",
+          "color": "Rosa Champagne"
+        },
+        {
+          "sourceSku": "31003-159721",
+          "size": "GG",
+          "color": "Rosa Champagne"
+        },
+        {
+          "sourceSku": "31003-159725",
+          "size": "M",
+          "color": "Bege"
+        },
+        {
+          "sourceSku": "31003-159729",
+          "size": "GG",
+          "color": "Bege"
+        },
+        {
+          "sourceSku": "31003-159735",
+          "size": "G",
+          "color": "Preto"
+        },
+        {
+          "sourceSku": "31003-159737",
+          "size": "GG",
+          "color": "Preto"
+        }
+      ],
+      "measurementEvidence": "O fornecedor não publicou medidas em centímetros para este modelo.",
+      "galleryUrls": [
+        "https://images.tcdn.com.br/img/img_prod/610417/cala_maelis_14_20261111103802_afd574684e0a.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/cala_maelis_1_20261111103802_ae3efaf5772d.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/cala_maelis_2_20261111103802_3919b1a5f1ae.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/cala_maelis_3_20261111103802_df11a6720a10.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/cala_maelis_4_20261111103802_2f58fbf82013.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/cala_maelis_5_20261111103802_81b067c666ac.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/cala_maelis_6_20261111103802_3f082ad577cb.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/cala_maelis_7_20261111103802_473218901282.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/cala_maelis_8_20261111103802_bbfb4aee4410.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/cala_maelis_9_20261111103802_27a6c6901dc5.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/cala_maelis_10_20261111103802_1958f38cb9b5.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/cala_maelis_11_20261111103802_3b2bdb9117eb.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/cala_maelis_12_20261111103802_27a2a63e8748.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/cala_maelis_13_20261111103802_2b084704f3fa.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/cala_maelis_15_20261111103802_ee59655e613d.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/cala_maelis_16_20261111103802_0dcd12e88e45.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/cala_maelis_17_20261111103802_a7338bb8909f.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/cala_maelis_18_20261111103802_6297445f9606.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/cala_maelis_19_20261111103802_0755c1ace59a.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/cala_maelis_20_20261111103802_a312b7b49149.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/cala_maelis_21_20261111103802_199d1867970b.jpeg"
+      ]
+    },
+    "pricingProposal": {
+      "priceCents": 13900,
+      "basis": "Preço regular da ficha de referência, adotado pela Felipe Modas.",
+      "approved": true,
+      "approvedAt": "2026-11-24"
+    }
+  },
+  {
+    "id": "fm-c04",
+    "sku": "FM-C04",
+    "slug": "calca-jeans-wide-leg-baya",
+    "name": "Calça jeans estonada Baya",
+    "category": "calcas",
+    "summary": "A lavagem estonada destaca o corte wide leg do jeans.",
+    "description": "A modelagem tem perna ampla. A variação de tom do denim vem da lavagem estonada da peça.",
+    "fabric": "Jeans",
+    "composition": null,
+    "fit": "Wide leg.",
+    "measurements": [],
+    "sizeGuide": {},
+    "care": null,
+    "images": [
+      {
+        "src": "/assets/products/calca-jeans-wide-leg-baya/01.webp",
+        "alt": "Calça jeans estonada Baya, jeans azul — detalhe frontal da lavagem.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Jeans azul"
+      },
+      {
+        "src": "/assets/products/calca-jeans-wide-leg-baya/02.webp",
+        "alt": "Calça jeans estonada Baya, jeans azul — frente no espelho.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Jeans azul"
+      },
+      {
+        "src": "/assets/products/calca-jeans-wide-leg-baya/03.webp",
+        "alt": "Calça jeans estonada Baya, jeans azul — perfil e bolsos traseiros.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Jeans azul"
+      },
+      {
+        "src": "/assets/products/calca-jeans-wide-leg-baya/04.webp",
+        "alt": "Calça jeans estonada Baya, jeans azul — frente no espelho.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Jeans azul"
+      },
+      {
+        "src": "/assets/products/calca-jeans-wide-leg-baya/05.webp",
+        "alt": "Calça jeans estonada Baya, jeans azul — costas no espelho.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Jeans azul"
+      },
+      {
+        "src": "/assets/products/calca-jeans-wide-leg-baya/06.webp",
+        "alt": "Calça jeans estonada Baya, jeans azul — costas.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Jeans azul"
+      },
+      {
+        "src": "/assets/products/calca-jeans-wide-leg-baya/07.webp",
+        "alt": "Calça jeans estonada Baya, jeans azul — frente.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Jeans azul"
+      },
+      {
+        "src": "/assets/products/calca-jeans-wide-leg-baya/08.webp",
+        "alt": "Calça jeans estonada Baya, jeans azul — perfil.",
+        "width": 1120,
+        "height": 1493,
+        "color": "Jeans azul"
+      }
+    ],
+    "variants": [],
+    "priceCents": 8900,
+    "shipping": null,
+    "status": "listed",
+    "source": {
+      "name": "DaLuz",
+      "url": "https://www.daluzloja.com.br/todos-os-produtos/calca/calca-wide-leg-baya",
+      "verifiedAt": "2026-11-24",
+      "supplierSizes": [
+        "36",
+        "38",
+        "40",
+        "42",
+        "44",
+        "46"
+      ],
+      "supplierColors": [
+        "Jeans azul"
+      ],
+      "retailPriceCents": 8900,
+      "referenceImage": "https://images.tcdn.com.br/img/img_prod/610417/cala_wide_leg_baya_1_20261013162824_a1fbaff4672d.jpeg",
+      "photoPermission": "merchant-authorized",
+      "photoPermissionDate": "2026-11-24",
+      "supplierVariantPairs": [
+        {
+          "sourceSku": "30575-158171",
+          "size": "36",
+          "color": null
+        },
+        {
+          "sourceSku": "30575-158173",
+          "size": "38",
+          "color": null
+        },
+        {
+          "sourceSku": "30575-158175",
+          "size": "40",
+          "color": null
+        },
+        {
+          "sourceSku": "30575-158177",
+          "size": "42",
+          "color": null
+        },
+        {
+          "sourceSku": "30575-158179",
+          "size": "44",
+          "color": null
+        },
+        {
+          "sourceSku": "30575-158181",
+          "size": "46",
+          "color": null
+        }
+      ],
+      "measurementEvidence": "O fornecedor não publicou medidas em centímetros para este modelo.",
+      "galleryUrls": [
+        "https://images.tcdn.com.br/img/img_prod/610417/cala_wide_leg_baya_1_20261013162824_a1fbaff4672d.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/cala_wide_leg_baya_2_20261013162824_2a5f1ef3fbe3.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/cala_wide_leg_baya_3_20261013162824_e84955356afb.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/cala_wide_leg_baya_4_20261013162824_5de1ec5c9444.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/cala_wide_leg_baya_5_20261013162824_f7a361d5cb1c.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/cala_wide_leg_baya_6_20261013162824_fd9b4a2968eb.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/cala_wide_leg_baya_7_20261013162824_b67693729b73.jpeg",
+        "https://images.tcdn.com.br/img/img_prod/610417/cala_wide_leg_baya_8_20261013162824_dcc00e466908.jpeg"
+      ]
+    },
+    "pricingProposal": {
+      "priceCents": 8900,
+      "basis": "Preço regular da ficha de referência, adotado pela Felipe Modas.",
+      "approved": true,
+      "approvedAt": "2026-11-24"
+    },
+    "measurementNote": "Numeração brasileira de 36 a 46."
+  }
+]

@@ -1,0 +1,340 @@
+[
+  {
+    "target": "hero-colecao-desktop.webp",
+    "width": 1824,
+    "height": 855,
+    "bytes": 99698,
+    "source": "hero-colecao.png",
+    "rect": [
+      0,
+      2,
+      1829,
+      857
+    ]
+  },
+  {
+    "target": "hero-colecao-mobile.webp",
+    "width": 750,
+    "height": 1000,
+    "bytes": 73330,
+    "source": "hero-colecao-portrait.png",
+    "rect": [
+      0,
+      0,
+      1086,
+      1448
+    ]
+  },
+  {
+    "target": "hero-vestidos-desktop.webp",
+    "width": 1824,
+    "height": 855,
+    "bytes": 108846,
+    "source": "hero-vestidos.png",
+    "rect": [
+      0,
+      1,
+      1831,
+      858
+    ]
+  },
+  {
+    "target": "hero-vestidos-mobile.webp",
+    "width": 750,
+    "height": 1000,
+    "bytes": 77110,
+    "source": "hero-vestidos-portrait.png",
+    "rect": [
+      0,
+      0,
+      1086,
+      1448
+    ]
+  },
+  {
+    "target": "hero-conjuntos-desktop.webp",
+    "width": 1824,
+    "height": 855,
+    "bytes": 45710,
+    "source": "hero-conjuntos.png",
+    "rect": [
+      0,
+      2,
+      1829,
+      857
+    ]
+  },
+  {
+    "target": "hero-conjuntos-mobile.webp",
+    "width": 750,
+    "height": 1000,
+    "bytes": 38040,
+    "source": "hero-conjuntos-portrait.png",
+    "rect": [
+      0,
+      0,
+      1086,
+      1448
+    ]
+  },
+  {
+    "target": "cat-vestidos-desktop.webp",
+    "width": 900,
+    "height": 1200,
+    "bytes": 57122,
+    "source": "cat-vestidos.png",
+    "rect": [
+      0,
+      0,
+      1086,
+      1448
+    ]
+  },
+  {
+    "target": "cat-vestidos-mobile.webp",
+    "width": 540,
+    "height": 720,
+    "bytes": 28410,
+    "source": "cat-vestidos.png",
+    "rect": [
+      0,
+      0,
+      1086,
+      1448
+    ]
+  },
+  {
+    "target": "cat-conjuntos-desktop.webp",
+    "width": 900,
+    "height": 1200,
+    "bytes": 83954,
+    "source": "cat-conjuntos.png",
+    "rect": [
+      0,
+      0,
+      1086,
+      1448
+    ]
+  },
+  {
+    "target": "cat-conjuntos-mobile.webp",
+    "width": 540,
+    "height": 720,
+    "bytes": 38272,
+    "source": "cat-conjuntos.png",
+    "rect": [
+      0,
+      0,
+      1086,
+      1448
+    ]
+  },
+  {
+    "target": "cat-calcas-desktop.webp",
+    "width": 900,
+    "height": 1200,
+    "bytes": 85812,
+    "source": "cat-calcas.png",
+    "rect": [
+      0,
+      0,
+      1086,
+      1448
+    ]
+  },
+  {
+    "target": "cat-calcas-mobile.webp",
+    "width": 540,
+    "height": 720,
+    "bytes": 39084,
+    "source": "cat-calcas.png",
+    "rect": [
+      0,
+      0,
+      1086,
+      1448
+    ]
+  },
+  {
+    "target": "cat-novidades-desktop.webp",
+    "width": 900,
+    "height": 1200,
+    "bytes": 116228,
+    "source": "cat-novidades.png",
+    "rect": [
+      0,
+      0,
+      1086,
+      1448
+    ]
+  },
+  {
+    "target": "cat-novidades-mobile.webp",
+    "width": 540,
+    "height": 720,
+    "bytes": 48220,
+    "source": "cat-novidades.png",
+    "rect": [
+      0,
+      0,
+      1086,
+      1448
+    ]
+  },
+  {
+    "target": "mini-looks-desktop.webp",
+    "width": 1200,
+    "height": 700,
+    "bytes": 169128,
+    "source": "mini-looks.png",
+    "rect": [
+      0,
+      0,
+      1642,
+      958
+    ]
+  },
+  {
+    "target": "mini-looks-mobile.webp",
+    "width": 900,
+    "height": 900,
+    "bytes": 174252,
+    "source": "mini-looks.png",
+    "rect": [
+      684,
+      0,
+      958,
+      958
+    ]
+  },
+  {
+    "target": "mini-calcas-desktop.webp",
+    "width": 1200,
+    "height": 700,
+    "bytes": 85542,
+    "source": "mini-calcas.png",
+    "rect": [
+      0,
+      0,
+      1642,
+      958
+    ]
+  },
+  {
+    "target": "mini-calcas-mobile.webp",
+    "width": 900,
+    "height": 900,
+    "bytes": 53198,
+    "source": "mini-calcas.png",
+    "rect": [
+      539,
+      0,
+      958,
+      958
+    ]
+  },
+  {
+    "target": "head-vestidos-desktop.webp",
+    "width": 1920,
+    "height": 500,
+    "bytes": 46682,
+    "source": "head-vestidos.png",
+    "rect": [
+      0,
+      65,
+      2172,
+      566
+    ]
+  },
+  {
+    "target": "head-vestidos-mobile.webp",
+    "width": 800,
+    "height": 800,
+    "bytes": 37392,
+    "source": "head-vestidos.png",
+    "rect": [
+      1202,
+      0,
+      724,
+      724
+    ]
+  },
+  {
+    "target": "head-conjuntos-desktop.webp",
+    "width": 1920,
+    "height": 500,
+    "bytes": 54020,
+    "source": "head-conjuntos.png",
+    "rect": [
+      0,
+      0,
+      2172,
+      566
+    ]
+  },
+  {
+    "target": "head-conjuntos-mobile.webp",
+    "width": 800,
+    "height": 800,
+    "bytes": 57930,
+    "source": "head-conjuntos.png",
+    "rect": [
+      1332,
+      0,
+      724,
+      724
+    ]
+  },
+  {
+    "target": "head-calcas-desktop.webp",
+    "width": 1920,
+    "height": 500,
+    "bytes": 168990,
+    "source": "head-calcas.png",
+    "rect": [
+      0,
+      65,
+      2172,
+      566
+    ]
+  },
+  {
+    "target": "head-calcas-mobile.webp",
+    "width": 800,
+    "height": 800,
+    "bytes": 110788,
+    "source": "head-calcas.png",
+    "rect": [
+      1289,
+      0,
+      724,
+      724
+    ]
+  },
+  {
+    "target": "editorial-desktop.webp",
+    "width": 1600,
+    "height": 800,
+    "bytes": 71330,
+    "source": "editorial.png",
+    "rect": [
+      0,
+      0,
+      1774,
+      887
+    ]
+  },
+  {
+    "target": "editorial-mobile.webp",
+    "width": 900,
+    "height": 1100,
+    "bytes": 55460,
+    "source": "editorial.png",
+    "rect": [
+      311,
+      0,
+      726,
+      887
+    ]
+  }
+]

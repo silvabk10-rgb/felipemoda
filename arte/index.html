@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#f8f6f2">
+  <title>Estúdio de artes | Felipe Modas</title>
+  <link rel="icon" href="/assets/brand/favicon.png">
+  <link rel="stylesheet" href="./studio.css">
+</head>
+<body>
+  <header class="bar">
+    <a href="/" aria-label="Felipe Modas, voltar à loja"><img src="/assets/brand/logo.png" width="155" height="48" alt="Felipe Modas"></a>
+    <div class="actions"><button type="button" id="save" disabled>Salvar rascunho</button><button type="button" class="primary" id="export" disabled>Exportar PNG <span aria-hidden="true">↓</span></button></div>
+  </header>
+  <main>
+    <h1>Estúdio de artes</h1>
+    <div class="workspace">
+      <section class="preview" aria-label="Prévia da arte">
+        <div class="preview-head"><h2 id="piece-name">Prévia</h2><span id="resolution"></span></div>
+        <div class="mat" id="mat"><canvas id="canvas" width="1200" height="700" aria-label="Prévia da composição. Ajuste a posição do texto nos controles ao lado.">A prévia requer um navegador com suporte a Canvas.</canvas></div>
+        <div class="preview-foot"><span id="notice" role="status" aria-live="polite">Carregando as peças…</span></div>
+      </section>
+      <form class="controls" id="controls">
+        <fieldset id="edit" disabled>
+          <legend class="sr">Editar composição</legend>
+          <section>
+            <h2>Peça e formato</h2>
+            <label for="piece">Peça</label><select id="piece"></select>
+            <div class="segment" role="group" aria-label="Formato"><button type="button" data-format="desktop" aria-pressed="true">Desktop</button><button type="button" data-format="mobile" aria-pressed="false">Celular</button></div>
+          </section>
+          <section>
+            <h2>Texto</h2>
+            <label for="overline">Linha de apoio</label><input id="overline" maxlength="60">
+            <label for="title">Título</label><textarea id="title" rows="2" maxlength="140"></textarea>
+            <label for="cta">Chamada para ação</label><input id="cta" maxlength="50">
+            <div class="pair"><div><label for="font">Tipografia</label><select id="font"><option value="serif">Serifada</option><option value="sans">Sem serifa</option><option value="italic">Serifada itálica</option></select></div>
+            <div><label for="color">Cor do texto</label><input type="color" id="color" value="#ffffff"></div></div>
+            <label for="size">Tamanho do título <output id="size-out"></output></label><input type="range" id="size" min="4" max="19" step="0.1">
+          </section>
+          <details><summary>Posição e contraste</summary><div class="details-body">
+            <label for="align">Alinhamento</label><select id="align"><option value="left">À esquerda</option><option value="center">Centralizado</option><option value="right">À direita</option></select>
+            <label for="x">Posição horizontal <output id="x-out"></output></label><input type="range" id="x" min="4" max="96" step="1">
+            <label for="y">Posição vertical <output id="y-out"></output></label><input type="range" id="y" min="4" max="96" step="1">
+            <label for="width">Largura do texto <output id="width-out"></output></label><input type="range" id="width" min="18" max="92" step="1">
+            <label for="shade">Intensidade do degradê <output id="shade-out"></output></label><input type="range" id="shade" min="0" max="95" step="1">
+            <label for="shadeColor">Cor do degradê</label><input type="color" id="shadeColor" value="#211e1c">
+          </div></details>
+          <details><summary>Fotografia e marca</summary><div class="details-body">
+            <label for="upload">Usar fotografia própria</label><input type="file" id="upload" accept="image/png,image/jpeg,image/webp,image/avif">
+            <button type="button" class="simple" id="photo-reset">Usar foto da campanha</button>
+            <label for="focusX">Recorte horizontal <output id="focusX-out"></output></label><input type="range" id="focusX" min="0" max="100" step="1">
+            <label for="focusY">Recorte vertical <output id="focusY-out"></output></label><input type="range" id="focusY" min="0" max="100" step="1">
+            <label for="zoom">Ampliação <output id="zoom-out"></output></label><input type="range" id="zoom" min="100" max="240" step="1">
+            <label for="logo">Assinatura</label><select id="logo"><option value="light">Logo claro</option><option value="dark">Logo escuro</option><option value="mono">Logo preto</option><option value="none">Sem assinatura</option></select>
+            <label for="corner">Posição do logo</label><select id="corner"><option value="tl">Superior esquerda</option><option value="tr">Superior direita</option><option value="bl">Inferior esquerda</option><option value="br">Inferior direita</option></select>
+          </div></details>
+        </fieldset>
+      </form>
+    </div>
+  </main>
+  <script type="module" src="./studio.js"></script>
+</body>
+</html>
