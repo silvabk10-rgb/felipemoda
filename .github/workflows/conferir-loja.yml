@@ -1,0 +1,40 @@
+name: Conferir loja publicada
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/conferir-loja.yml'
+      - 'scripts/conferir-loja.mjs'
+      - 'build.mjs'
+      - 'catalogo.js'
+      - 'package*.json'
+      - 'netlify.toml'
+      - 'assets/**'
+      - 'commerce/**'
+      - 'data/**'
+      - 'institucional/**'
+      - 'netlify/**'
+      - 'store/**'
+      - 'theme/**'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: conferir-loja-main
+  cancel-in-progress: true
+
+jobs:
+  conferir:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Aguardar a Netlify e conferir o domínio público
+        run: node scripts/conferir-loja.mjs

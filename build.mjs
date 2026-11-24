@@ -87,6 +87,9 @@ async function build() {
   const archive=JSON.parse(old.replace(/^\s*const\s+catalogo\s*=\s*/,'').replace(/;\s*$/,''));
   await rm(outDir,{force:true,recursive:true});
   await mkdir(outDir,{recursive:true});
+  if (/^[a-f0-9]{40}$/i.test(process.env.COMMIT_REF ?? '')) {
+    await writeFile(path.join(outDir,'versao.txt'),process.env.COMMIT_REF.toLowerCase()+'\n');
+  }
   async function copyFlat(folder,match){
     const dst=path.join(outDir,folder);await mkdir(dst,{recursive:true});
     for(const entry of await readdir(path.join(root,folder),{withFileTypes:true})){
