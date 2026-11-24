@@ -1817,7 +1817,7 @@
         "stock": 10000
       }
     ],
-    "priceCents": 18900,
+    "priceCents": 18000,
     "shipping": null,
     "status": "active",
     "source": {
@@ -1883,8 +1883,8 @@
       ]
     },
     "pricingProposal": {
-      "priceCents": 18900,
-      "basis": "Preço regular da ficha de referência, adotado pela Felipe Modas.",
+      "priceCents": 18000,
+      "basis": "Preço definido pela Felipe Modas para o Conjunto Reeve.",
       "approved": true,
       "approvedAt": "2026-11-24"
     }

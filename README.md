@@ -23,7 +23,7 @@ Requer Node.js 22.11 ou posterior. Execute `npm ci`, `npm test` e `npm run build
 
 ## Catálogo e prévias
 
-O preço de cada uma das 12 fichas corresponde ao preço principal de varejo conferido no respectivo fornecedor. A loja aprovou esses valores em 24/11/2026. O preço da vitrine segue o valor regular aprovado pela Felipe Modas. As medidas e equivalências são específicas de cada modelo.
+O preço da vitrine segue o valor aprovado pela Felipe Modas em cada ficha. As medidas e equivalências são específicas de cada modelo.
 
 As galerias usam fotografias de produto dos fornecedores, com uso autorizado pelo lojista. Os arquivos WebP são servidos pelo próprio site. Cada entrada da galeria conserva a origem para auditoria. As imagens editoriais de campanha têm uso e origem descritos separadamente em `docs/fotografia.md`.
 

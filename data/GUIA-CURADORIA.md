@@ -4,7 +4,7 @@
 
 ## Preços de venda aprovados
 
-Em 24 de novembro de 2026, a Felipe Modas adotou o preço regular das fichas autorizadas. Os valores abaixo são os preços da vitrine. Nos seis modelos Via Luxo, valores promocionais condicionais do fornecedor ficam apenas na pesquisa interna. A loja usa `priceCents` para exibir o preço aprovado em reais.
+Os valores abaixo são os preços da vitrine. Em 24 de novembro de 2026, a Felipe Modas adotou o preço regular das fichas autorizadas e definiu o valor do Conjunto Reeve em R$ 180,00. Nos seis modelos Via Luxo, valores promocionais condicionais do fornecedor ficam apenas na pesquisa interna. A loja usa `priceCents` para exibir o preço aprovado em reais.
 
 | SKU | Peça | Referência | Preço aprovado |
 |---|---|---|---:|
@@ -15,7 +15,7 @@ Em 24 de novembro de 2026, a Felipe Modas adotou o preço regular das fichas aut
 | FM-CJ01 | Conjunto listrado Helena | Via Luxo Store | R$ 339,90 |
 | FM-CJ02 | Conjunto listrado com cinto Ísis | Via Luxo Store | R$ 259,90 |
 | FM-CJ03 | Conjunto de microsarja Orsay | DaLuz | R$ 149,00 |
-| FM-CJ04 | Conjunto de três peças Reeve | DaLuz | R$ 189,00 |
+| FM-CJ04 | Conjunto de três peças Reeve | DaLuz | R$ 180,00 |
 | FM-C01 | Calça de alfaiataria Dani | Via Luxo Store | R$ 139,90 |
 | FM-C02 | Calça jeans wide leg Mariana | Via Luxo Store | R$ 188,90 |
 | FM-C03 | Calça de alfaiataria Maelis | DaLuz | R$ 139,00 |
