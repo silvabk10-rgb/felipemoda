@@ -1,0 +1,618 @@
+[
+  {
+    "id": "fm-v01",
+    "sku": "FM-V01",
+    "slug": "vestido-longo-floral-leticia",
+    "name": "Vestido longo floral Letícia",
+    "category": "vestidos",
+    "summary": "A cintura marcada dá lugar a uma saia longa com movimento.",
+    "description": "O decote quadrado é emoldurado por alças que amarram no ombro. O franzido nas costas acomoda o busto, e o vestido tem forro interno.",
+    "fabric": "Algodão",
+    "composition": "100% algodão",
+    "fit": "Parte superior ajustada e saia solta.",
+    "measurements": [
+      {
+        "name": "Comprimento da peça",
+        "unit": "cm",
+        "values": {
+          "Único": 119
+        }
+      }
+    ],
+    "sizeGuide": {
+      "Único": "36 a 42"
+    },
+    "care": null,
+    "images": [],
+    "variants": [],
+    "priceCents": null,
+    "shipping": null,
+    "status": "draft",
+    "source": {
+      "name": "Via Luxo Store",
+      "url": "https://www.vialuxostore.com.br/vestido-longo-floral-lastex-leticia",
+      "verifiedAt": "2026-11-24",
+      "supplierSizes": [
+        "Único"
+      ],
+      "supplierColors": [],
+      "retailPriceCents": 16990,
+      "referenceImage": "https://images.tcdn.com.br/img/img_prod/1119565/vestido_longo_floral_lastex_leticia_1_20261123150054_7290f499ffdb.jpeg",
+      "photoPermission": "unverified"
+    },
+    "pricingProposal": {
+      "priceCents": 16990,
+      "basis": "Paridade com o preço público de referência em 24/11/2026 para análise de margem pela Felipe Modas.",
+      "approved": false
+    }
+  },
+  {
+    "id": "fm-v02",
+    "sku": "FM-V02",
+    "slug": "vestido-jeans-lara-escuro",
+    "name": "Vestido jeans Lara escuro",
+    "category": "vestidos",
+    "summary": "Um vestido longo de jeans escuro com recortes horizontais.",
+    "description": "As costuras atravessam a saia em faixas. O busto tem camada dupla de tecido e decote em U. As alças ajustáveis e o elástico nas costas ajudam a acertar o caimento.",
+    "fabric": "Jeans",
+    "composition": "100% algodão",
+    "fit": "Cintura marcada e saia solta.",
+    "measurements": [
+      {
+        "name": "Comprimento do busto à barra",
+        "unit": "cm",
+        "values": {
+          "P": 130,
+          "M": 130,
+          "G": 133
+        }
+      }
+    ],
+    "sizeGuide": {
+      "P": "36/38",
+      "M": "40",
+      "G": "42",
+      "GG": "44"
+    },
+    "care": null,
+    "images": [],
+    "variants": [],
+    "priceCents": null,
+    "shipping": null,
+    "status": "draft",
+    "source": {
+      "name": "Via Luxo Store",
+      "url": "https://www.vialuxostore.com.br/vestidos/vestido-jeans-lara-escuro",
+      "verifiedAt": "2026-11-24",
+      "supplierSizes": [
+        "P",
+        "M",
+        "G",
+        "GG"
+      ],
+      "supplierColors": [
+        "Jeans escuro"
+      ],
+      "retailPriceCents": 16990,
+      "referenceImage": "https://images.tcdn.com.br/img/img_prod/1119565/90_vestido_jeans_lara_escuro_30027_1_0c0cfdd3dd1b50e1c4acff59d10bee43.jpeg",
+      "photoPermission": "unverified"
+    },
+    "pricingProposal": {
+      "priceCents": 16990,
+      "basis": "Paridade com o preço público de referência em 24/11/2026 para análise de margem pela Felipe Modas.",
+      "approved": false
+    }
+  },
+  {
+    "id": "fm-v03",
+    "sku": "FM-V03",
+    "slug": "vestido-listras-astoria",
+    "name": "Vestido listrado Astoria",
+    "category": "vestidos",
+    "summary": "Listras e amarração dão ritmo a este vestido de viscose.",
+    "description": "A amarração permite ajustar a peça. O detalhe com elastano nas costas acompanha o corpo. A referência de numeração informada para este modelo vai, aproximadamente, até o 42.",
+    "fabric": "Viscose",
+    "composition": null,
+    "fit": "Amarração com ajuste nas costas.",
+    "measurements": [],
+    "sizeGuide": {},
+    "care": null,
+    "images": [],
+    "variants": [],
+    "priceCents": null,
+    "shipping": null,
+    "status": "draft",
+    "source": {
+      "name": "DaLuz",
+      "url": "https://www.daluzloja.com.br/todos-os-produtos/vestido/vestido-listras-astoria",
+      "verifiedAt": "2026-11-24",
+      "supplierSizes": [],
+      "supplierColors": [
+        "Preto",
+        "Azul claro",
+        "Rosa claro",
+        "Verde esmeralda",
+        "Bege",
+        "Azul"
+      ],
+      "retailPriceCents": 10900,
+      "referenceImage": "https://images.tcdn.com.br/img/img_prod/610417/90_vestido_listras_astoria_1_20261117124902_ec901debdc50.jpeg",
+      "photoPermission": "unverified",
+      "photoPolicy": "https://www.daluzloja.com.br/duvidasfrequentes"
+    },
+    "pricingProposal": {
+      "priceCents": 10900,
+      "basis": "Paridade com o preço público de referência em 24/11/2026 para análise de margem pela Felipe Modas.",
+      "approved": false
+    }
+  },
+  {
+    "id": "fm-v04",
+    "sku": "FM-V04",
+    "slug": "vestido-um-ombro-amara",
+    "name": "Vestido de um ombro Amara",
+    "category": "vestidos",
+    "summary": "O recorte de um ombro encontra o caimento do crepe.",
+    "description": "O corte de alfaiataria acompanha o decote assimétrico. A alça tem regulagem e o fechamento fica nas costas, com zíper.",
+    "fabric": "Crepe",
+    "composition": null,
+    "fit": "Alfaiataria de um ombro.",
+    "measurements": [],
+    "sizeGuide": {
+      "P": "36/38",
+      "M": "40/42",
+      "G": "42/44"
+    },
+    "care": null,
+    "images": [],
+    "variants": [],
+    "priceCents": null,
+    "shipping": null,
+    "status": "draft",
+    "source": {
+      "name": "DaLuz",
+      "url": "https://www.daluzloja.com.br/todos-os-produtos/vestido/vestido-amara",
+      "verifiedAt": "2026-11-24",
+      "supplierSizes": [
+        "P",
+        "M",
+        "G"
+      ],
+      "supplierColors": [
+        "Amarelo",
+        "Branco",
+        "Vermelho",
+        "Preto"
+      ],
+      "retailPriceCents": 9900,
+      "referenceImage": "https://images.tcdn.com.br/img/img_prod/610417/90_vestido_amara_1_20261117102726_09e8e4041082.jpeg",
+      "photoPermission": "unverified",
+      "photoPolicy": "https://www.daluzloja.com.br/duvidasfrequentes"
+    },
+    "pricingProposal": {
+      "priceCents": 9900,
+      "basis": "Paridade com o preço público de referência em 24/11/2026 para análise de margem pela Felipe Modas.",
+      "approved": false
+    }
+  },
+  {
+    "id": "fm-cj01",
+    "sku": "FM-CJ01",
+    "slug": "conjunto-listrado-peplum-helena",
+    "name": "Conjunto listrado Helena",
+    "category": "conjuntos",
+    "summary": "A blusa com peplum encontra a amplitude da pantalona.",
+    "description": "As tiras frontais fecham a blusa de gola redonda. A barra passa do cós da pantalona, que tem forro, bolsos laterais e fechamento com botão e zíper.",
+    "fabric": "Viscose com poliamida",
+    "composition": "87% viscose e 13% poliamida",
+    "fit": "Blusa peplum e pantalona.",
+    "measurements": [
+      {
+        "name": "Comprimento da blusa",
+        "unit": "cm",
+        "values": {
+          "P": 58,
+          "M": 59,
+          "G": 60
+        }
+      },
+      {
+        "name": "Comprimento da calça",
+        "unit": "cm",
+        "values": {
+          "P": 109,
+          "M": 110,
+          "G": 111
+        }
+      }
+    ],
+    "sizeGuide": {
+      "P": "36/38",
+      "M": "40",
+      "G": "42"
+    },
+    "care": null,
+    "images": [],
+    "variants": [],
+    "priceCents": null,
+    "shipping": null,
+    "status": "draft",
+    "source": {
+      "name": "Via Luxo Store",
+      "url": "https://www.vialuxostore.com.br/conjunto-listrado-blusa-peplum-e-calca-helena",
+      "verifiedAt": "2026-11-24",
+      "supplierSizes": [
+        "P",
+        "M",
+        "G"
+      ],
+      "supplierColors": [],
+      "retailPriceCents": 33990,
+      "referenceImage": "https://images.tcdn.com.br/img/img_prod/1119565/90_conjunto_listrado_blusa_peplum_e_cala_helena_1_20261118182849_1fa734767630.jpeg",
+      "photoPermission": "unverified"
+    },
+    "pricingProposal": {
+      "priceCents": 33990,
+      "basis": "Paridade com o preço público de referência em 24/11/2026 para análise de margem pela Felipe Modas.",
+      "approved": false
+    }
+  },
+  {
+    "id": "fm-cj02",
+    "sku": "FM-CJ02",
+    "slug": "conjunto-listrado-com-cinto-isis",
+    "name": "Conjunto listrado com cinto Ísis",
+    "category": "conjuntos",
+    "summary": "O cinto no tom do conjunto marca o encontro das duas peças.",
+    "description": "A blusa listrada termina em peplum e fecha com zíper nas costas. A calça tem corte reto, bolsos laterais e passantes para o cinto que acompanha o conjunto.",
+    "fabric": null,
+    "composition": "50% algodão e 50% poliéster",
+    "fit": "Blusa levemente ajustada e calça reta.",
+    "measurements": [
+      {
+        "name": "Comprimento da blusa",
+        "unit": "cm",
+        "values": {
+          "P": 58,
+          "M": 59,
+          "G": 60
+        }
+      },
+      {
+        "name": "Comprimento da calça",
+        "unit": "cm",
+        "values": {
+          "P": 109,
+          "M": 110,
+          "G": 112
+        }
+      }
+    ],
+    "sizeGuide": {
+      "P": "36/38",
+      "M": "40",
+      "G": "42"
+    },
+    "care": null,
+    "images": [],
+    "variants": [],
+    "priceCents": null,
+    "shipping": null,
+    "status": "draft",
+    "source": {
+      "name": "Via Luxo Store",
+      "url": "https://www.vialuxostore.com.br/conjunto-listrado-blusa-e-calca-com-cinto-isis",
+      "verifiedAt": "2026-11-24",
+      "supplierSizes": [
+        "P",
+        "M",
+        "G"
+      ],
+      "supplierColors": [],
+      "retailPriceCents": 25990,
+      "referenceImage": "https://images.tcdn.com.br/img/img_prod/1119565/conjunto_listrado_blusa_e_cala_com_cinto_isis_1_20261123154609_af9933283cc0.jpeg",
+      "photoPermission": "unverified"
+    },
+    "pricingProposal": {
+      "priceCents": 25990,
+      "basis": "Paridade com o preço público de referência em 24/11/2026 para análise de margem pela Felipe Modas.",
+      "approved": false
+    }
+  },
+  {
+    "id": "fm-cj03",
+    "sku": "FM-CJ03",
+    "slug": "conjunto-microsarja-orsay",
+    "name": "Conjunto de microsarja Orsay",
+    "category": "conjuntos",
+    "summary": "Microsarja em duas peças, com cropped sem alças e calça.",
+    "description": "Os botões decorativos marcam a frente do cropped tomara que caia. A parte traseira tem elastano. A calça do conjunto traz bolsos.",
+    "fabric": "Microsarja",
+    "composition": "Poliéster e elastano, em proporções não informadas.",
+    "fit": "Cropped tomara que caia.",
+    "measurements": [],
+    "sizeGuide": {
+      "P": "36/38",
+      "M": "40/42",
+      "G": "44"
+    },
+    "care": null,
+    "images": [],
+    "variants": [],
+    "priceCents": null,
+    "shipping": null,
+    "status": "draft",
+    "source": {
+      "name": "DaLuz",
+      "url": "https://www.daluzloja.com.br/todos-os-produtos/conjunto/conjunto-arsay",
+      "verifiedAt": "2026-11-24",
+      "supplierSizes": [
+        "P",
+        "M",
+        "G"
+      ],
+      "supplierColors": [
+        "Azul-marinho",
+        "Bege"
+      ],
+      "retailPriceCents": 14900,
+      "referenceImage": "https://images.tcdn.com.br/img/img_prod/610417/90_conjunto_orsay_1_20261029104016_f64b435c6a61.jpeg",
+      "photoPermission": "unverified",
+      "photoPolicy": "https://www.daluzloja.com.br/duvidasfrequentes"
+    },
+    "pricingProposal": {
+      "priceCents": 14900,
+      "basis": "Paridade com o preço público de referência em 24/11/2026 para análise de margem pela Felipe Modas.",
+      "approved": false
+    }
+  },
+  {
+    "id": "fm-cj04",
+    "sku": "FM-CJ04",
+    "slug": "conjunto-tres-pecas-reeve",
+    "name": "Conjunto de três peças Reeve",
+    "category": "conjuntos",
+    "summary": "Camisa, pantalona e lenço para usar juntos ou combinar separadamente.",
+    "description": "A camisa de algodão faz par com uma pantalona forrada. O lenço completa a produção e permite variar a composição do look.",
+    "fabric": "Algodão",
+    "composition": null,
+    "fit": "Calça pantalona com forro.",
+    "measurements": [],
+    "sizeGuide": {
+      "P": "36/38",
+      "M": "40/42",
+      "G": "44"
+    },
+    "care": null,
+    "images": [],
+    "variants": [],
+    "priceCents": null,
+    "shipping": null,
+    "status": "draft",
+    "source": {
+      "name": "DaLuz",
+      "url": "https://www.daluzloja.com.br/todos-os-produtos/conjunto/conjunto-reeve",
+      "verifiedAt": "2026-11-24",
+      "supplierSizes": [
+        "P",
+        "M",
+        "G"
+      ],
+      "supplierColors": [
+        "Azul claro",
+        "Branco"
+      ],
+      "retailPriceCents": 18900,
+      "referenceImage": "https://images.tcdn.com.br/img/img_prod/610417/90_conjunto_reeve_1_20260826170051_d93655f214c3.jpeg",
+      "photoPermission": "unverified",
+      "photoPolicy": "https://www.daluzloja.com.br/duvidasfrequentes"
+    },
+    "pricingProposal": {
+      "priceCents": 18900,
+      "basis": "Paridade com o preço público de referência em 24/11/2026 para análise de margem pela Felipe Modas.",
+      "approved": false
+    }
+  },
+  {
+    "id": "fm-c01",
+    "sku": "FM-C01",
+    "slug": "calca-wide-leg-alfaiataria-dani",
+    "name": "Calça de alfaiataria Dani",
+    "category": "calcas",
+    "summary": "Cintura alta e perna ampla em tecido de alfaiataria.",
+    "description": "Os passantes permitem usar a peça com cinto. Os bolsos dianteiros são funcionais, enquanto os traseiros são decorativos. Botão e zíper fecham a frente.",
+    "fabric": "Alfaiataria",
+    "composition": "90% poliéster e 10% elastano",
+    "fit": "Wide leg com cintura alta.",
+    "measurements": [
+      {
+        "name": "Comprimento da calça",
+        "unit": "cm",
+        "values": {
+          "P": 110.5,
+          "M": 113,
+          "G": 113.5
+        }
+      }
+    ],
+    "sizeGuide": {
+      "P": "36/38",
+      "M": "40",
+      "G": "42"
+    },
+    "care": null,
+    "images": [],
+    "variants": [],
+    "priceCents": null,
+    "shipping": null,
+    "status": "draft",
+    "source": {
+      "name": "Via Luxo Store",
+      "url": "https://www.vialuxostore.com.br/calca/calca-alfaiataria-wide-leg-dani",
+      "verifiedAt": "2026-11-24",
+      "supplierSizes": [
+        "P",
+        "M",
+        "G"
+      ],
+      "supplierColors": [],
+      "retailPriceCents": 13990,
+      "referenceImage": "https://images.tcdn.com.br/img/img_prod/1119565/90_cala_alfaiataria_wide_leg_dani_1_20260120165316_852be575f189.jpeg",
+      "photoPermission": "unverified"
+    },
+    "pricingProposal": {
+      "priceCents": 13990,
+      "basis": "Paridade com o preço público de referência em 24/11/2026 para análise de margem pela Felipe Modas.",
+      "approved": false
+    }
+  },
+  {
+    "id": "fm-c02",
+    "sku": "FM-C02",
+    "slug": "calca-jeans-wide-leg-mariana",
+    "name": "Calça jeans wide leg Mariana",
+    "category": "calcas",
+    "summary": "Jeans de cintura alta com abertura ampla na perna.",
+    "description": "A peça combina o corte wide leg com uma pequena parcela de elastano. Há bolsos na frente e atrás, passantes no cós e fechamento frontal por botão e zíper.",
+    "fabric": "Jeans",
+    "composition": "99% algodão e 1% elastano",
+    "fit": "Wide leg de cintura alta.",
+    "measurements": [
+      {
+        "name": "Comprimento da calça",
+        "unit": "cm",
+        "values": {
+          "34": 108,
+          "36": 109,
+          "38": 110,
+          "40": 110,
+          "42": 112,
+          "44": 112
+        }
+      }
+    ],
+    "sizeGuide": {},
+    "care": null,
+    "images": [],
+    "variants": [],
+    "priceCents": null,
+    "shipping": null,
+    "status": "draft",
+    "source": {
+      "name": "Via Luxo Store",
+      "url": "https://www.vialuxostore.com.br/calca-wide-leg-jeans-mariana",
+      "verifiedAt": "2026-11-24",
+      "supplierSizes": [
+        "34",
+        "36",
+        "38",
+        "40",
+        "42",
+        "44"
+      ],
+      "supplierColors": [],
+      "retailPriceCents": 18890,
+      "referenceImage": "https://images.tcdn.com.br/img/img_prod/1119565/90_cala_wide_leg_jeans_mariana_11_20261007180216_4203dc40dc0a.jpeg",
+      "photoPermission": "unverified"
+    },
+    "pricingProposal": {
+      "priceCents": 18890,
+      "basis": "Paridade com o preço público de referência em 24/11/2026 para análise de margem pela Felipe Modas.",
+      "approved": false
+    }
+  },
+  {
+    "id": "fm-c03",
+    "sku": "FM-C03",
+    "slug": "calca-alfaiataria-maelis",
+    "name": "Calça de alfaiataria Maelis",
+    "category": "calcas",
+    "summary": "Uma silhueta ampla em crepe de alfaiataria.",
+    "description": "O fecho em colchete mantém a frente da calça discreta. A amplitude da modelagem destaca a queda do crepe.",
+    "fabric": "Crepe de alfaiataria",
+    "composition": null,
+    "fit": "Ampla.",
+    "measurements": [],
+    "sizeGuide": {
+      "P": "36/38",
+      "M": "40",
+      "G": "42",
+      "GG": "44"
+    },
+    "care": null,
+    "images": [],
+    "variants": [],
+    "priceCents": null,
+    "shipping": null,
+    "status": "draft",
+    "source": {
+      "name": "DaLuz",
+      "url": "https://www.daluzloja.com.br/todos-os-produtos/calca/calca-maelis",
+      "verifiedAt": "2026-11-24",
+      "supplierSizes": [
+        "P",
+        "M",
+        "G",
+        "GG"
+      ],
+      "supplierColors": [
+        "Branco",
+        "Rosa champagne",
+        "Bege",
+        "Preto"
+      ],
+      "retailPriceCents": 13900,
+      "referenceImage": "https://images.tcdn.com.br/img/img_prod/610417/90_cala_maelis_1_20261111103802_ae3efaf5772d.jpeg",
+      "photoPermission": "unverified",
+      "photoPolicy": "https://www.daluzloja.com.br/duvidasfrequentes"
+    },
+    "pricingProposal": {
+      "priceCents": 13900,
+      "basis": "Paridade com o preço público de referência em 24/11/2026 para análise de margem pela Felipe Modas.",
+      "approved": false
+    }
+  },
+  {
+    "id": "fm-c04",
+    "sku": "FM-C04",
+    "slug": "calca-jeans-wide-leg-baya",
+    "name": "Calça jeans estonada Baya",
+    "category": "calcas",
+    "summary": "A lavagem estonada destaca o corte wide leg do jeans.",
+    "description": "A modelagem tem perna ampla. A variação de tom do denim vem da lavagem estonada da peça.",
+    "fabric": "Jeans",
+    "composition": null,
+    "fit": "Wide leg.",
+    "measurements": [],
+    "sizeGuide": {},
+    "care": null,
+    "images": [],
+    "variants": [],
+    "priceCents": null,
+    "shipping": null,
+    "status": "draft",
+    "source": {
+      "name": "DaLuz",
+      "url": "https://www.daluzloja.com.br/todos-os-produtos/calca/calca-wide-leg-baya",
+      "verifiedAt": "2026-11-24",
+      "supplierSizes": [
+        "36",
+        "38",
+        "40",
+        "42",
+        "44",
+        "46"
+      ],
+      "supplierColors": [],
+      "retailPriceCents": 8900,
+      "referenceImage": "https://images.tcdn.com.br/img/img_prod/610417/90_cala_wide_leg_baya_1_20261013162824_a1fbaff4672d.jpeg",
+      "photoPermission": "unverified",
+      "photoPolicy": "https://www.daluzloja.com.br/duvidasfrequentes"
+    },
+    "pricingProposal": {
+      "priceCents": 8900,
+      "basis": "Paridade com o preço público de referência em 24/11/2026 para análise de margem pela Felipe Modas.",
+      "approved": false
+    }
+  }
+]

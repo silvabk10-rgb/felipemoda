@@ -1,0 +1,52 @@
+.fm-info-shell{max-width:1240px;margin:0 auto;padding:0 clamp(1rem,5vw,4.5rem) clamp(4rem,9vw,8rem);color:#26231f}
+.fm-info-crumb{display:flex;align-items:center;flex-wrap:wrap;gap:.65rem;padding:1.3rem 0;color:#5d564f;font-size:.8rem}
+.fm-info-crumb a{color:inherit;text-decoration:none;padding:.6rem 0}
+.fm-info-crumb a:hover{text-decoration:underline}
+.fm-info-grid{display:grid;grid-template-columns:minmax(160px,220px) minmax(0,730px);gap:clamp(1.5rem,7vw,7rem);align-items:start;justify-content:space-between;padding-top:clamp(1rem,4vw,3rem)}
+.fm-info-side{position:sticky;top:6.6rem}
+.fm-info-side nav{display:grid}
+.fm-info-side nav a{font-size:.9rem;line-height:1.5;color:#5a514a;text-decoration:none;border-bottom:1px solid #e3ddd3;padding:.8rem .25rem;min-height:44px;display:flex;align-items:center}
+.fm-info-side nav a[aria-current=page]{color:#773c27;font-weight:650;border-bottom-color:#955a3a}
+.fm-info-side nav a:hover{text-decoration:underline}
+.fm-info-side details{display:none}
+.fm-info-article{min-width:0;overflow-wrap:anywhere}
+.fm-info-header{padding-bottom:2rem;border-bottom:1px solid #d9c8b7;margin-bottom:2rem}
+.fm-info-header h1{font-family:var(--serif,Georgia,serif);font-size:clamp(2.6rem,5vw,4.8rem);line-height:1.05;letter-spacing:-.04em;font-weight:400;margin:0 0 .85rem}
+.fm-info-header p{margin:0;color:#564f48;font-size:clamp(1rem,1.4vw,1.15rem);line-height:1.55}
+.fm-info-article section+section,.fm-info-channels+section{padding-top:1.6rem;margin-top:1.6rem;border-top:1px solid #e3ddd3}
+.fm-info-article section[id]{scroll-margin-top:7rem}
+.fm-info-article h2{font-family:var(--serif,Georgia,serif);font-size:clamp(1.45rem,2.3vw,2rem);font-weight:400;line-height:1.25;margin:0 0 .65rem;letter-spacing:-.025em}
+.fm-info-article section p,.fm-info-channels p,.fm-info-faq p,.fm-info-article li,.fm-info-article dd{font-size:1rem;line-height:1.65;margin:0}
+.fm-info-article section p+p,.fm-info-article ol,.fm-info-article dl+p,.fm-info-channels p+p{margin-top:.8rem}
+.fm-info-article a{color:#793f2a;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
+.fm-info-facts,.fm-info-measures{margin:0}
+.fm-info-facts>div,.fm-info-measures>div{display:grid;grid-template-columns:minmax(6.6rem,1fr) 2.4fr;gap:1rem;padding:.55rem 0}
+.fm-info-facts dt,.fm-info-measures dt{font-weight:600;align-self:baseline;line-height:1.65}
+.fm-info-channels{display:grid;grid-template-columns:1fr 1.25fr;gap:1rem}
+.fm-info-channels>div{min-width:0;padding:1.2rem;background:#faf8f1;border:1px solid #e3ddd3}
+.fm-info-article ol{padding-left:1.35rem}
+.fm-info-article li+li{margin-top:.45rem}
+.fm-info-actions{display:flex;gap:.5rem 1.2rem;flex-wrap:wrap}
+.fm-info-actions a,.fm-info-channels a{display:inline-flex;min-height:44px;align-items:center}
+.fm-info-faq details{border-bottom:1px solid #d9c8b7}
+.fm-info-faq summary,.fm-info-side summary{cursor:pointer;padding:1rem .15rem;min-height:44px;font-weight:550;line-height:1.45}
+.fm-info-faq details>div{padding:0 .15rem 1.2rem}
+#fm-browser-data fieldset{margin:1rem 0;padding:.5rem 0;border:0}
+#fm-browser-data legend{font-weight:600}
+#fm-browser-data label{display:flex;gap:.7rem;align-items:center;min-height:44px;cursor:pointer}
+#fm-browser-data input{width:1.15rem;height:1.15rem;accent-color:#955a3a}
+#fm-browser-data button{min-height:46px;cursor:pointer;background:#302923;color:#fff;padding:.7rem 1.1rem;border:0;border-radius:2px;font:inherit}
+#fm-preferences-status{min-height:1.5rem;margin-top:.65rem}
+.fm-info-shell :focus-visible{outline:2px solid #874525;outline-offset:3px}
+@media(max-width:760px){
+  .fm-info-grid{display:flex;flex-direction:column;gap:1.4rem;padding-top:.25rem}
+  .fm-info-side{position:static;width:100%}
+  .fm-info-side>nav{display:none}
+  .fm-info-side details{display:block;border-top:1px solid #d9c8b7;border-bottom:1px solid #d9c8b7}
+  .fm-info-side details nav{padding:0 .4rem .5rem}
+  .fm-info-article{width:100%}
+  .fm-info-header{margin-bottom:1.4rem;padding-bottom:1.35rem}
+  .fm-info-channels{grid-template-columns:1fr}
+  .fm-info-channels a{min-height:0;padding:.5rem 0}
+  .fm-info-crumb{padding:.5rem 0}
+}
