@@ -23,6 +23,18 @@ export function validQuote(q) {
   return q && ['subtotalCents','shippingCents','discountCents','totalCents'].every(k=>Number.isSafeInteger(q[k])&&q[k]>=0)
     && q.totalCents>0 && q.subtotalCents+q.shippingCents-q.discountCents===q.totalCents;
 }
+export function checkoutCardMethod(data,checkoutEnabled) {
+  const key=data?.cardPublicKey;
+  if(checkoutEnabled && data?.cardEnabled===true && Array.isArray(data.paymentMethods) &&
+     data.paymentMethods.includes('card') && typeof key==='string' && /^pk_[a-zA-Z0-9_-]+$/.test(key)){
+    const sandbox=data.environment==='sandbox';
+    return {publicKey:key,note:sandbox?'Ambiente de homologação.':'',
+      summary:'Cartão de crédito em 1 parcela'+(sandbox?' · Homologação':'')};
+  }
+  const note=data?'O pagamento com cartão está indisponível no momento.':
+    'Não foi possível consultar a forma de pagamento. Atualize a página para tentar novamente.';
+  return {publicKey:null,note,summary:note};
+}
 const orderTokenValid=t=>typeof t==='string'&&/^fm_[A-Za-z0-9_-]{26}\.[A-Za-z0-9_-]{43}$/.test(t);
 const activeStates=new Set(['pending','sending']);
 const states={draft:'Confira seu pedido',sending:'Verificando seu pagamento',pending:'Pagamento pendente',paid:'Pagamento aprovado',
@@ -53,7 +65,7 @@ export function initCheckout(doc=document,{mountCard=mountCardPayment}={}) {
   const $=s=>doc.querySelector(s), form=$('#co-form'), fields=form.elements;
   const empty=$('[data-empty]'),purchase=$('[data-purchase]'),orderPanel=$('[data-order]'),loading=$('[data-loading]');
   const submit=$('[data-pay]'),error=$('[data-error]'),quoteNote=$('[data-quote-note]');
-  let products=new Map(),rows=[],checkoutEnabled=false,card=null;
+  let products=new Map(),rows=[],checkoutEnabled=false,card=null,cardPublicKey=null;
   let quote=null,quoteKey='',timer,version=0,busy=false,lastCep='',addressSerial=0;
   let activeToken=null,order=null,poll,statusBusy=false,disposed=false,statusSerial=0,displayedStatus='';
   const touched=new Set(),automatic={};
@@ -64,6 +76,7 @@ export function initCheckout(doc=document,{mountCard=mountCardPayment}={}) {
   function clearPoll(){clearTimeout(poll);poll=null;}
   function usable(){return rows.length>0&&rows.every(row=>row.ok);}
   function controls(){
+    if(rows.length && cardPublicKey && !card)card=mountCard($('[data-card-entry]'),{publicKey:cardPublicKey});
     submit.disabled=busy||!usable()||!checkoutEnabled||!validQuote(quote)||!card;
     submit.textContent=busy?'Enviando pedido…':'Pagar com cartão';
   }
@@ -127,18 +140,12 @@ export function initCheckout(doc=document,{mountCard=mountCardPayment}={}) {
     }else shippingNote.textContent='A disponibilidade será conferida ao calcular o total.';
   }
   async function configureCard(){
-    const note=$('[data-method-note]');
-    try{
-      const data=await request({action:'methods'});
-      if(!checkoutEnabled || !data.cardEnabled || !data.paymentMethods?.includes('card') || !/^pk_[a-zA-Z0-9_-]+$/.test(data.cardPublicKey||'')){
-        note.textContent='O pagamento com cartão está indisponível no momento.';
-        return;
-      }
-      card=mountCard($('[data-card-entry]'),{publicKey:data.cardPublicKey});
-      note.textContent=data.environment==='sandbox'?'Ambiente de homologação.':'';
-    }catch{
-      note.textContent='Não foi possível carregar o pagamento com cartão. Atualize a página para tentar novamente.';
-    }finally{controls();}
+    const data=await request({action:'methods'}).catch(()=>null);
+    const method=checkoutCardMethod(data,checkoutEnabled);
+    cardPublicKey=method.publicKey;
+    $('[data-method-note]').textContent=method.note;
+    $('[data-preview-payment]').textContent=method.summary;
+    controls();
   }
   function statusUrl(t){
     const url=new URL(location.href);url.search='';url.hash='pedido='+t;history.replaceState(null,'',url.href);
@@ -292,7 +299,9 @@ export function initCheckout(doc=document,{mountCard=mountCardPayment}={}) {
       const config=await r.json();products=new Map(config.products.map(p=>[p.id,p]));checkoutEnabled=config.checkoutEnabled===true;
       await migrateBag(products);if(activeToken){if(order?.orderState==='paid')finishPaidAttempt(activeToken,products);return;}
       updateBag();
-      if(rows.length){if(await recoverUncertain())return;await configureCard();if(!checkoutEnabled)notice('A finalização online está indisponível no momento. Sua sacola está salva.');if(fields.cep.value)await updateCep();}
+      if(rows.length && await recoverUncertain())return;
+      await configureCard();
+      if(rows.length){if(!checkoutEnabled)notice('A finalização online está indisponível no momento. Sua sacola está salva.');if(fields.cep.value)await updateCep();}
     }catch{if(!activeToken){mode('loading');loading.textContent='Não foi possível carregar sua sacola. Atualize a página para tentar novamente.';}}
   }
   return start();

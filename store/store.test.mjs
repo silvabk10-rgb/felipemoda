@@ -163,6 +163,24 @@ test('a confirmação do próprio pedido libera recompra sem apagar uma sacola d
   }finally{save(keys.checkout,null,true);save(keys.bag,[]);}
 });
 
+test('a sacola vazia apresenta o cartão somente após confirmação do método de pagamento',async()=>{
+  const {checkoutCardMethod}=await import('./checkout-client.mjs');
+  const {checkoutDocument}=await import('./checkout.mjs');
+  const empty=checkoutDocument().split('data-empty hidden>')[1].split('data-purchase hidden>')[0];
+  assert.match(empty,/role="status" data-preview-payment><\/p>/);
+  assert.doesNotMatch(empty,/Cartão de crédito em 1 parcela|pk_/);
+  const live={cardEnabled:true,paymentMethods:['card'],cardPublicKey:'pk_fixture',environment:'live'};
+  assert.equal(checkoutCardMethod(live,true).summary,'Cartão de crédito em 1 parcela');
+  assert.match(checkoutCardMethod({...live,environment:'sandbox'},true).summary,/Homologação/);
+  for(const [data,enabled] of [[live,false],[null,true],[{...live,cardEnabled:false},true],
+    [{...live,paymentMethods:[]},true],[{...live,paymentMethods:'card'},true],[{...live,cardPublicKey:null},true]]){
+    const method=checkoutCardMethod(data,enabled);
+    assert.equal(method.publicKey,null);
+    assert.doesNotMatch(method.summary,/em 1 parcela|pk_/);
+    assert.match(method.summary,/indisponível|Não foi possível consultar/);
+  }
+});
+
 test('a página e os módulos públicos de nova compra oferecem apenas crédito em uma parcela',async()=>{
   const {checkoutDocument}=await import('./checkout.mjs');
   const html=checkoutDocument({shippingRates:[{id:'pac',label:'PAC',priceCents:2300},{id:'sedex',label:'SEDEX',priceCents:4800}]});
