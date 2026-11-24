@@ -117,6 +117,30 @@ test('a ficha liga cada cor somente à primeira foto identificada do tom',async(
   assert.equal(body.match(/loading="lazy"/g).length,4);
 });
 
+test('cada ficha liga ao seu modelo no guia e apresenta somente a grade e as medidas cadastradas',async()=>{
+  const {productPage}=await import('./views.mjs');
+  const source=JSON.parse(await readFile(new URL('../data/curadoria.json',import.meta.url),'utf8'));
+  const models=normalizeProducts(source.map(p=>({...p,displaySizes:p.source.supplierSizes})));
+  assert.equal(models.length,12);
+  const lookup=new Map();
+  for(const p of models){
+    const html=productPage(p,[],{measures:'/guia-de-medidas/',returns:'/trocas-e-devolucoes/'});
+    assert.equal(html.split('href="/guia-de-medidas/#'+p.slug+'"').length-1,2,p.name);
+    const table=html.match(/<div class="st-table">(<table>.*?<\/table>)<\/div>/)?.[1];
+    assert.ok(table?.includes('Felipe Modas</span>'+p.name+'</caption>'),p.name);
+    assert.match(table,/scope="row"/);
+    assert.equal(table.includes('Equivalência BR'),Object.keys(p.sizeGuide).length>0,p.name);
+    assert.equal(table.includes('(cm)'),p.measurements.some(m=>m.unit==='cm'),p.name);
+    lookup.set(p.sku,table);
+  }
+  assert.match(lookup.get('FM-V02'),/scope="row">GG<\/th><td>44<\/td><td[^>]*>Não informado/);
+  assert.match(lookup.get('FM-V03'),/Veste, em média, até o 42/);
+  assert.match(lookup.get('FM-CJ01'),/scope="row">G<\/th><td>42<\/td><td>60<\/td><td>111/);
+  assert.match(lookup.get('FM-CJ02'),/scope="row">G<\/th><td>42<\/td><td>60<\/td><td>112/);
+  assert.match(lookup.get('FM-C01'),/<td>110,5<\/td>/);
+  assert.match(lookup.get('FM-C04'),/<td>36, 38, 40, 42, 44, 46<\/td>/);
+});
+
 test('checkout oferece as modalidades cadastradas e preserva edições durante a consulta do CEP',async()=>{
   const {addressAutofill,quoteInput,validCep,validQuote}=await import('./checkout-client.mjs');
   const {checkoutDocument}=await import('./checkout.mjs');

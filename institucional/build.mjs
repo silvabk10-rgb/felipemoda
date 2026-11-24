@@ -1,6 +1,8 @@
 import { copyFile, mkdir, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import curatedProducts from '../data/curadoria.json' with {type:'json'};
+import { renderSizeGuide } from './medidas.mjs';
 import { shippingRates as configuredShipping } from '../commerce/config.mjs';
 
 const source = dirname(fileURLToPath(import.meta.url));
@@ -50,7 +52,7 @@ const returnsLink = link('/trocas-e-devolucoes/', 'Trocas e devoluções');
 const helpLink = link('/atendimento/', 'Atendimento');
 const cookiesLink = link('/cookies/', 'Cookies e preferências');
 
-function contentPages({ checkoutEnabled, remotePhotos, shippingRates }) {
+function contentPages({ checkoutEnabled, remotePhotos, shippingRates, products }) {
   const reais = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
   const shippingChoices = shippingRates.map(rate => escape(rate.label) + ' por ' + reais.format(rate.priceCents / 100)).join(' ou ');
   const shippingText = shippingChoices
@@ -117,11 +119,7 @@ function contentPages({ checkoutEnabled, remotePhotos, shippingRates }) {
       details('Posso devolver uma peça comprada pela internet?', p('Sim. Você pode comunicar a desistência em até sete dias corridos do recebimento, com devolução gratuita e reembolso integral. Veja como solicitar em ' + returnsLink + '.')) +
       details('Como consulto uma compra ou um atraso?', p('Tenha o número do pedido em mãos e ' + link('/atendimento/#pedido', 'fale com a equipe sobre a sua compra') + '.')) +
       details('Como removo minha sacola ou meus favoritos?', p('Você pode remover itens individualmente ou apagar uma categoria de dados deste navegador em ' + cookiesLink + '.')) + '</div>'),
-    article('/guia-de-medidas/', 'Guia de medidas', 'Uma fita métrica e três medidas ajudam a comparar o seu corpo com as informações de cada peça.',
-      section('Antes de medir', p('Use uma fita flexível, fique em pé com postura natural e passe a fita sobre roupa leve ou diretamente sobre o corpo. Mantenha-a paralela ao chão, encostada à pele sem apertar. Anote cada medida em centímetros.')) +
-      section('Onde passar a fita', '<dl class="fm-info-measures"><div><dt>Busto</dt><dd>Contorne a parte de maior volume do busto, passando a fita sob os braços e pelas costas.</dd></div><div><dt>Cintura</dt><dd>Meça ao redor da cintura natural, na região em que o tronco dobra quando você se inclina de lado.</dd></div><div><dt>Quadril</dt><dd>Com os pés próximos, passe a fita pela parte de maior volume do quadril e dos glúteos.</dd></div></dl>') +
-      section('Como comparar com a peça', p('Confira se a tabela do produto indica medidas do corpo ou da roupa. Quando a informação for da peça, use uma roupa de caimento parecido e compare seguindo o mesmo método indicado. Uma medida tomada com a peça aberta sobre a mesa pode representar apenas a largura de uma face.') +
-      p('A numeração varia conforme o corte e o fabricante. Por isso, consulte os dados do modelo que você escolheu. Se estiver entre dois tamanhos, envie a referência e a medida que gerou a dúvida.') + p(whatsApp('Pedir ajuda para escolher o tamanho')))),
+    article('/guia-de-medidas/', 'Guia de medidas', 'Consulte os tamanhos, equivalências e comprimentos das peças da Felipe Modas e aprenda a tirar suas medidas.', renderSizeGuide(products, company.whatsAppUrl)),
   ];
 }
 function navigation(current) {
@@ -139,16 +137,17 @@ function legacyPolicy() {
   return article('/politicas.html', 'Políticas da loja', 'Consulte as condições e encontre o atendimento que procura.',
     rows.map(([id, title, href, subtitle]) => section(title, p(subtitle) + p(link(href, 'Consultar ' + title.toLowerCase())), id)).join(''));
 }
-export async function buildInstitutional({ outDir, layout, checkoutEnabled = false, remotePhotos = false, shippingRates = configuredShipping }) {
+export async function buildInstitutional({ outDir, layout, checkoutEnabled = false, remotePhotos = false, shippingRates = configuredShipping, products = curatedProducts.filter(p => ['active','listed'].includes(p.status)) }) {
   const assetDir = join(outDir, 'institucional');
   await mkdir(assetDir, { recursive: true });
-  await Promise.all(['info.css', 'preferencias.js'].map(file => copyFile(join(source, file), join(assetDir, file))));
-  const pages = [...contentPages({ checkoutEnabled, remotePhotos, shippingRates }), legacyPolicy()];
+  await Promise.all(['info.css', 'preferencias.js', 'medidas.css', 'medidas.js', 'tabela-canvas.mjs'].map(file => copyFile(join(source, file), join(assetDir, file))));
+  const pages = [...contentPages({ checkoutEnabled, remotePhotos, shippingRates, products }), legacyPolicy()];
   for (const page of pages) {
     const path = page.path;
-    const body = '<div class="fm-info-shell"><nav class="fm-info-crumb" aria-label="Caminho de navegação"><a href="/">Início</a><span aria-hidden="true">/</span><span aria-current="page">' + escape(page.title) + '</span></nav><div class="fm-info-grid">' + navigation(path) +
+    const isGuide = path === '/guia-de-medidas/';
+    const body = isGuide ? page.content : '<div class="fm-info-shell"><nav class="fm-info-crumb" aria-label="Caminho de navegação"><a href="/">Início</a><span aria-hidden="true">/</span><span aria-current="page">' + escape(page.title) + '</span></nav><div class="fm-info-grid">' + navigation(path) +
        '<article class="fm-info-article"><header class="fm-info-header"><h1>' + escape(page.title) + '</h1><p>' + escape(page.summary) + '</p></header>' + page.content + '</article></div></div>';
-    const head = '<link rel="stylesheet" href="/institucional/info.css">' + (path === '/cookies/' ? '<script type="module" src="/institucional/preferencias.js"></script>' : '');
+    const head = isGuide ? '<link rel="stylesheet" href="/institucional/medidas.css"><script type="module" src="/institucional/medidas.js"></script><script type="module" src="/institucional/tabela-canvas.mjs"></script>' : '<link rel="stylesheet" href="/institucional/info.css">' + (path === '/cookies/' ? '<script type="module" src="/institucional/preferencias.js"></script>' : '');
     const output = path.endsWith('/') ? join(outDir, path.slice(1), 'index.html') : join(outDir, path.slice(1));
     await mkdir(dirname(output), { recursive: true });
     await writeFile(output, await layout({ title: page.title, description: page.summary, canonical: 'https://felipemodasbr.com' + path, path, body, head }));

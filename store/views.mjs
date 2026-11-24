@@ -41,12 +41,39 @@ export function listPage({slug, products, title, banner, search, favorites}) {
   return '<div class="st-shell" data-list="' + esc(search ? 'busca' : favorites ? 'favoritos' : slug) + '">' + crumbs(title) + heading + (search ? form : '') + shortcuts + controls + '<div class="st-chips" data-applied></div>' + grid(first) +
     '<div data-empty>' + (search ? emptyState('Busque uma peça','Experimente o nome de um modelo, uma cor ou uma categoria.') : favorites ? emptyState('Seus favoritos ficam aqui','Toque no coração de uma peça para guardá-la nesta seleção.','/colecao/todas/','Explorar a coleção') : (!products.length ? emptyState('Explore a coleção','Conheça outras peças da curadoria.','/colecao/todas/','Ver todas as peças') : '')) + '</div><div class="st-more"><button class="st-action st-outline" type="button" data-more' + (first.length < products.length && !search && !favorites ? '' : ' hidden') + '>Ver mais peças</button></div>' + filterDialog + '</div>';
 }
+const measureNumber = new Intl.NumberFormat('pt-BR',{maximumFractionDigits:20});
+const modelGuideURL = (p,links) => esc(links.measures + '#' + encodeURIComponent(p.slug));
 function tables(p, links) {
-  const rows = p.measurements || [];
-  const keys = sorted(rows.flatMap(row=>Object.keys(row.values)));
-  const table = keys.length ? '<div class="st-table"><table><caption>Medidas da peça</caption><thead><tr><th scope="col">Medida</th>' + keys.map(s=>'<th scope="col">' + esc(s) + '</th>').join('') + '</tr></thead><tbody>' + rows.map(row=>'<tr><th scope="row">' + esc(row.name) + (row.unit ? ' (' + esc(row.unit) + ')' : '') + '</th>' + keys.map(s=>'<td>' + esc(row.values[s] ?? '—') + '</td>').join('') + '</tr>').join('') + '</tbody></table></div>' : '';
-  const guide = Object.entries(p.sizeGuide || {});
-  return table + (guide.length ? '<dl class="st-facts">' + guide.map(([k,v])=>'<div><dt>Tamanho ' + esc(k) + '</dt><dd>' + esc(v) + '</dd></div>').join('') + '</dl>' : '') + (p.measurementNote ? '<p>' + esc(p.measurementNote) + '</p>' : '') + '<a class="st-under" href="' + links.measures + '">Como tirar suas medidas</a>';
+  const columns = [];
+  const sizes = new Map();
+  function addColumn(label, entries) {
+    const values = new Map();
+    for (const [size,value] of Object.entries(entries)) {
+      const key = fold(size);
+      if (!key || value == null || value === '') continue;
+      sizes.set(key,size);
+      values.set(key,value);
+    }
+    if (values.size) columns.push({label,values});
+  }
+  addColumn('Equivalência BR',p.sizeGuide || {});
+  for (const measure of p.measurements || []) {
+    addColumn(measure.name + (measure.unit ? ' (' + measure.unit + ')' : ''),measure.values);
+  }
+  for (const size of p.sizes || []) {
+    if (!sizes.has(fold(size))) sizes.set(fold(size),size);
+  }
+  const caption = '<caption><span class="st-size-brand">Felipe Modas</span>' + esc(p.name) + '</caption>';
+  const header = '<thead><tr><th scope="col">Tamanho</th>' + columns.map(c=>'<th scope="col">' + esc(c.label) + '</th>').join('') + '</tr></thead>';
+  const cell = value => value == null ? '<td class="st-size-unknown">Não informado</td>' :
+    '<td>' + esc(typeof value === 'number' ? measureNumber.format(value) : value) + '</td>';
+  const rows = [...sizes].map(([key,label])=>'<tr><th scope="row">' + esc(label) + '</th>' +
+    columns.map(c=>cell(c.values.get(key))).join('') + '</tr>').join('');
+  const grid = columns.length ? header + '<tbody>' + rows + '</tbody>' :
+    '<tbody><tr><th scope="row">Tamanhos do modelo</th><td>' + [...sizes.values()].map(esc).join(', ') + '</td></tr></tbody>';
+  const table = sizes.size ? '<div class="st-table"><table>' + caption + grid + '</table></div>' : '';
+  return table + (p.measurementNote ? '<p class="st-measure-note">' + esc(p.measurementNote) + '</p>' : '') +
+    '<a class="st-under" href="' + modelGuideURL(p,links) + '">Ver este modelo no guia de medidas</a>';
 }
 export function buyBox(p, links, prefix='pdp') {
   const potential = p.variants.some(canBuy);
@@ -64,13 +91,13 @@ export function buyBox(p, links, prefix='pdp') {
     const request = p.priceCents ? 'a disponibilidade de ' : 'o preço e a disponibilidade de ';
     const wa = 'https://wa.me/5521974623058?text=' + encodeURIComponent('Olá, gostaria de consultar '+request+p.name+(p.sku ? ' ('+p.sku+')' : '')+'.');
     const actionStyle = p.status === 'listed' ? 'st-action st-outline st-wide' : 'st-action st-wide';
-    return '<div class="st-buybox">' + attributes + '<a class="' + actionStyle + '" href="' + esc(wa) + '">' + (stockKnown ? 'Consultar reposição' : 'Consultar disponibilidade') + '</a><a href="' + links.measures + '" class="st-under">Guia de medidas</a></div>';
+    return '<div class="st-buybox">' + attributes + '<a class="' + actionStyle + '" href="' + esc(wa) + '">' + (stockKnown ? 'Consultar reposição' : 'Consultar disponibilidade') + '</a><a href="' + modelGuideURL(p,links) + '" class="st-under">Guia de medidas deste modelo</a></div>';
   }
   const group = (label,key,values) => values.length ? fieldset(label,values.map((v,i)=>'<label class="st-choice"><input type="radio" name="' + key + '" value="' + esc(v) + '" required><span>' + esc(v) + '</span></label>').join('')) : '';
   const colors = sorted(p.variants.map(v=>v.color)); const sizes = sorted(p.variants.map(v=>v.size));
   const select = !colors.length && !sizes.length ? '<label>Variação<select class="st-input" name="variant" required><option value="">Selecione</option>' + p.variants.map(v=>'<option value="' + esc(v.id) + '"' + (!canBuy(v)?' disabled':'') + '>' + esc(v.label||p.name) + '</option>').join('') + '</select></label>' : '';
   return '<form class="st-buybox" data-buybox="' + esc(p.id) + '">' + group('Cor','color',colors) + group('Tamanho','size',sizes) + select +
-    '<a class="st-under" href="'+links.measures+'">Guia de medidas</a><p class="st-selection" data-selection aria-live="polite">Selecione a variação para adicionar à sacola.</p><div class="st-buy-actions"><label>Quantidade<input name="quantity" class="st-input" type="number" min="1" max="99" step="1" value="1" required></label><button type="submit" class="st-action" disabled>Adicionar à sacola</button></div><p data-buy-message role="status"></p></form>';
+    '<a class="st-under" href="'+modelGuideURL(p,links)+'">Guia de medidas deste modelo</a><p class="st-selection" data-selection aria-live="polite">Selecione a variação para adicionar à sacola.</p><div class="st-buy-actions"><label>Quantidade<input name="quantity" class="st-input" type="number" min="1" max="99" step="1" value="1" required></label><button type="submit" class="st-action" disabled>Adicionar à sacola</button></div><p data-buy-message role="status"></p></form>';
 }
 export function productPage(p, related, links) {
   const info = [['Tecido',p.fabric],['Composição',p.composition],['Modelagem',p.fit],['Cuidados',p.care]].filter(([,v])=>v);
@@ -81,7 +108,7 @@ export function productPage(p, related, links) {
     (p.variants.some(canBuy) ? '<details class="st-freight"><summary>Calcular frete e prazo</summary><form data-ship><label>CEP<input class="st-input" type="text" name="cep" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}-?[0-9]{3}" maxlength="9" required placeholder="00000-000"></label><button class="st-action st-outline">Calcular</button></form><p data-ship-message role="status"></p></details>' : '') +
     '<div class="st-details">' + (p.description?details('Sobre a peça','<p>' + esc(p.description) + '</p>','open'):'') +
     (info.length?details('Tecido e detalhes','<dl class="st-facts">' + info.map(([k,v])=>'<div><dt>' + esc(k) + '</dt><dd>' + esc(v) + '</dd></div>').join('') + '</dl>'):'') +
-    details('Medidas',tables(p,links)) + details('Trocas e devoluções','<p>Nas compras online, você pode exercer o direito de arrependimento em até sete dias a partir do recebimento.</p><a class="st-under" href="' + links.returns + '">Ver política de trocas e devoluções</a>') +
+    details('Tamanhos e medidas',tables(p,links),'open') + details('Trocas e devoluções','<p>Nas compras online, você pode exercer o direito de arrependimento em até sete dias a partir do recebimento.</p><a class="st-under" href="' + links.returns + '">Ver política de trocas e devoluções</a>') +
     '</div></div></div>' + (related.length ? '<section class="st-related"><h2>Na mesma coleção</h2>' + grid(related) + '</section>' : '') + '<section class="st-related" data-recent hidden><h2>Vistas recentemente</h2><div class="st-grid"></div></section></div>';
 }
 export function cartPage() {
