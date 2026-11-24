@@ -26,7 +26,7 @@ O preço de cada uma das 12 fichas corresponde ao preço principal de varejo con
 
 As galerias usam fotografias de produto dos fornecedores, com uso autorizado pelo lojista. Os arquivos WebP são servidos pelo próprio site. Cada entrada da galeria conserva a origem para auditoria. As imagens editoriais de campanha têm uso e origem descritos separadamente em `docs/fotografia.md`.
 
-As fichas com `status: listed` aparecem com fotos e preço e oferecem consulta de disponibilidade à loja. Para habilitar a compra, informe a contagem própria de cada variante e confirme o pagamento por cartão de crédito na conta da loja. O frete aprovado é fixo por pedido, com PAC a R$ 23,00 ou SEDEX a R$ 48,00. As 235 referências históricas da Stella Basic permanecem em `catalogo.js` para migrar a seleção do carrinho anterior.
+Os 12 modelos possuem variantes ativas. Em 24/11/2026, a loja informou o saldo inicial de 10.000 unidades por combinação de cor e tamanho da grade documentada. As vendas e as reservas são descontadas pelo serviço de pedidos. O guia em `/guia-de-medidas/` reúne as tabelas da coleção e permite baixar cada uma em PNG. O frete é fixo por pedido, com PAC a R$ 23,00 ou SEDEX a R$ 48,00. As 235 referências históricas da Stella Basic permanecem em `catalogo.js` para migrar a seleção do carrinho anterior.
 
 As prévias de pull requests seguem a configuração de acesso da equipe na Netlify. Confira o cadastro empresarial e os requisitos operacionais em `docs/operacao.md` e `docs/comercio.md` antes da abertura comercial.
 

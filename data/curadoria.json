@@ -65,10 +65,18 @@
         "color": "Floral azul"
       }
     ],
-    "variants": [],
+    "variants": [
+      {
+        "id": "fm-v01-floral-azul-unico",
+        "sku": "FM-V01-FLORAL-AZUL-UNICO",
+        "color": "Floral azul",
+        "size": "Único",
+        "stock": 10000
+      }
+    ],
     "priceCents": 16990,
     "shipping": null,
-    "status": "listed",
+    "status": "active",
     "source": {
       "name": "Via Luxo Store",
       "url": "https://www.vialuxostore.com.br/vestido-longo-floral-lastex-leticia",
@@ -230,10 +238,39 @@
         "color": "Jeans escuro"
       }
     ],
-    "variants": [],
+    "variants": [
+      {
+        "id": "fm-v02-jeans-escuro-p",
+        "sku": "FM-V02-JEANS-ESCURO-P",
+        "color": "Jeans escuro",
+        "size": "P",
+        "stock": 10000
+      },
+      {
+        "id": "fm-v02-jeans-escuro-m",
+        "sku": "FM-V02-JEANS-ESCURO-M",
+        "color": "Jeans escuro",
+        "size": "M",
+        "stock": 10000
+      },
+      {
+        "id": "fm-v02-jeans-escuro-g",
+        "sku": "FM-V02-JEANS-ESCURO-G",
+        "color": "Jeans escuro",
+        "size": "G",
+        "stock": 10000
+      },
+      {
+        "id": "fm-v02-jeans-escuro-gg",
+        "sku": "FM-V02-JEANS-ESCURO-GG",
+        "color": "Jeans escuro",
+        "size": "GG",
+        "stock": 10000
+      }
+    ],
     "priceCents": 16990,
     "shipping": null,
-    "status": "listed",
+    "status": "active",
     "source": {
       "name": "Via Luxo Store",
       "url": "https://www.vialuxostore.com.br/vestidos/vestido-jeans-lara-escuro",
@@ -435,10 +472,53 @@
         "color": "Bege"
       }
     ],
-    "variants": [],
+    "variants": [
+      {
+        "id": "fm-v03-preto-u",
+        "sku": "FM-V03-PRETO-U",
+        "color": "Preto",
+        "size": "U",
+        "stock": 10000
+      },
+      {
+        "id": "fm-v03-azul-claro-u",
+        "sku": "FM-V03-AZUL-CLARO-U",
+        "color": "Azul claro",
+        "size": "U",
+        "stock": 10000
+      },
+      {
+        "id": "fm-v03-rosa-claro-u",
+        "sku": "FM-V03-ROSA-CLARO-U",
+        "color": "Rosa claro",
+        "size": "U",
+        "stock": 10000
+      },
+      {
+        "id": "fm-v03-verde-esmeralda-u",
+        "sku": "FM-V03-VERDE-ESMERALDA-U",
+        "color": "Verde esmeralda",
+        "size": "U",
+        "stock": 10000
+      },
+      {
+        "id": "fm-v03-bege-u",
+        "sku": "FM-V03-BEGE-U",
+        "color": "Bege",
+        "size": "U",
+        "stock": 10000
+      },
+      {
+        "id": "fm-v03-azul-u",
+        "sku": "FM-V03-AZUL-U",
+        "color": "Azul",
+        "size": "U",
+        "stock": 10000
+      }
+    ],
     "priceCents": 10900,
     "shipping": null,
-    "status": "listed",
+    "status": "active",
     "source": {
       "name": "DaLuz",
       "url": "https://www.daluzloja.com.br/todos-os-produtos/vestido/vestido-listras-astoria",
@@ -635,10 +715,81 @@
         "color": "Branco"
       }
     ],
-    "variants": [],
+    "variants": [
+      {
+        "id": "fm-v04-amarelo-p",
+        "sku": "FM-V04-AMARELO-P",
+        "color": "Amarelo",
+        "size": "P",
+        "stock": 10000
+      },
+      {
+        "id": "fm-v04-amarelo-g",
+        "sku": "FM-V04-AMARELO-G",
+        "color": "Amarelo",
+        "size": "G",
+        "stock": 10000
+      },
+      {
+        "id": "fm-v04-branco-p",
+        "sku": "FM-V04-BRANCO-P",
+        "color": "Branco",
+        "size": "P",
+        "stock": 10000
+      },
+      {
+        "id": "fm-v04-branco-m",
+        "sku": "FM-V04-BRANCO-M",
+        "color": "Branco",
+        "size": "M",
+        "stock": 10000
+      },
+      {
+        "id": "fm-v04-branco-g",
+        "sku": "FM-V04-BRANCO-G",
+        "color": "Branco",
+        "size": "G",
+        "stock": 10000
+      },
+      {
+        "id": "fm-v04-vermelho-p",
+        "sku": "FM-V04-VERMELHO-P",
+        "color": "Vermelho",
+        "size": "P",
+        "stock": 10000
+      },
+      {
+        "id": "fm-v04-vermelho-m",
+        "sku": "FM-V04-VERMELHO-M",
+        "color": "Vermelho",
+        "size": "M",
+        "stock": 10000
+      },
+      {
+        "id": "fm-v04-vermelho-g",
+        "sku": "FM-V04-VERMELHO-G",
+        "color": "Vermelho",
+        "size": "G",
+        "stock": 10000
+      },
+      {
+        "id": "fm-v04-preto-p",
+        "sku": "FM-V04-PRETO-P",
+        "color": "Preto",
+        "size": "P",
+        "stock": 10000
+      },
+      {
+        "id": "fm-v04-preto-g",
+        "sku": "FM-V04-PRETO-G",
+        "color": "Preto",
+        "size": "G",
+        "stock": 10000
+      }
+    ],
     "priceCents": 9900,
     "shipping": null,
-    "status": "listed",
+    "status": "active",
     "source": {
       "name": "DaLuz",
       "url": "https://www.daluzloja.com.br/todos-os-produtos/vestido/vestido-amara",
@@ -858,10 +1009,32 @@
         "color": "Listrado azul-claro"
       }
     ],
-    "variants": [],
+    "variants": [
+      {
+        "id": "fm-cj01-listrado-azul-claro-p",
+        "sku": "FM-CJ01-LISTRADO-AZUL-CLARO-P",
+        "color": "Listrado azul-claro",
+        "size": "P",
+        "stock": 10000
+      },
+      {
+        "id": "fm-cj01-listrado-azul-claro-m",
+        "sku": "FM-CJ01-LISTRADO-AZUL-CLARO-M",
+        "color": "Listrado azul-claro",
+        "size": "M",
+        "stock": 10000
+      },
+      {
+        "id": "fm-cj01-listrado-azul-claro-g",
+        "sku": "FM-CJ01-LISTRADO-AZUL-CLARO-G",
+        "color": "Listrado azul-claro",
+        "size": "G",
+        "stock": 10000
+      }
+    ],
     "priceCents": 33990,
     "shipping": null,
-    "status": "listed",
+    "status": "active",
     "source": {
       "name": "Via Luxo Store",
       "url": "https://www.vialuxostore.com.br/conjunto-listrado-blusa-peplum-e-calca-helena",
@@ -1032,10 +1205,95 @@
         "color": "Listrado verde"
       }
     ],
-    "variants": [],
+    "variants": [
+      {
+        "id": "fm-cj02-listrado-azul-p",
+        "sku": "FM-CJ02-LISTRADO-AZUL-P",
+        "color": "Listrado azul",
+        "size": "P",
+        "stock": 10000
+      },
+      {
+        "id": "fm-cj02-listrado-bege-p",
+        "sku": "FM-CJ02-LISTRADO-BEGE-P",
+        "color": "Listrado bege",
+        "size": "P",
+        "stock": 10000
+      },
+      {
+        "id": "fm-cj02-listrado-rosa-p",
+        "sku": "FM-CJ02-LISTRADO-ROSA-P",
+        "color": "Listrado rosa",
+        "size": "P",
+        "stock": 10000
+      },
+      {
+        "id": "fm-cj02-listrado-verde-p",
+        "sku": "FM-CJ02-LISTRADO-VERDE-P",
+        "color": "Listrado verde",
+        "size": "P",
+        "stock": 10000
+      },
+      {
+        "id": "fm-cj02-listrado-azul-m",
+        "sku": "FM-CJ02-LISTRADO-AZUL-M",
+        "color": "Listrado azul",
+        "size": "M",
+        "stock": 10000
+      },
+      {
+        "id": "fm-cj02-listrado-bege-m",
+        "sku": "FM-CJ02-LISTRADO-BEGE-M",
+        "color": "Listrado bege",
+        "size": "M",
+        "stock": 10000
+      },
+      {
+        "id": "fm-cj02-listrado-rosa-m",
+        "sku": "FM-CJ02-LISTRADO-ROSA-M",
+        "color": "Listrado rosa",
+        "size": "M",
+        "stock": 10000
+      },
+      {
+        "id": "fm-cj02-listrado-verde-m",
+        "sku": "FM-CJ02-LISTRADO-VERDE-M",
+        "color": "Listrado verde",
+        "size": "M",
+        "stock": 10000
+      },
+      {
+        "id": "fm-cj02-listrado-azul-g",
+        "sku": "FM-CJ02-LISTRADO-AZUL-G",
+        "color": "Listrado azul",
+        "size": "G",
+        "stock": 10000
+      },
+      {
+        "id": "fm-cj02-listrado-bege-g",
+        "sku": "FM-CJ02-LISTRADO-BEGE-G",
+        "color": "Listrado bege",
+        "size": "G",
+        "stock": 10000
+      },
+      {
+        "id": "fm-cj02-listrado-rosa-g",
+        "sku": "FM-CJ02-LISTRADO-ROSA-G",
+        "color": "Listrado rosa",
+        "size": "G",
+        "stock": 10000
+      },
+      {
+        "id": "fm-cj02-listrado-verde-g",
+        "sku": "FM-CJ02-LISTRADO-VERDE-G",
+        "color": "Listrado verde",
+        "size": "G",
+        "stock": 10000
+      }
+    ],
     "priceCents": 25990,
     "shipping": null,
-    "status": "listed",
+    "status": "active",
     "source": {
       "name": "Via Luxo Store",
       "url": "https://www.vialuxostore.com.br/conjunto-listrado-blusa-e-calca-com-cinto-isis",
@@ -1268,10 +1526,39 @@
         "color": "Azul-marinho"
       }
     ],
-    "variants": [],
+    "variants": [
+      {
+        "id": "fm-cj03-azul-marinho-p",
+        "sku": "FM-CJ03-AZUL-MARINHO-P",
+        "color": "Azul-marinho",
+        "size": "P",
+        "stock": 10000
+      },
+      {
+        "id": "fm-cj03-azul-marinho-m",
+        "sku": "FM-CJ03-AZUL-MARINHO-M",
+        "color": "Azul-marinho",
+        "size": "M",
+        "stock": 10000
+      },
+      {
+        "id": "fm-cj03-azul-marinho-g",
+        "sku": "FM-CJ03-AZUL-MARINHO-G",
+        "color": "Azul-marinho",
+        "size": "G",
+        "stock": 10000
+      },
+      {
+        "id": "fm-cj03-bege-g",
+        "sku": "FM-CJ03-BEGE-G",
+        "color": "Bege",
+        "size": "G",
+        "stock": 10000
+      }
+    ],
     "priceCents": 14900,
     "shipping": null,
-    "status": "listed",
+    "status": "active",
     "source": {
       "name": "DaLuz",
       "url": "https://www.daluzloja.com.br/todos-os-produtos/conjunto/conjunto-arsay",
@@ -1507,10 +1794,32 @@
         "height": 1493
       }
     ],
-    "variants": [],
+    "variants": [
+      {
+        "id": "fm-cj04-azul-claro-m",
+        "sku": "FM-CJ04-AZUL-CLARO-M",
+        "color": "Azul claro",
+        "size": "M",
+        "stock": 10000
+      },
+      {
+        "id": "fm-cj04-azul-claro-g",
+        "sku": "FM-CJ04-AZUL-CLARO-G",
+        "color": "Azul claro",
+        "size": "G",
+        "stock": 10000
+      },
+      {
+        "id": "fm-cj04-branco-g",
+        "sku": "FM-CJ04-BRANCO-G",
+        "color": "Branco",
+        "size": "G",
+        "stock": 10000
+      }
+    ],
     "priceCents": 18900,
     "shipping": null,
-    "status": "listed",
+    "status": "active",
     "source": {
       "name": "DaLuz",
       "url": "https://www.daluzloja.com.br/todos-os-produtos/conjunto/conjunto-reeve",
@@ -1811,10 +2120,46 @@
         "color": "Cinza chumbo"
       }
     ],
-    "variants": [],
+    "variants": [
+      {
+        "id": "fm-c01-azul-marinho-m",
+        "sku": "FM-C01-AZUL-MARINHO-M",
+        "color": "Azul-marinho",
+        "size": "M",
+        "stock": 10000
+      },
+      {
+        "id": "fm-c01-mocha-mousse-m",
+        "sku": "FM-C01-MOCHA-MOUSSE-M",
+        "color": "Mocha mousse",
+        "size": "M",
+        "stock": 10000
+      },
+      {
+        "id": "fm-c01-mocha-mousse-g",
+        "sku": "FM-C01-MOCHA-MOUSSE-G",
+        "color": "Mocha mousse",
+        "size": "G",
+        "stock": 10000
+      },
+      {
+        "id": "fm-c01-azul-marinho-g",
+        "sku": "FM-C01-AZUL-MARINHO-G",
+        "color": "Azul-marinho",
+        "size": "G",
+        "stock": 10000
+      },
+      {
+        "id": "fm-c01-preto-g",
+        "sku": "FM-C01-PRETO-G",
+        "color": "Preto",
+        "size": "G",
+        "stock": 10000
+      }
+    ],
     "priceCents": 13990,
     "shipping": null,
-    "status": "listed",
+    "status": "active",
     "source": {
       "name": "Via Luxo Store",
       "url": "https://www.vialuxostore.com.br/calca/calca-alfaiataria-wide-leg-dani",
@@ -2042,10 +2387,39 @@
         "color": "Jeans azul"
       }
     ],
-    "variants": [],
+    "variants": [
+      {
+        "id": "fm-c02-jeans-azul-36",
+        "sku": "FM-C02-JEANS-AZUL-36",
+        "color": "Jeans azul",
+        "size": "36",
+        "stock": 10000
+      },
+      {
+        "id": "fm-c02-jeans-azul-40",
+        "sku": "FM-C02-JEANS-AZUL-40",
+        "color": "Jeans azul",
+        "size": "40",
+        "stock": 10000
+      },
+      {
+        "id": "fm-c02-jeans-azul-42",
+        "sku": "FM-C02-JEANS-AZUL-42",
+        "color": "Jeans azul",
+        "size": "42",
+        "stock": 10000
+      },
+      {
+        "id": "fm-c02-jeans-azul-44",
+        "sku": "FM-C02-JEANS-AZUL-44",
+        "color": "Jeans azul",
+        "size": "44",
+        "stock": 10000
+      }
+    ],
     "priceCents": 18890,
     "shipping": null,
-    "status": "listed",
+    "status": "active",
     "source": {
       "name": "Via Luxo Store",
       "url": "https://www.vialuxostore.com.br/calca-wide-leg-jeans-mariana",
@@ -2275,10 +2649,95 @@
         "height": 1493
       }
     ],
-    "variants": [],
+    "variants": [
+      {
+        "id": "fm-c03-branco-p",
+        "sku": "FM-C03-BRANCO-P",
+        "color": "Branco",
+        "size": "P",
+        "stock": 10000
+      },
+      {
+        "id": "fm-c03-branco-m",
+        "sku": "FM-C03-BRANCO-M",
+        "color": "Branco",
+        "size": "M",
+        "stock": 10000
+      },
+      {
+        "id": "fm-c03-branco-g",
+        "sku": "FM-C03-BRANCO-G",
+        "color": "Branco",
+        "size": "G",
+        "stock": 10000
+      },
+      {
+        "id": "fm-c03-branco-gg",
+        "sku": "FM-C03-BRANCO-GG",
+        "color": "Branco",
+        "size": "GG",
+        "stock": 10000
+      },
+      {
+        "id": "fm-c03-rosa-champagne-p",
+        "sku": "FM-C03-ROSA-CHAMPAGNE-P",
+        "color": "Rosa champagne",
+        "size": "P",
+        "stock": 10000
+      },
+      {
+        "id": "fm-c03-rosa-champagne-m",
+        "sku": "FM-C03-ROSA-CHAMPAGNE-M",
+        "color": "Rosa champagne",
+        "size": "M",
+        "stock": 10000
+      },
+      {
+        "id": "fm-c03-rosa-champagne-g",
+        "sku": "FM-C03-ROSA-CHAMPAGNE-G",
+        "color": "Rosa champagne",
+        "size": "G",
+        "stock": 10000
+      },
+      {
+        "id": "fm-c03-rosa-champagne-gg",
+        "sku": "FM-C03-ROSA-CHAMPAGNE-GG",
+        "color": "Rosa champagne",
+        "size": "GG",
+        "stock": 10000
+      },
+      {
+        "id": "fm-c03-bege-m",
+        "sku": "FM-C03-BEGE-M",
+        "color": "Bege",
+        "size": "M",
+        "stock": 10000
+      },
+      {
+        "id": "fm-c03-bege-gg",
+        "sku": "FM-C03-BEGE-GG",
+        "color": "Bege",
+        "size": "GG",
+        "stock": 10000
+      },
+      {
+        "id": "fm-c03-preto-g",
+        "sku": "FM-C03-PRETO-G",
+        "color": "Preto",
+        "size": "G",
+        "stock": 10000
+      },
+      {
+        "id": "fm-c03-preto-gg",
+        "sku": "FM-C03-PRETO-GG",
+        "color": "Preto",
+        "size": "GG",
+        "stock": 10000
+      }
+    ],
     "priceCents": 13900,
     "shipping": null,
-    "status": "listed",
+    "status": "active",
     "source": {
       "name": "DaLuz",
       "url": "https://www.daluzloja.com.br/todos-os-produtos/calca/calca-maelis",
@@ -2465,10 +2924,53 @@
         "color": "Jeans azul"
       }
     ],
-    "variants": [],
+    "variants": [
+      {
+        "id": "fm-c04-jeans-azul-36",
+        "sku": "FM-C04-JEANS-AZUL-36",
+        "color": "Jeans azul",
+        "size": "36",
+        "stock": 10000
+      },
+      {
+        "id": "fm-c04-jeans-azul-38",
+        "sku": "FM-C04-JEANS-AZUL-38",
+        "color": "Jeans azul",
+        "size": "38",
+        "stock": 10000
+      },
+      {
+        "id": "fm-c04-jeans-azul-40",
+        "sku": "FM-C04-JEANS-AZUL-40",
+        "color": "Jeans azul",
+        "size": "40",
+        "stock": 10000
+      },
+      {
+        "id": "fm-c04-jeans-azul-42",
+        "sku": "FM-C04-JEANS-AZUL-42",
+        "color": "Jeans azul",
+        "size": "42",
+        "stock": 10000
+      },
+      {
+        "id": "fm-c04-jeans-azul-44",
+        "sku": "FM-C04-JEANS-AZUL-44",
+        "color": "Jeans azul",
+        "size": "44",
+        "stock": 10000
+      },
+      {
+        "id": "fm-c04-jeans-azul-46",
+        "sku": "FM-C04-JEANS-AZUL-46",
+        "color": "Jeans azul",
+        "size": "46",
+        "stock": 10000
+      }
+    ],
     "priceCents": 8900,
     "shipping": null,
-    "status": "listed",
+    "status": "active",
     "source": {
       "name": "DaLuz",
       "url": "https://www.daluzloja.com.br/todos-os-produtos/calca/calca-wide-leg-baya",
