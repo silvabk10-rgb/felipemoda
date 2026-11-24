@@ -1,14 +1,14 @@
 import {abandonedBeforeDispatch,fingerprint,readToken,reject,reserve} from './domain.mjs';
-import {applyProvider,InvalidProviderOrder,providerPayload,safeQrUrl} from './provider.mjs';
+import {applyProvider,InvalidProviderOrder,providerPayload} from './provider.mjs';
 
-export function reserveForCustomer(state,id,person,cfg,method='pix',ip='') {
+export function reserveForCustomer(state,id,person,cfg,ip='') {
   const buyer={
     emailKey:fingerprint(cfg.secret,'email:'+person.email),
     documentKey:fingerprint(cfg.secret,'cpf:'+person.document)
   };
   const order=state.orders[id];
-  if (order.state!=='draft' && (order.paymentMethod??'pix')!==method) reject('conflict','O meio de pagamento já foi definido para este pedido.',409);
-  if (method==='card' && order.state==='draft') {
+  if (order.state!=='draft' && order.paymentMethod!=='card') reject('conflict','O meio de pagamento já foi definido para este pedido.',409);
+  if (order.state==='draft') {
     const ipKey=ip?fingerprint(cfg.secret,'ip:'+ip):null;
     const recent=Object.values(state.orders).filter(other=>other.id!==id && other.paymentMethod==='card' && other.submittedAt>cfg.now()-10*60*1000 &&
       (other.buyer?.documentKey===buyer.documentKey || other.buyer?.emailKey===buyer.emailKey || (ipKey && other.buyer?.ipKey===ipKey)));
@@ -18,7 +18,7 @@ export function reserveForCustomer(state,id,person,cfg,method='pix',ip='') {
   const newAttempt=order.state==='draft';
   const reserved=reserve(state,id,buyer,fingerprint(cfg.secret,JSON.stringify(person)),cfg);
   if(newAttempt) reserved.dispatchVersion=2;
-  reserved.paymentMethod=method;
+  reserved.paymentMethod='card';
   return reserved;
 }
 
@@ -86,8 +86,9 @@ async function prepareCard(order,person,token,ledger,cfg,provider) {
 }
 
 export async function submitPayment(order,person,ledger,cfg,provider,cardToken) {
+  if (order.paymentMethod!=='card') reject('method','Este pedido está disponível somente para consulta.',409);
   if (order.state!=='sending' || order.providerId) return reconcile(order,ledger,cfg,provider);
-  if (order.gatewaySentAt || order.dispatchedAt && order.paymentMethod!=='card') {
+  if (order.gatewaySentAt) {
     order=await reconcile(order,ledger,cfg,provider);
     if (order.state!=='sending' || order.providerId) return order;
   }
@@ -103,19 +104,17 @@ export async function submitPayment(order,person,ledger,cfg,provider,cardToken) 
   });
   if (!claim.send) return claim.order;
   order=claim.order;
-  if (order.paymentMethod==='card') {
-    try {
-      order=await prepareCard(order,person,cardToken,ledger,cfg,provider);
-    } catch(error) {
-      // Preparar um cartão na carteira não cria um pedido. Libere a reserva se nenhum envio de cobrança ocorreu.
-      const current=await ledger.change(data=>{
-        const saved=data.orders[order.id];
-        if(saved.state==='sending' && !saved.gatewaySentAt) saved.state='canceled';
-        return saved;
-      });
-      if(current.state==='canceled') return current;
-      throw error;
-    }
+  try {
+    order=await prepareCard(order,person,cardToken,ledger,cfg,provider);
+  } catch(error) {
+    // Preparar um cartão na carteira não cria um pedido. Libere a reserva se nenhum envio de cobrança ocorreu.
+    const current=await ledger.change(data=>{
+      const saved=data.orders[order.id];
+      if(saved.state==='sending' && !saved.gatewaySentAt) saved.state='canceled';
+      return saved;
+    });
+    if(current.state==='canceled') return current;
+    throw error;
   }
   const dispatch=await ledger.change(data=>{
     const current=data.orders[order.id];
@@ -139,15 +138,10 @@ export async function submitPayment(order,person,ledger,cfg,provider,cardToken) 
   }
 }
 
-export function privateStatus(order,token,now) {
+export function privateStatus(order,token) {
   const quote=order.quote;
-  const expired=order.pixExpires && Date.parse(order.pixExpires)<=now;
-  const payable=order.state==='pending' && !expired;
   return {
     orderId:order.id,orderToken:token,orderState:order.state,paymentMethod:order.paymentMethod??'pix',
-    pixCode:payable ? order.pix || null : null,
-    pixQrUrl:payable ? safeQrUrl(order.pixQrUrl) : null,
-    expiresAt:order.pixExpires || null,
     subtotalCents:quote.subtotalCents,discountCents:quote.discountCents,
     shippingCents:quote.shippingCents,totalCents:quote.totalCents,
     shippingMethod:quote.shippingMethod ?? null,shippingLabel:quote.shippingLabel ?? 'Entrega'

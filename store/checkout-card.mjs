@@ -1,5 +1,5 @@
 const TOKEN_ENDPOINT = 'https://api.pagar.me/core/v5/tokens';
-const UNAVAILABLE = 'O pagamento com cartão está indisponível. Tente novamente ou escolha outra forma de pagamento.';
+const UNAVAILABLE = 'O pagamento com cartão está indisponível. Tente novamente.';
 
 function requirePublicKey(key) {
   if (typeof key !== 'string' || !/^pk_[a-zA-Z0-9_-]+$/.test(key)) throw new Error(UNAVAILABLE);

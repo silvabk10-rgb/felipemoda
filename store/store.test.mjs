@@ -162,3 +162,17 @@ test('a confirmação do próprio pedido libera recompra sem apagar uma sacola d
     assert.equal(load(keys.checkout,null,true),null);assert.equal(load(keys.bag,null)[0].quantity,2);
   }finally{save(keys.checkout,null,true);save(keys.bag,[]);}
 });
+
+test('a página e os módulos públicos de nova compra oferecem apenas crédito em uma parcela',async()=>{
+  const {checkoutDocument}=await import('./checkout.mjs');
+  const html=checkoutDocument({shippingRates:[{id:'pac',label:'PAC',priceCents:2300},{id:'sedex',label:'SEDEX',priceCents:4800}]});
+  assert.match(html,/Cartão de crédito/);
+  assert.match(html,/Pagamento em 1×/);
+  assert.match(html,/disabled>Pagar com cartão</);
+  assert.doesNotMatch(html,/data-payment-choices|name="paymentMethod"|\bpix\b|QR Code|copia e cola/i);
+  const publicFiles=['checkout.mjs','checkout-client.mjs','checkout-card.mjs','checkout.css','commerce-client.mjs'];
+  for(const file of publicFiles){
+    const source=await readFile(new URL(file,import.meta.url),'utf8');
+    assert.doesNotMatch(source,/\bpix\b|data-pix|pixCode|qrCode|copia e cola/i,file);
+  }
+});

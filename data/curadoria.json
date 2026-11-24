@@ -97,6 +97,15 @@
         "https://images.tcdn.com.br/img/img_prod/1119565/vestido_longo_floral_lastex_leticia_4_20261123150054_447bc5b367e0.jpeg",
         "https://images.tcdn.com.br/img/img_prod/1119565/vestido_longo_floral_lastex_leticia_5_20261123150054_7b1ec218c1b1.jpeg",
         "https://images.tcdn.com.br/img/img_prod/1119565/vestido_longo_floral_lastex_leticia_6_20261123150054_61f75c568386.jpeg"
+      ],
+      "supplierVariantPairs": [
+        {
+          "sourceSku": "97695",
+          "size": "Único",
+          "color": "Floral azul",
+          "originalVariant": "Tamanho: UNICO - Cor: AZUL",
+          "variantUrl": "https://www.vialuxostore.com.br/vestido-longo-floral-lastex-leticia?variant_id=97695"
+        }
       ]
     },
     "pricingProposal": {
@@ -260,6 +269,32 @@
         "https://images.tcdn.com.br/img/img_prod/1119565/vestido_jeans_lara_escuro_30027_11_ea9475b52bc29c1c9a1187b8a8e3e094.jpeg",
         "https://images.tcdn.com.br/img/img_prod/1119565/vestido_jeans_lara_escuro_30027_2_5b533327963af48c075bdbe62397ccdc.jpeg",
         "https://images.tcdn.com.br/img/img_prod/1119565/vestido_jeans_lara_escuro_30027_3_8a9b66eefb15a5d782a3017a28c11633.jpeg"
+      ],
+      "supplierVariantPairs": [
+        {
+          "sourceSku": "30027-61027",
+          "size": "P",
+          "color": null,
+          "originalVariant": "Tamanho: P"
+        },
+        {
+          "sourceSku": "30027-61029",
+          "size": "M",
+          "color": null,
+          "originalVariant": "Tamanho: M"
+        },
+        {
+          "sourceSku": "30027-61031",
+          "size": "G",
+          "color": null,
+          "originalVariant": "Tamanho: G"
+        },
+        {
+          "sourceSku": "30027-61033",
+          "size": "GG",
+          "color": null,
+          "originalVariant": "Tamanho: GG"
+        }
       ]
     },
     "pricingProposal": {
@@ -861,6 +896,26 @@
         "https://images.tcdn.com.br/img/img_prod/1119565/conjunto_listrado_blusa_peplum_e_cala_helena_2_20261117164133_7cb3806853ba.jpeg",
         "https://images.tcdn.com.br/img/img_prod/1119565/conjunto_listrado_blusa_peplum_e_cala_helena_3_20261117164133_11224fc33607.jpeg",
         "https://images.tcdn.com.br/img/img_prod/1119565/conjunto_listrado_blusa_peplum_e_cala_helena_4_20261117164133_103bebbad09c.jpeg"
+      ],
+      "supplierVariantPairs": [
+        {
+          "sourceSku": "34879-97417",
+          "size": "P",
+          "color": "Listrado azul-claro",
+          "originalVariant": "Tamanho: P | Cor: AZUL"
+        },
+        {
+          "sourceSku": "34879-97419",
+          "size": "M",
+          "color": "Listrado azul-claro",
+          "originalVariant": "Tamanho: M | Cor: AZUL"
+        },
+        {
+          "sourceSku": "34879-97421",
+          "size": "G",
+          "color": "Listrado azul-claro",
+          "originalVariant": "Tamanho: G | Cor: AZUL"
+        }
       ]
     },
     "pricingProposal": {
@@ -1019,6 +1074,80 @@
         "https://images.tcdn.com.br/img/img_prod/1119565/conjunto_listrado_blusa_e_cala_com_cinto_isis_8_20261123154609_2ef6ffe30a95.jpeg",
         "https://images.tcdn.com.br/img/img_prod/1119565/conjunto_listrado_blusa_e_cala_com_cinto_isis_9_20261123154609_9d5efd62dbb6.jpeg",
         "https://images.tcdn.com.br/img/img_prod/1119565/conjunto_listrado_blusa_e_cala_com_cinto_isis_10_20261123154609_325879cb2e59.jpeg"
+      ],
+      "supplierVariantPairs": [
+        {
+          "sourceSku": "34903-97655",
+          "size": "P",
+          "color": "Listrado azul",
+          "originalVariant": "Tamanho: P | Cor: AZUL"
+        },
+        {
+          "sourceSku": "34903-97661",
+          "size": "P",
+          "color": "Listrado bege",
+          "originalVariant": "Tamanho: P | Cor: BEGE"
+        },
+        {
+          "sourceSku": "34903-97667",
+          "size": "P",
+          "color": "Listrado rosa",
+          "originalVariant": "Tamanho: P | Cor: Rosa"
+        },
+        {
+          "sourceSku": "34903-97673",
+          "size": "P",
+          "color": "Listrado verde",
+          "originalVariant": "Tamanho: P | Cor: Verde Menta"
+        },
+        {
+          "sourceSku": "34903-97657",
+          "size": "M",
+          "color": "Listrado azul",
+          "originalVariant": "Tamanho: M | Cor: AZUL"
+        },
+        {
+          "sourceSku": "34903-97663",
+          "size": "M",
+          "color": "Listrado bege",
+          "originalVariant": "Tamanho: M | Cor: BEGE"
+        },
+        {
+          "sourceSku": "34903-97669",
+          "size": "M",
+          "color": "Listrado rosa",
+          "originalVariant": "Tamanho: M | Cor: Rosa"
+        },
+        {
+          "sourceSku": "34903-97675",
+          "size": "M",
+          "color": "Listrado verde",
+          "originalVariant": "Tamanho: M | Cor: Verde Menta"
+        },
+        {
+          "sourceSku": "34903-97659",
+          "size": "G",
+          "color": "Listrado azul",
+          "originalVariant": "Tamanho: G | Cor: AZUL"
+        },
+        {
+          "sourceSku": "34903-97665",
+          "size": "G",
+          "color": "Listrado bege",
+          "originalVariant": "Tamanho: G | Cor: BEGE"
+        },
+        {
+          "sourceSku": "34903-97671",
+          "size": "G",
+          "color": "Listrado rosa",
+          "originalVariant": "Tamanho: G | Cor: Rosa"
+        },
+        {
+          "sourceSku": "34903-97677",
+          "size": "G",
+          "color": "Listrado verde",
+          "originalVariant": "Tamanho: G | Cor: Verde Menta"
+        }
       ]
     },
     "pricingProposal": {
@@ -1745,6 +1874,38 @@
         "https://images.tcdn.com.br/img/img_prod/1119565/cala_alfaiataria_wide_leg_dani_31_20260120165316_d58b74e057bb.jpeg",
         "https://images.tcdn.com.br/img/img_prod/1119565/cala_alfaiataria_wide_leg_dani_32_20260120165316_5a657ce9140a.jpeg",
         "https://images.tcdn.com.br/img/img_prod/1119565/cala_alfaiataria_wide_leg_dani_33_20260120165316_983ab4303f7c.jpeg"
+      ],
+      "supplierVariantPairs": [
+        {
+          "sourceSku": "31871-84691",
+          "size": "M",
+          "color": "Azul-marinho",
+          "originalVariant": "Tamanho: M | Cor: AZUL MARINHO"
+        },
+        {
+          "sourceSku": "31871-82179",
+          "size": "M",
+          "color": "Mocha mousse",
+          "originalVariant": "Tamanho: M | Cor: MOCHA MOUSSE"
+        },
+        {
+          "sourceSku": "31871-82181",
+          "size": "G",
+          "color": "Mocha mousse",
+          "originalVariant": "Tamanho: G | Cor: MOCHA MOUSSE"
+        },
+        {
+          "sourceSku": "31871-84693",
+          "size": "G",
+          "color": "Azul-marinho",
+          "originalVariant": "Tamanho: G | Cor: AZUL MARINHO"
+        },
+        {
+          "sourceSku": "31871-73469",
+          "size": "G",
+          "color": "Preto",
+          "originalVariant": "Tamanho: G | Cor: Preto"
+        }
       ]
     },
     "pricingProposal": {
@@ -1924,6 +2085,32 @@
         "https://images.tcdn.com.br/img/img_prod/1119565/cala_wide_leg_jeans_mariana_2_20261005153431_61a3f9a9d299.jpeg",
         "https://images.tcdn.com.br/img/img_prod/1119565/cala_wide_leg_jeans_mariana_13_20261007180216_3622d504f82e.jpeg",
         "https://images.tcdn.com.br/img/img_prod/1119565/cala_wide_leg_jeans_mariana_14_20261007180216_542eff6bb350.jpeg"
+      ],
+      "supplierVariantPairs": [
+        {
+          "sourceSku": "34691-95463",
+          "size": "36",
+          "color": null,
+          "originalVariant": "Tamanho: 36"
+        },
+        {
+          "sourceSku": "34691-95467",
+          "size": "40",
+          "color": null,
+          "originalVariant": "Tamanho: 40"
+        },
+        {
+          "sourceSku": "34691-95469",
+          "size": "42",
+          "color": null,
+          "originalVariant": "Tamanho: 42"
+        },
+        {
+          "sourceSku": "34691-95471",
+          "size": "44",
+          "color": null,
+          "originalVariant": "Tamanho: 44"
+        }
       ]
     },
     "pricingProposal": {

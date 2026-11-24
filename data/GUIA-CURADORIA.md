@@ -4,7 +4,7 @@
 
 ## Preços de venda aprovados
 
-Em 24 de novembro de 2026, a Felipe Modas adotou o preço regular das fichas autorizadas. Os valores abaixo são os preços da vitrine. Nos seis modelos Via Luxo, o preço condicionado ao Pix da referência fica apenas na pesquisa interna. A loja usa `priceCents` para exibir o preço aprovado em reais.
+Em 24 de novembro de 2026, a Felipe Modas adotou o preço regular das fichas autorizadas. Os valores abaixo são os preços da vitrine. Nos seis modelos Via Luxo, valores promocionais condicionais do fornecedor ficam apenas na pesquisa interna. A loja usa `priceCents` para exibir o preço aprovado em reais.
 
 | SKU | Peça | Referência | Preço aprovado |
 |---|---|---|---:|
@@ -37,7 +37,9 @@ A coleta guarda `supplierSizes` e `supplierColors` dentro de `source` para confe
 
 O proprietário da Felipe Modas autorizou o uso comercial das galerias de Via Luxo e DaLuz em 24/11/2026. As 179 fotos dos 12 modelos estão em WebP em `assets/products/`. As galerias têm 83 fotos da Via Luxo e 96 da DaLuz. Cada item em `images` contém o caminho local, texto alternativo e dimensões do derivado. A URL da foto original ocupa a mesma posição em `source.galleryUrls`. A origem da ficha, a autorização e a data ficam em `source`.
 
-A capa é sempre o primeiro arquivo de `images`. O atributo opcional `color` associa a foto a um tom identificado do modelo. Uma foto de grupo, uma tonalidade ambígua ou uma imagem do mesmo modelo em cor ausente da grade verificada permanece acessível na galeria geral. Na Via Luxo, `source.photoColors` registra os tons visualmente conferidos. Na DaLuz, `source.supplierVariantPairs` preserva as combinações publicadas na página de referência. Esses atributos apoiam a navegação e a conferência física. Para habilitar a compra, a loja precisa registrar a contagem de suas próprias variantes.
+A capa é sempre o primeiro arquivo de `images`. O atributo opcional `color` associa a foto a um tom identificado do modelo. Uma foto de grupo, uma tonalidade ambígua ou uma imagem do mesmo modelo em cor ausente da grade verificada permanece acessível na galeria geral. Na Via Luxo, `source.photoColors` registra os tons conferidos nas fotos. Os dois fornecedores têm variações documentadas em `source.supplierVariantPairs`, com 29 referências da Via Luxo e 41 da DaLuz. Cada referência identifica o tamanho e a cor publicados. Quando o seletor oferece apenas tamanho, `color` fica nulo e a ficha identifica a única lavagem da peça. O SKU do fornecedor permite conferir a origem.
+
+A grade da Via Luxo ainda tem 13 combinações para conferência física. São o Letícia floral vermelho em tamanho único, dez combinações de cor e tamanho da Dani e a Mariana nas numerações 34 e 38. As 70 referências documentadas nos dois fornecedores podem receber saldo quando a Felipe Modas informar sua contagem por variação.
 
 Seis fichas da Via Luxo possuem medidas da peça em centímetros. Dez das doze fichas têm equivalências de numeração. A calça Mariana usa medida por tamanho numérico, e a calça Baya traz sua grade numérica. Para o vestido Lara, o GG equivale ao 44; o comprimento desse tamanho permanece sem medida publicada.
 

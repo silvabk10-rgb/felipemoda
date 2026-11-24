@@ -15,19 +15,19 @@ Requer Node.js 22.11 ou posterior. Execute `npm ci`, `npm test` e `npm run build
 | `/arte/marca.html` na prévia | Ateliê Canvas do logotipo |
 | `data/curadoria.json` e `data/GUIA-CURADORIA.md` | Doze fichas, dados de referência e instruções de importação e ativação |
 | `commerce/config.mjs` | Campanha e modalidades de frete com preço fixo por pedido |
-| `/checkout/` | Finalização em uma página, escolha de frete, formas de pagamento habilitadas e acompanhamento do pedido |
+| `/checkout/` | Finalização em uma página, escolha de frete, cartão de crédito em uma parcela e acompanhamento do pedido |
 | `institucional/build.mjs` | Cadastro da empresa, contato e políticas |
 | `docs/identidade.md`, `docs/fotografia.md` | Paleta, aplicação da marca, direção de arte e origem dos ativos |
 | `docs/operacao.md`, `docs/comercio.md` | Atendimento, homologação, pagamentos e publicação |
 
 ## Catálogo e prévias
 
-O preço de cada uma das 12 fichas corresponde ao preço principal de varejo conferido no respectivo fornecedor. A loja aprovou esses valores em 24/11/2026. Descontos exclusivos do fornecedor, como Pix, não são condições da Felipe Modas. As medidas e equivalências são específicas de cada modelo.
+O preço de cada uma das 12 fichas corresponde ao preço principal de varejo conferido no respectivo fornecedor. A loja aprovou esses valores em 24/11/2026. O preço da vitrine segue o valor regular aprovado pela Felipe Modas. As medidas e equivalências são específicas de cada modelo.
 
 As galerias usam fotografias de produto dos fornecedores, com uso autorizado pelo lojista. Os arquivos WebP são servidos pelo próprio site. Cada entrada da galeria conserva a origem para auditoria. As imagens editoriais de campanha têm uso e origem descritos separadamente em `docs/fotografia.md`.
 
-As fichas com `status: listed` aparecem com fotos e preço e oferecem consulta de disponibilidade à loja. Para habilitar a compra, informe a contagem própria de cada variante e homologue as formas de pagamento na conta da loja. O frete aprovado é fixo por pedido, com PAC a R$ 23,00 ou SEDEX a R$ 48,00. As 235 referências históricas da Stella Basic permanecem em `catalogo.js` para migrar a seleção do carrinho anterior.
+As fichas com `status: listed` aparecem com fotos e preço e oferecem consulta de disponibilidade à loja. Para habilitar a compra, informe a contagem própria de cada variante e confirme o pagamento por cartão de crédito na conta da loja. O frete aprovado é fixo por pedido, com PAC a R$ 23,00 ou SEDEX a R$ 48,00. As 235 referências históricas da Stella Basic permanecem em `catalogo.js` para migrar a seleção do carrinho anterior.
 
 As prévias de pull requests seguem a configuração de acesso da equipe na Netlify. Confira o cadastro empresarial e os requisitos operacionais em `docs/operacao.md` e `docs/comercio.md` antes da abertura comercial.
 
-A proposta de cupom BEMVINDA10 permanece desativada. O cliente informa contato e endereço, escolhe a entrega e seleciona a forma de pagamento na mesma página. A configuração do servidor define a oferta de Pix e cartão de crédito em uma parcela. A Pagar.me (Stone) precisa habilitar a modalidade no estabelecimento e confirmar a transação. Os testes automatizados usam um provedor controlado e não iniciam cobranças reais.
+A proposta de cupom BEMVINDA10 permanece desativada. O cliente informa contato e endereço, escolhe a entrega e paga exclusivamente por cartão de crédito em uma parcela na mesma página. A Pagar.me (Stone) precisa habilitar o cartão no estabelecimento e confirmar a transação. Os testes automatizados usam um provedor controlado e não iniciam cobranças reais.

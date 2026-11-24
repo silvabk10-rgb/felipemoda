@@ -30,15 +30,12 @@ function checkPaymentFields(body) {
     }
   }
   if (!Array.isArray(body.items) || body.items.some(item=>!item || Object.keys(item).some(k=>!['variantId','quantity'].includes(k)))) reject('card','Confira os itens da sacola.');
-  if(body.action==='pix' && body.cardToken!==undefined) reject('card','Confira a forma de pagamento.');
-  if(body.action==='card' && (typeof body.cardToken!=='string' || !/^token_[a-zA-Z0-9_-]{4,160}$/.test(body.cardToken))) reject('card','O cartão precisa ser tokenizado pelo provedor.');
+  if(typeof body.cardToken!=='string' || !/^token_[a-zA-Z0-9_-]{4,160}$/.test(body.cardToken)) reject('card','O cartão precisa ser tokenizado pelo provedor.');
 }
 
 function paymentMethods(cfg) {
   const cardEnabled=cfg?.cardEnabled===true && Boolean(cfg.cardPublicKey);
-  const paymentMethods=[];
-  if(cfg && cfg.pixEnabled!==false) paymentMethods.push('pix');
-  if(cardEnabled) paymentMethods.push('card');
+  const paymentMethods=cardEnabled?['card']:[];
   return {paymentMethods,cardEnabled,cardPublicKey:cardEnabled?cfg.cardPublicKey:null,environment:cfg?.mode??'unconfigured'};
 }
 
@@ -54,7 +51,8 @@ export async function api(request,context,dependencies={configuration,openLedger
       reject('body','Não foi possível ler a solicitação.');
     }
     const action=body?.action;
-    if(!['shipping','address','methods','quote','checkout','pix','card','payment-status'].includes(action)) reject('action','Solicitação inválida.');
+    if(['pix','checkout'].includes(action)) reject('method','Finalize sua compra com cartão em uma parcela.',409);
+    if(!['shipping','address','methods','quote','card','payment-status'].includes(action)) reject('action','Solicitação inválida.');
     if(action==='shipping' || action==='address') {
       const cep=normalizeCep(body.cep);
       const result=action==='address'?await (dependencies.postalAddress??postalAddress)(cep):{shippingOptions:shippingRates};
@@ -67,10 +65,9 @@ export async function api(request,context,dependencies={configuration,openLedger
         throw error;
       }
     }
-    if (action==='card' || action==='pix') checkPaymentFields(body);
+    if (action==='card') checkPaymentFields(body);
     const cfg=dependencies.configuration(request,context);
     if(action==='card' && !paymentMethods(cfg).cardEnabled) reject('method','O pagamento com cartão está indisponível.',409);
-    if(['pix','checkout'].includes(action) && cfg.pixEnabled===false) reject('method','O pagamento por Pix está indisponível.',409);
     const ledger=await dependencies.openLedger(cfg.mode);
     const provider=dependencies.pagarme??pagarme;
     if(action==='payment-status') {
@@ -81,12 +78,11 @@ export async function api(request,context,dependencies={configuration,openLedger
       const order=await getPrivateOrder(ledger,token,cfg);
       recovery={orderId:order.id,orderToken:token,orderState:order.state};
       const current=await reconcile(order,ledger,cfg,provider);
-      return response({ok:true,...privateStatus(current,token,cfg.now())});
+      return response({ok:true,...privateStatus(current,token)});
     }
 
     const input=normalizeRequest(body);
-    const direct=action==='pix'||action==='card';
-    const person=direct?parseCustomer(body,input.cep):null;
+    const person=action==='card'?parseCustomer(body,input.cep):null;
     const email=person?.email??normalizeEmail(body.email);
     if (email && !emailValid(email)) reject('email','Informe um e-mail válido.');
     const emailKey=email?fingerprint(cfg.secret,'email:'+email):null;
@@ -98,17 +94,12 @@ export async function api(request,context,dependencies={configuration,openLedger
     const {id,token}=checkoutIdentity(body.idempotencyKey,cfg.secret);
     const order=await ledger.change(data=>{
       const draft=begin(data,input,emailKey,id,cfg);
-      if(action==='checkout') return draft;
       if (body.expectedTotalCents!==undefined && draft.quote.totalCents!==body.expectedTotalCents) reject('changed','O total mudou. Confira a cotação antes de confirmar o pagamento.',409);
-      return reserveForCustomer(data,id,person,cfg,action,context?.ip);
+      return reserveForCustomer(data,id,person,cfg,context?.ip);
     });
-    if(action==='checkout') {
-      const expired=order.state==='draft' && cfg.now()-order.createdAt>30*60*1000;
-      return response({ok:true,orderId:id,orderState:expired?'expired':order.state,checkoutUrl:'/.netlify/functions/pagamento?t='+encodeURIComponent(token)});
-    }
     recovery={orderId:id,orderToken:token,orderState:order.state};
     const current=await submitPayment(order,person,ledger,cfg,provider,body.cardToken);
-    return response({ok:true,...privateStatus(current,token,cfg.now())});
+    return response({ok:true,...privateStatus(current,token)});
   } catch (error) {
     const known=error instanceof CommerceError;
     return response({ok:false,code:known?error.code:'temporarily_unavailable',message:known?error.message:'O serviço está temporariamente indisponível.',...recovery},known?error.status:503);

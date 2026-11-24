@@ -32,7 +32,12 @@ test('políticas e FAQ exibem o frete por pedido e a situação dos pagamentos',
   t.after(() => rm(outDir, { recursive: true, force: true }));
   const layout = ({ body }) => body;
   for (const checkoutEnabled of [false, true]) {
-    await buildInstitutional({ outDir, layout, checkoutEnabled });
+    const paths = await buildInstitutional({ outDir, layout, checkoutEnabled });
+    for (const route of paths) {
+      const file = route.endsWith('/') ? join(outDir, route.slice(1), 'index.html') : join(outDir, route.slice(1));
+      const html = await readFile(file, 'utf8');
+      assert.doesNotMatch(html, /\bpix\b|boleto|transferência bancária/i);
+    }
     for (const route of ['entregas', 'perguntas-frequentes', 'termos-de-compra']) {
       const html = await readFile(join(outDir, route, 'index.html'), 'utf8');
       assert.match(html, /PAC por R\$\s23,00 ou SEDEX por R\$\s48,00/);
@@ -40,7 +45,7 @@ test('políticas e FAQ exibem o frete por pedido e a situação dos pagamentos',
       if (route === 'entregas') continue;
       if (checkoutEnabled) {
         assert.match(html, /em uma única página/);
-        assert.match(html, /cartão de crédito, quando oferecido/);
+        assert.match(html, /exclusivamente por cartão de crédito em uma parcela/);
       } else {
         assert.match(html, /pagamento online está indisponível/);
       }

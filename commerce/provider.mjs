@@ -51,11 +51,11 @@ export function providerItems(quote) {
 }
 
 export function providerPayload(order, person) {
-  const card=order.paymentMethod==='card';
-  const buyer=card ? {customer_id:order.providerCustomerId} : {customer:person};
-  const payment=card ? {payment_method:'credit_card',credit_card:{card_id:order.providerCardId,operation_type:'auth_and_capture',installments:1,auto_recovery:false}}
-    : {payment_method:'pix',pix:{expires_in:1800}};
-  return {code:order.id,closed:true,currency:'BRL',...buyer,items:providerItems(order.quote),
+  if (order.paymentMethod!=='card' || !/^cus_[a-z0-9]+$/i.test(order.providerCustomerId??'') || !/^card_[a-z0-9]+$/i.test(order.providerCardId??'')) {
+    reject('card','Confira a identificação do cartão junto ao provedor.',409);
+  }
+  const payment={payment_method:'credit_card',credit_card:{card_id:order.providerCardId,operation_type:'auth_and_capture',installments:1,auto_recovery:false}};
+  return {code:order.id,closed:true,currency:'BRL',customer_id:order.providerCustomerId,items:providerItems(order.quote),
     shipping:{amount:order.quote.shippingCents,description:order.quote.shippingLabel || 'Entrega',recipient_name:person.name,address:person.address},
     payments:[{...payment,amount:order.quote.totalCents}]};
 }
@@ -68,7 +68,7 @@ export async function pagarme(cfg,path,options={}) {
   let response;
   try {
     response = await fetch('https://api.pagar.me/core/v5/'+path, {
-      method:options.body?'POST':'GET', redirect:'error',signal:AbortSignal.timeout(9000),
+      method:options.body?'POST':'GET', redirect:'error',signal:options.signal??AbortSignal.timeout(9000),
       headers:{'Authorization':'Basic '+Buffer.from(cfg.key+':').toString('base64'),'Content-Type':'application/json',
         ...(options.id?{'Idempotency-Key':options.id}:{})},
       body:options.body?JSON.stringify(options.body):undefined
@@ -82,7 +82,9 @@ export async function pagarme(cfg,path,options={}) {
       if (failure?.errors && typeof failure.errors==='object' && Object.keys(failure.errors).length) throw new InvalidProviderOrder();
     }
     // Timeout, 409 e falhas técnicas são resultados indeterminados.
-    reject('provider','O provedor não confirmou a solicitação. Consulte o pedido novamente ou fale com o atendimento.',503);
+    const error=new CommerceError('provider','O provedor não confirmou a solicitação. Consulte o pedido novamente ou fale com o atendimento.',503);
+    error.upstreamStatus=response.status;
+    throw error;
   }
   return await response.json();
 }
@@ -94,7 +96,8 @@ export function applyProvider(order,remote) {
   }
   if (!['sending','pending','paid','refunded','partially_refunded','disputed','declined','canceled'].includes(order.state)) reject('state','Pedido não iniciou um pagamento.',409);
   const charge=remote.charges?.length===1 ? remote.charges[0] : null;
-  const expectedMethod=order.paymentMethod==='card'?'credit_card':'pix';
+  const expectedMethod=({card:'credit_card',pix:'pix'})[order.paymentMethod??'pix'];
+  if (!expectedMethod) reject('method','A modalidade deste pedido precisa de conferência.',409);
   if (!charge || charge.currency!=='BRL' || charge.amount!==order.quote.totalCents || String(charge.payment_method).toLowerCase()!==expectedMethod || (order.providerChargeId && charge.id!==order.providerChargeId)) reject('charge','A cobrança precisa de conferência.',409);
   let state='pending';
   const financialStates=[charge.status,charge.last_transaction?.status];
@@ -117,16 +120,4 @@ export function applyProvider(order,remote) {
   order.providerId=remote.id;
   if (/^ch_[a-z0-9]+$/i.test(charge.id??'')) order.providerChargeId=charge.id;
   order.state=state;
-  order.pix=expectedMethod==='pix' && state==='pending' ? String(charge.last_transaction?.qr_code ?? '').slice(0,1500) : '';
-  order.pixExpires=charge.last_transaction?.expires_at ?? null;
-  order.pixQrUrl=expectedMethod==='pix' && state==='pending'?safeQrUrl(charge.last_transaction?.qr_code_url):null;
-}
-
-export function safeQrUrl(value) {
-  if (typeof value !== 'string' || value.length>2048) return null;
-  try {
-    const uri=new URL(value);
-    const permitted=/(^|\.)(pagar\.me|stone\.com\.br)$/.test(uri.hostname);
-    return permitted && uri.protocol==='https:' && !uri.username && !uri.password && !uri.port ? uri.href : null;
-  } catch { return null; }
 }

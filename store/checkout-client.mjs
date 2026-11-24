@@ -1,3 +1,4 @@
+import {mountCardPayment} from './checkout-card.mjs';
 import {esc,money} from './core.mjs';
 import {keys,load,save,cartLines,migrateBag} from './bag.mjs';
 import {commerceRequest as request} from './commerce-client.mjs';
@@ -29,12 +30,7 @@ const states={draft:'Confira seu pedido',sending:'Verificando seu pagamento',pen
 const stateText={sending:'Seu pedido foi enviado. A confirmação será consultada automaticamente.',paid:'Recebemos a confirmação do pagamento do seu pedido.',
   declined:'O pagamento foi recusado. Você pode voltar à sacola e tentar novamente.',canceled:'O pagamento deste pedido foi cancelado.',
   refunded:'O pagamento deste pedido foi estornado.',partially_refunded:'Parte do valor deste pedido foi estornada.',disputed:'A contestação deste pagamento está em análise.'};
-const copyText=async text=>navigator.clipboard.writeText(text);
 const digest=async value=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(value))),v=>v.toString(16).padStart(2,'0')).join('');
-const fmt=iso=>new Intl.DateTimeFormat('pt-BR',{dateStyle:'short',timeStyle:'short'}).format(new Date(iso));
-function apiQR(value) {
-  try{const url=new URL(value);return url.protocol==='https:'&&!url.username&&!url.password&&/(^|\.)(pagar\.me|stone\.com\.br)$/.test(url.hostname)?url.href:'';}catch{return '';}
-}
 function linesMarkup(rows) {
   return rows.map(({row,p,v})=>{
     const photo=p?.images.find(i=>i.color&&i.color===v?.color)||p?.images[0];
@@ -53,12 +49,12 @@ export function finishPaidAttempt(activeToken,products){
   save(keys.checkout,null,true);
 }
 
-export function initCheckout(doc=document) {
+export function initCheckout(doc=document,{mountCard=mountCardPayment}={}) {
   const $=s=>doc.querySelector(s), form=$('#co-form'), fields=form.elements;
   const empty=$('[data-empty]'),purchase=$('[data-purchase]'),orderPanel=$('[data-order]'),loading=$('[data-loading]');
   const submit=$('[data-pay]'),error=$('[data-error]'),quoteNote=$('[data-quote-note]');
-  let products=new Map(),rows=[],checkoutEnabled=false,methods=[],publicKey='',environment='',paymentMethod='',card=null;
-  let quote=null,quoteKey='',timer,version=0,busy=false,lastCep='',addressSerial=0,paymentSerial=0;
+  let products=new Map(),rows=[],checkoutEnabled=false,card=null;
+  let quote=null,quoteKey='',timer,version=0,busy=false,lastCep='',addressSerial=0;
   let activeToken=null,order=null,poll,statusBusy=false,disposed=false,statusSerial=0,displayedStatus='';
   const touched=new Set(),automatic={};
   function mode(state){
@@ -68,8 +64,8 @@ export function initCheckout(doc=document) {
   function clearPoll(){clearTimeout(poll);poll=null;}
   function usable(){return rows.length>0&&rows.every(row=>row.ok);}
   function controls(){
-    submit.disabled=busy||!usable()||!checkoutEnabled||!validQuote(quote)||!methods.includes(paymentMethod)||(paymentMethod==='card'&&!card);
-    submit.textContent=busy?'Enviando pedido…':paymentMethod==='pix'?'Confirmar pedido e gerar Pix':paymentMethod==='card'?'Pagar com cartão':'Confirmar pedido';
+    submit.disabled=busy||!usable()||!checkoutEnabled||!validQuote(quote)||!card;
+    submit.textContent=busy?'Enviando pedido…':'Pagar com cartão';
   }
   function resetQuote(){
     quote=null;quoteKey='';quoteNote.textContent='';$('[data-total]').textContent='—';
@@ -130,33 +126,19 @@ export function initCheckout(doc=document) {
       if(previous!==selected)scheduleQuote();
     }else shippingNote.textContent='A disponibilidade será conferida ao calcular o total.';
   }
-  async function choosePayment(method){
-    const current=++paymentSerial;
-    paymentMethod=methods.includes(method)?method:'';
-    card?.destroy();card=null;
-    $('[data-card-entry]').replaceChildren();
-    $('[data-pix-description]').hidden=paymentMethod!=='pix';
-    if(paymentMethod==='card'){
-      controls();
-      try{
-        const {mountCardPayment}=await import('./checkout-card.mjs');
-        if(current!==paymentSerial)return;
-        card=mountCardPayment($('[data-card-entry]'),{publicKey});
-      }catch{if(current===paymentSerial)notice('O formulário do cartão não carregou. Tente novamente.');}
-    }
-    controls();
-  }
-  async function paymentOptions(){
-    let note=$('[data-method-note]');
+  async function configureCard(){
+    const note=$('[data-method-note]');
     try{
       const data=await request({action:'methods'});
-      environment=data.environment;publicKey=data.cardPublicKey||'';
-      methods=(data.paymentMethods||[]).filter(m=>m==='pix'||(m==='card'&&data.cardEnabled&&publicKey.startsWith('pk_')));
-      $('[data-payment-choices]').innerHTML='<legend class="co-sr">Escolha como pagar</legend>'+methods.map((m,i)=>
-        '<label class="co-rate"><input type="radio" name="paymentMethod" value="'+m+'" '+(!i?'checked':'')+' required><span>'+(m==='pix'?'Pix':'Cartão de crédito')+'</span></label>').join('');
-      note.textContent=methods.length?(environment==='sandbox'?'Ambiente de homologação.':''):'O pagamento online está indisponível no momento.';
-      await choosePayment(methods[0]);
-    }catch(e){note.textContent=e.message;controls();}
+      if(!checkoutEnabled || !data.cardEnabled || !data.paymentMethods?.includes('card') || !/^pk_[a-zA-Z0-9_-]+$/.test(data.cardPublicKey||'')){
+        note.textContent='O pagamento com cartão está indisponível no momento.';
+        return;
+      }
+      card=mountCard($('[data-card-entry]'),{publicKey:data.cardPublicKey});
+      note.textContent=data.environment==='sandbox'?'Ambiente de homologação.':'';
+    }catch{
+      note.textContent='Não foi possível carregar o pagamento com cartão. Atualize a página para tentar novamente.';
+    }finally{controls();}
   }
   function statusUrl(t){
     const url=new URL(location.href);url.search='';url.hash='pedido='+t;history.replaceState(null,'',url.href);
@@ -186,14 +168,14 @@ export function initCheckout(doc=document) {
     if(!usable()||!checkoutEnabled){updateBag();notice('Confira a disponibilidade da sua sacola antes de pagar.');return;}
     const payload=quoteInput(rows,fields);
     if(!quote||quoteKey!==JSON.stringify(payload)){scheduleQuote();notice('Confira o total atualizado antes de pagar.');return;}
-    if(!methods.includes(paymentMethod))return;
-    const method=paymentMethod;const confirmed=quote.totalCents;
+    if(!card){notice('O pagamento com cartão está indisponível no momento.');return;}
+    const confirmed=quote.totalCents;
     const customer=Object.fromEntries(['name','email','cpf','phone'].map(k=>[k,fields[k].value.trim()]));
     const address=Object.fromEntries([...addressKeys,'number','extra'].map(k=>[k,fields[k].value.trim()]));
     busy=true;notice('');controls();
     try{
       // An interrupted submit reuses its key. Only the digest and opaque identifiers are retained.
-      const marker=await digest(JSON.stringify([payload,method,confirmed]));
+      const marker=await digest(JSON.stringify([payload,'card',confirmed]));
       let attempt=load(keys.checkout,null,true);
       if(orderTokenValid(attempt?.orderToken) && (attempt.digest===marker || JSON.stringify(attempt.items)===JSON.stringify(payload.items))){
         persistToken(attempt.orderToken);await status();return;
@@ -213,13 +195,13 @@ export function initCheckout(doc=document) {
         attempt={digest:marker,key:attempt?.sent&&!attempt.orderToken?attempt.key:crypto.randomUUID(),items:payload.items};
         save(keys.checkout,attempt,true);
       }
-      const extra=method==='card'?await card.getPayment():{};
+      const {cardToken}=await card.getPayment();
       form.querySelector('.co-form-root').disabled=true;
       const currentItems=cartLines(products).map(({row})=>({variantId:row.variant,quantity:row.quantity})).sort((a,b)=>a.variantId.localeCompare(b.variantId));
       const detailsChanged=Object.entries({...customer,...address}).some(([key,value])=>fields[key].value.trim()!==value);
-      if(detailsChanged||quoteKey!==JSON.stringify(quoteInput(rows,fields))||method!==paymentMethod||JSON.stringify(currentItems)!==JSON.stringify(payload.items))throw Error('Os dados mudaram. Confira a sacola e o total antes de pagar.');
+      if(detailsChanged||quoteKey!==JSON.stringify(quoteInput(rows,fields))||JSON.stringify(currentItems)!==JSON.stringify(payload.items))throw Error('Os dados mudaram. Confira a sacola e o total antes de pagar.');
       save(keys.checkout,{...attempt,sent:true},true);
-      const result=await request({action:method,...payload,idempotencyKey:attempt.key,expectedTotalCents:confirmed,customer,address,...(method==='card'?{cardToken:extra.cardToken}:{})});
+      const result=await request({action:'card',...payload,idempotencyKey:attempt.key,expectedTotalCents:confirmed,customer,address,cardToken});
       if(!orderTokenValid(result.orderToken))throw Error('Não foi possível identificar o pedido. Tente novamente com a mesma sacola.');
       persistToken(result.orderToken);displayOrder(result);
     }catch(e){
@@ -235,23 +217,20 @@ export function initCheckout(doc=document) {
   }
   function displayOrder(data){
     order=data;const state=data.orderState;
-    const isPix=data.paymentMethod==='pix'||Boolean(data.pixCode);
-    const expires=Date.parse(data.expiresAt);
-    const expired=Number.isFinite(expires)&&expires<=Date.now();
-    const pixAvailable=state==='pending'&&isPix&&data.pixCode&&!expired;
-    const qr=pixAvailable?apiQR(data.pixQrUrl):'';
-    const viewState=JSON.stringify([data.orderId,state,pixAvailable,qr,data.pixCode,data.expiresAt,data.totalCents,data.shippingCents]);
+    if(data.paymentMethod && data.paymentMethod!=='card'){
+      // Previously issued receipts remain private and are rendered separately.
+      location.replace('/.netlify/functions/pagamento?t='+encodeURIComponent(activeToken));
+      return;
+    }
+    const viewState=JSON.stringify([data.orderId,state,data.totalCents,data.shippingCents]);
     clearPoll();
     if(activeStates.has(state)&&!doc.hidden)poll=setTimeout(status,15000);
     if(viewState===displayedStatus)return;
     displayedStatus=viewState;
-    const waitText=state==='pending'?(isPix?(expired?'O prazo deste Pix terminou. Consulte a situação do pedido antes de iniciar outro pagamento.':'A aprovação será consultada automaticamente.'): 'A operadora está analisando o pagamento. A confirmação será consultada automaticamente.'):(stateText[state]||'Consulte a situação do pedido.');
+    const waitText=state==='pending'?'A operadora está analisando o pagamento. A confirmação será consultada automaticamente.':(stateText[state]||'Consulte a situação do pedido.');
     orderPanel.innerHTML='<p data-order-ref>Pedido '+esc(data.orderId||'')+'</p><h2>'+esc(states[state]||'Situação do pedido')+'</h2><p>'+esc(waitText)+'</p>'+
       (validQuote(data)?'<dl><div><dt>Entrega'+(data.shippingLabel?' · '+esc(data.shippingLabel):'')+'</dt><dd>'+money(data.shippingCents)+'</dd></div><div class="co-grand"><dt>Total</dt><dd>'+money(data.totalCents)+'</dd></div></dl>':'')+
-      (pixAvailable?(qr?'<img src="'+esc(qr)+'" referrerpolicy="no-referrer" alt="QR Code Pix deste pedido">':'')+
-        '<label class="co-field"><span>Pix copia e cola</span><textarea rows="3" data-pix readonly>'+esc(data.pixCode)+'</textarea></label>'+
-        (Number.isFinite(expires)?'<p class="co-hint">Válido até '+esc(fmt(expires))+'.</p>':''):'')+
-      '<nav>'+(pixAvailable?'<button class="co-button" type="button" data-copy>Copiar código Pix</button>':'')+
+      '<nav>'+
       (activeStates.has(state)||state==='draft'?'<button class="co-secondary" type="button" data-refresh>Atualizar pagamento</button>':'')+
       (['declined','canceled','refunded'].includes(state)?'<button class="co-secondary" type="button" data-retry>Voltar à sacola</button>':'')+
       '<a class="co-text-link" href="/atendimento/">Atendimento</a></nav><p data-order-notice role="status"></p>';
@@ -276,10 +255,7 @@ export function initCheckout(doc=document) {
     const b=e.target.closest('button');if(!b)return;
     if(b.hasAttribute('data-refresh'))return status();
     if(b.hasAttribute('data-retry')){save(keys.checkout,null,true);location.replace('/sacola/');return;}
-    if(b.hasAttribute('data-copy')){
-      try{await copyText($('[data-pix]').value);$('[data-order-notice]').textContent='Código Pix copiado.';}
-      catch{$('[data-pix]').focus();$('[data-pix]').select();$('[data-order-notice]').textContent='Selecione e copie o código Pix acima.';}
-    }
+
   });
   form.addEventListener('input',e=>{
     const k=e.target.name;if(addressKeys.includes(k))touched.add(k);
@@ -287,7 +263,6 @@ export function initCheckout(doc=document) {
     if(k==='coupon' || k==='email'&&fields.coupon?.value)scheduleQuote();
   });
   form.addEventListener('change',e=>{
-    if(e.target.name==='paymentMethod')choosePayment(e.target.value);
     if(e.target.name==='shippingMethod')scheduleQuote();
     if(e.target.name==='cep')updateCep();
   });
@@ -317,7 +292,7 @@ export function initCheckout(doc=document) {
       const config=await r.json();products=new Map(config.products.map(p=>[p.id,p]));checkoutEnabled=config.checkoutEnabled===true;
       await migrateBag(products);if(activeToken){if(order?.orderState==='paid')finishPaidAttempt(activeToken,products);return;}
       updateBag();
-      if(rows.length){if(await recoverUncertain())return;await paymentOptions();if(!checkoutEnabled)notice('A finalização online está indisponível no momento. Sua sacola está salva.');if(fields.cep.value)await updateCep();}
+      if(rows.length){if(await recoverUncertain())return;await configureCard();if(!checkoutEnabled)notice('A finalização online está indisponível no momento. Sua sacola está salva.');if(fields.cep.value)await updateCep();}
     }catch{if(!activeToken){mode('loading');loading.textContent='Não foi possível carregar sua sacola. Atualize a página para tentar novamente.';}}
   }
   return start();

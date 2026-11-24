@@ -21,23 +21,10 @@ function post(data) {
 function fixture() {
   const ledger=freshLedger();
   const db={read:async()=>structuredClone(ledger),change:async fn=>fn(ledger)};
-  let remote=null;
-  const sends=[];
-  const deps={configuration:()=>initial,openLedger:async()=>db,pagarme:async (_cfg,path,request)=>{
-    if (request) {
-      sends.push(request);
-      const {code,payments:[{amount}]}=request.body;
-      remote??={id:'or_Test',code,amount,currency:'BRL',closed:true,status:'pending',
-        charges:[{currency:'BRL',status:'pending',amount,payment_method:'pix',last_transaction:{qr_code:'PIX-TESTE'}}]};
-    }
-    return path.startsWith('orders?')?{data:remote?[remote]:[]}:structuredClone(remote);
-  }};
-  return {ledger,deps,sends,remote:()=>remote};
+  const deps={configuration:()=>initial,openLedger:async()=>db};
+  return {ledger,deps};
 }
 const person={name:'Cliente de Teste',email:'cliente@example.test',cpf:'52998224725',phone:'21999999999',street:'Rua do Teste',number:'1',district:'Centro',city:'Rio de Janeiro',uf:'RJ'};
-function formRequest(path) {
-  return new Request(url+path,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(person).toString()});
-}
 
 test('catálogo em rascunho não habilita variante ou preço de referência',()=>{
   const product={name:'Peça',status:'draft',priceCents:null,source:{retailPriceCents:19900},variants:[{id:'draft',stock:3}]};
@@ -71,33 +58,23 @@ test('último saldo, validade da cotação, concorrência e primeira compra por 
   assert.throws(()=>reserve(ledger,'B',{emailKey:'cliente2'},'pessoa',{...initial,now:()=>initial.now()+2000000}),/prazo/);
   assert.throws(()=>reserve(ledger,'B',{emailKey:'cliente2'},'pessoa',{...initial,rates:[{...initial.rates[0],priceCents:1900}]}),/mudaram/);
 });
-test('fluxo HTTP com provedor controlado, repetição e status confirmado',async()=>{
-  const f=fixture(),data={...input,email:person.email,idempotencyKey:randomUUID()};
-  const quote=await (await api(post({...data,action:'quote'}),{},f.deps)).json();
-  assert.equal(quote.totalCents,25698);
-  const start=()=>api(post({...data,action:'checkout'}),{},f.deps).then(r=>r.json());
-  const first=await start();
-  assert.equal(first.checkoutUrl,(await start()).checkoutUrl);
-  assert.equal(Object.keys(f.ledger.orders).length,1);
-  const changed=await api(post({...data,items:[{variantId:'dress-p',quantity:1}],action:'checkout'}),{},f.deps);
-  assert.equal(changed.status,409);
-  assert.match(await (await payment(new Request(url+first.checkoutUrl),{},f.deps)).text(),/Revise sua compra/);
-  assert.equal((await payment(formRequest(first.checkoutUrl),{},f.deps)).status,303);
-  const confirmation=await payment(new Request(url+first.checkoutUrl),{},f.deps);
-  assert.match(await confirmation.text(),/Pagamento pendente/);
-  await payment(formRequest(first.checkoutUrl),{},f.deps);
-  assert.equal(f.sends.length,1);
-  assert.equal(f.sends[0].body.shipping.address.zip_code,'22222222');
-  assert.equal(f.sends[0].body.payments[0].amount,25698);
-  const notification=()=>new Request(url+'/events',{method:'POST',body:JSON.stringify({type:'order.paid',data:{id:'or_Test',code:first.orderId,status:'paid'}})});
-  await webhook(notification(),{},f.deps);
-  assert.equal(f.ledger.orders[first.orderId].state,'pending');
-  const remote=f.remote();
-  remote.status='paid';
-  Object.assign(remote.charges[0],{status:'paid',paid_amount:25698});
-  for (let i=0;i<2;i++) assert.equal((await webhook(notification(),{},f.deps)).status,204);
-  assert.match(await (await payment(new Request(url+first.checkoutUrl),{},f.deps)).text(),/Pagamento aprovado/);
-  assert.equal(f.ledger.orders[first.orderId].state,'paid');
+test('recibo anterior somente consulta status, sem formulário ou códigos para pagar',async()=>{
+  const f=fixture(),{id,token}=checkoutIdentity(randomUUID(),initial.secret);
+  const quote=calculate(normalizeRequest({...input,coupon:''}),f.ledger,initial);
+  const archived={id,providerId:'or_Test',state:'pending',quote,input:{cep:'22222222'},pix:'CODIGO_QUE_NAO_DEVE_SAIR'};
+  f.ledger.orders[id]=archived;
+  const remote={id:'or_Test',code:id,amount:quote.totalCents,currency:'BRL',closed:true,status:'paid',
+    charges:[{currency:'BRL',status:'paid',amount:quote.totalCents,paid_amount:quote.totalCents,payment_method:'pix'}]};
+  let reads=0;
+  f.deps.pagarme=async(_cfg,path,options)=>{assert.equal(path,'orders/or_Test');assert.equal(options,undefined);reads++;return remote;};
+  const receipt=url+'/.netlify/functions/pagamento?t='+token;
+  assert.equal((await payment(new Request(receipt,{method:'POST'}),{},f.deps)).status,405);
+  assert.equal(reads,0);
+  const html=await (await payment(new Request(receipt),{},f.deps)).text();
+  assert.match(html,/Pagamento aprovado/);assert.doesNotMatch(html,/CODIGO_QUE_NAO_DEVE_SAIR|<form|gerar pix/i);
+  assert.equal(reads,1);
+  const status=await requestJson({action:'payment-status',orderToken:token},f.deps);
+  assert.equal(status.orderState,'paid');assert.ok(!Object.hasOwn(status,'pixCode'));
 });
 test('identificação privada, tentativas em valores diferentes e estados finais',()=>{
   const {id,token}=checkoutIdentity(randomUUID(),initial.secret);
@@ -140,21 +117,19 @@ test('escrita condicional resolve disputa simultânea pela última unidade',asyn
   assert.match(results.find(result=>result.status==='rejected').reason.message,/quantidade/);
   assert.equal(Object.values((await ledger.read()).orders).filter(o=>o.state==='sending').length,1);
 });
-test('resposta perdida do provedor se recupera pelo código sem criar outra cobrança',async()=>{
-  const f=fixture(),data={...input,email:person.email,idempotencyKey:randomUUID(),action:'checkout'};
-  const first=await (await api(post(data),{},f.deps)).json();
-  const requestProvider=f.deps.pagarme;
-  f.deps.pagarme=async(cfg,path,body)=>{
-    const response=await requestProvider(cfg,path,body);
-    if(body) throw Error('Perda controlada da resposta HTTP');
-    return response;
+test('resposta perdida do cartão é recuperada pelo código sem criar outra cobrança',async()=>{
+  const f=cardFixture(),body=directBody('card',{cardToken:'token_LostResponse'});
+  const base=f.deps.pagarme;
+  f.deps.pagarme=async(cfg,path,opts)=>{
+    const result=await base(cfg,path,opts);
+    if(path==='orders'&&opts?.body) throw Error('Perda controlada da resposta HTTP');
+    return result;
   };
-  assert.equal((await payment(formRequest(first.checkoutUrl),{},f.deps)).status,503);
-  assert.equal(f.ledger.orders[first.orderId].state,'sending');
-  const recovered=await payment(new Request(url+first.checkoutUrl),{},f.deps);
-  assert.equal(recovered.status,200);
-  assert.match(await recovered.text(),/Pagamento pendente/);
-  assert.equal(f.sends.length,1);
+  const original=await requestJson(body,f.deps);
+  assert.equal(original.status,503);assert.equal(original.orderState,'sending');
+  const recovered=await requestJson({action:'payment-status',idempotencyKey:body.idempotencyKey},f.deps);
+  assert.equal(recovered.status,200);assert.equal(recovered.orderState,'pending');
+  assert.equal(f.calls.filter(c=>c.path==='orders').length,1);
 });
 
 test('PAC e SEDEX têm os mesmos preços em CEPs brasileiros, inclusive sem credenciais',async()=>{
@@ -183,17 +158,21 @@ const directBody=(action,props={})=>({...input,coupon:'',cep:'01001000',action,s
   idempotencyKey:randomUUID(),customer:{name:person.name,cpf:person.cpf,email:person.email,phone:person.phone},
   address:{street:person.street,number:person.number,district:person.district,extra:'',city:'São Paulo',uf:'SP'},...props});
 const requestJson=(body,deps)=>api(post(body),{},deps).then(async res=>({status:res.status,...await res.json()}));
-test('Pix em uma etapa vincula pessoa, método e total e protege a consulta do pedido',async()=>{
-  const f=fixture(),body=directBody('pix',{expectedTotalCents:30798});
-  const payment=await requestJson(body,f.deps);
-  assert.equal(payment.status,200);assert.equal(payment.orderState,'pending');assert.equal(payment.paymentMethod,'pix');
-  assert.equal(payment.pixCode,'PIX-TESTE');assert.ok(payment.orderToken);assert.equal(payment.totalCents,30798);
-  assert.equal(f.sends[0].body.shipping.description,'SEDEX');assert.equal(f.sends[0].body.shipping.amount,4800);
-  assert.equal((await requestJson(body,f.deps)).orderId,payment.orderId);assert.equal(f.sends.length,1);
-  assert.equal((await requestJson({action:'payment-status',orderToken:'outro'},f.deps)).status,404);
-  assert.equal((await requestJson({action:'payment-status',orderToken:payment.orderToken},f.deps)).orderState,'pending');
-  const fresh=fixture();
-  assert.equal((await requestJson({...body,expectedTotalCents:1},fresh.deps)).status,409);assert.equal(fresh.sends.length,0);
+test('Pix fica bloqueado mesmo com configuração legada ativa e nenhum caminho cria ordem alternativa',async()=>{
+  const f=cardFixture(),current=f.deps.configuration;
+  f.deps.configuration=()=>({...current(),pixEnabled:true});
+  const methods=await requestJson({action:'methods'},f.deps);
+  assert.deepEqual(methods.paymentMethods,['card']);
+  for(const action of ['pix','checkout']) {
+    const result=await requestJson(directBody(action),f.deps);
+    assert.equal(result.status,409);assert.equal(result.orderToken,undefined);
+  }
+  const switched=await requestJson(directBody('card',{method:'pix',cardToken:'token_InvalidMethod'}),f.deps);
+  assert.equal(switched.status,422);
+  const mismatch=await requestJson(directBody('card',{cardToken:'token_ChangedPrice',expectedTotalCents:1}),f.deps);
+  assert.equal(mismatch.status,409);assert.equal(f.calls.length,0);
+  const {providerPayload}=await import('../commerce/provider.mjs');
+  assert.throws(()=>providerPayload({paymentMethod:'pix'},{}),/cartão/);
 });
 test('pedido legado mantém cotação e histórico anteriores às modalidades',()=>{
   const cfg={...initial},data=normalizeRequest({...input,coupon:''}),ledger=freshLedger();
@@ -207,7 +186,7 @@ test('pedido legado mantém cotação e histórico anteriores às modalidades',(
 });
 function cardFixture() {
   const f=fixture();let remote=null;const calls=[];
-  f.deps.configuration=()=>({...initial,cardEnabled:true,cardPublicKey:'pk_test_apenasTeste',pixEnabled:false});
+  f.deps.configuration=()=>({...initial,cardEnabled:true,cardPublicKey:'pk_test_apenasTeste'});
   f.deps.pagarme=async(_cfg,path,opts)=>{
     calls.push({path,opts});
     if(path==='customers') return {id:'cus_Example'};
@@ -230,7 +209,7 @@ test('checkout PSP somente cartão usa token, customer e card_id sem Pix nem dad
   assert.equal((await requestJson({...body,card:{cvv:'000'}},f.deps)).status,422);
   assert.equal((await requestJson({...body,cardToken:'card_Other'},f.deps)).status,422);
   const paid=await requestJson(body,f.deps);
-  assert.equal(paid.status,200);assert.equal(paid.orderState,'pending');assert.equal(paid.paymentMethod,'card');assert.equal(paid.pixCode,null);
+  assert.equal(paid.status,200);assert.equal(paid.orderState,'pending');assert.equal(paid.paymentMethod,'card');assert.ok(!Object.hasOwn(paid,'pixCode'));
   assert.deepEqual(f.calls.map(c=>c.path),['customers','customers/cus_Example/cards','orders']);
   const [client,card,order]=f.calls;
   assert.equal(client.opts.body.document,person.cpf);
@@ -266,7 +245,7 @@ test('erro no registro do cartão encerra tentativa sem cobrança ou retenção 
 });
 test('produção somente cartão requer deploy principal e nunca devolve credencial privada',async()=>{
   const {configuration}=await import('../commerce/runtime.mjs');
-  const env={FM_COMMERCE_MODE:'live',FM_COMMERCE_SECRET:'x'.repeat(36),FM_PIX_ENABLED:'false',FM_CARD_ENABLED:'true',
+  const env={FM_COMMERCE_MODE:'live',FM_COMMERCE_SECRET:'x'.repeat(36),FM_PIX_ENABLED:'true',FM_CARD_ENABLED:'true',
     PAGARME_SECRET_KEY:['sk','fixture'].join('_'),PAGARME_PUBLIC_KEY:['pk','fixture'].join('_')};
   const merchant='https://felipemodasbr.com';
   const request=new Request(merchant+'/.netlify/functions/commerce',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'methods'})});
@@ -296,9 +275,10 @@ test('422 validado do primeiro envio libera estoque; falha técnica conserva res
   t.mock.method(globalThis,'fetch',async()=>Response.json({message:'The request is invalid.',errors:{'order.customer.name':['invalid']}},{status}));
   for(const [http,expected] of [[422,'canceled'],[500,'sending'],[409,'sending']]) {
     status=http;
-    const f=fixture();
-    f.deps.pagarme=pagarme;
-    const result=await requestJson(directBody('pix'),f.deps);
+    const f=cardFixture();
+    const base=f.deps.pagarme;
+    f.deps.pagarme=(cfg,path,opts)=>path==='orders'?pagarme(cfg,path,opts):base(cfg,path,opts);
+    const result=await requestJson(directBody('card',{cardToken:'token_ValidationTest'}),f.deps);
     assert.equal(result.orderState,expected);assert.ok(result.orderToken);
     if(http===422) assert.equal(calculate(normalizeRequest({...input,coupon:''}),f.ledger,initial).lines[0].quantity,2);
     else assert.throws(()=>calculate(normalizeRequest({...input,coupon:''}),f.ledger,initial),/quantidade/);
