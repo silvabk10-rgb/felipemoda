@@ -4,6 +4,21 @@ opener?.addEventListener('click',()=>menu.showModal());
 menu?.querySelector('[data-close-menu]').addEventListener('click',()=>menu.close());
 menu?.addEventListener('click',event=>{if(event.target===menu && event.clientX>menu.getBoundingClientRect().right)menu.close()});
 menu?.addEventListener('close',()=>opener.focus());
+const categories=document.querySelector('.fm-nav .fm-collections');
+if(categories){
+  document.addEventListener('click',event=>{
+    if(categories.open && !categories.contains(event.target)) categories.open=false;
+  });
+  categories.addEventListener('focusout',event=>{
+    if(!categories.contains(event.relatedTarget)) categories.open=false;
+  });
+  categories.addEventListener('keydown',event=>{
+    if(event.key==='Escape' && categories.open){
+      categories.open=false;
+      categories.querySelector('summary').focus();
+    }
+  });
+}
 const hero=document.querySelector('[data-hero]');
 if(hero){
   const panels=[...hero.querySelectorAll('[data-slide]')];

@@ -21,11 +21,14 @@ export async function migrateBag(products){
   for(const r of old){
     if(!r || !Number.isSafeInteger(r.quantity)||r.quantity<1||r.product==null||r.variant==null)continue;
     const product=String(r.product),variant=String(r.variant);
-    const p=products.get(product) || known.get(product);
-    const v=p?.variants.find(v=>v.id===variant);
+    const current=products.get(product);
+    const historical=known.get(product);
+    const v=current?.variants.find(item=>item.id===variant);
+    const archived=historical?.variants.find(item=>item.id===variant);
     const existing=rows.find(item=>item.product===product&&item.variant===variant);
-    if(existing){existing.quantity=Math.min(9999,existing.quantity+r.quantity);continue;}
-    rows.push({product,variant,quantity:Math.min(9999,r.quantity),name:p?.name||product,label:v?.label||variant});
+    if(existing){existing.quantity=Math.min(Number.MAX_SAFE_INTEGER,existing.quantity+r.quantity);continue;}
+    const label=v?.label || [v?.color,v?.size].filter(Boolean).join(' / ') || archived?.label || variant;
+    rows.push({product,variant,quantity:r.quantity,name:current?.name||historical?.name||product,label});
   }
   if(load(keys.bag,null)===null)save(keys.bag,rows);
 }

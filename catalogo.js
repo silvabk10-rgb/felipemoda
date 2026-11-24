@@ -1,4 +1,4 @@
-const catalogo = [
+export default [
   {
     "id": "cj-cardiganregata-soft-preto-5021",
     "name": "Conjunto Cardigan+Regata Viscosoft Preto",

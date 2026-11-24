@@ -18,9 +18,24 @@ function options(name, values) {
 function fieldset(name, content) {
   return '<fieldset><legend>' + esc(name) + '</legend><div class="st-options">' + content + '</div></fieldset>';
 }
+function collectionIndex(products) {
+  const categories = new Map();
+  for(const p of products) categories.set(p.category,p.categoryName);
+  const items = [...categories].sort((a,b)=>a[1].localeCompare(b[1],'pt-BR'));
+  if(items.length < 2) return '';
+  return '<nav class="st-collection-index" aria-label="Escolher categoria">'+items.map(([slug,label])=>
+    '<a href="/colecao/'+encodeURIComponent(slug)+'/">'+esc(label)+'</a>').join('')+'</nav>';
+}
 export function listPage({slug, products, title, banner, search, favorites}) {
   const sizes = sorted(products.flatMap(p=>p.sizes));
-  const colors = sorted(products.flatMap(p=>p.colors));
+  const colorLabels = new Map();
+  for(const product of products) {
+    for(const color of product.colors) {
+      const key = fold(color);
+      if(!colorLabels.has(key)) colorLabels.set(key,color);
+    }
+  }
+  const colors = sorted([...colorLabels.values()]);
   const priced = products.some(p=>p.priceCents !== null);
   const stockKnown = products.some(p=>p.variants.some(v=>Number.isFinite(v.stock)));
   const filters = (sizes.length ? fieldset('Tamanho do modelo',options('tamanho',sizes)) : '') +
@@ -38,11 +53,12 @@ export function listPage({slug, products, title, banner, search, favorites}) {
   const form = '<form action="/busca/" role="search" class="st-search-form"><label for="st-query">Qual peça você procura?</label><div><input class="st-input" type="search" id="st-query" name="q" maxlength="160" placeholder="Vestido, jeans, conjunto…" required><button class="st-action" type="submit">Buscar</button></div></form>';
   const shortcuts = !search && !favorites && sizes.length && sizes.length < 12 ? '<div class="st-shortcuts" aria-label="Atalhos por tamanho"><span>Tamanho do modelo</span>' + sizes.map(s=>'<button type="button" data-size="' + esc(s) + '" aria-pressed="false">' + esc(s) + '</button>').join('') + '</div>' : '';
   const first = search || favorites ? [] : products.slice(0,32);
-  return '<div class="st-shell" data-list="' + esc(search ? 'busca' : favorites ? 'favoritos' : slug) + '">' + crumbs(title) + heading + (search ? form : '') + shortcuts + controls + '<div class="st-chips" data-applied></div>' + grid(first) +
+  return '<div class="st-shell" data-list="' + esc(search ? 'busca' : favorites ? 'favoritos' : slug) + '">' + crumbs(title) + heading + (search ? form : '') + (slug==='todas'?collectionIndex(products):'') + shortcuts + controls + '<div class="st-chips" data-applied></div>' + grid(first) +
     '<div data-empty>' + (search ? emptyState('Busque uma peça','Experimente o nome de um modelo, uma cor ou uma categoria.') : favorites ? emptyState('Seus favoritos ficam aqui','Toque no coração de uma peça para guardá-la nesta seleção.','/colecao/todas/','Explorar a coleção') : (!products.length ? emptyState('Explore a coleção','Conheça outras peças da curadoria.','/colecao/todas/','Ver todas as peças') : '')) + '</div><div class="st-more"><button class="st-action st-outline" type="button" data-more' + (first.length < products.length && !search && !favorites ? '' : ' hidden') + '>Ver mais peças</button></div>' + filterDialog + '</div>';
 }
 const measureNumber = new Intl.NumberFormat('pt-BR',{maximumFractionDigits:20});
-const modelGuideURL = (p,links) => esc(links.measures + '#' + encodeURIComponent(p.slug));
+const modelGuideURL = (p,links) => esc(links.measures + '#' + (p.legacy?'como-medir':encodeURIComponent(p.slug)));
+const guideLabel = p => p.legacy ? 'Como tirar suas medidas' : 'Guia de medidas deste modelo';
 function tables(p, links) {
   const columns = [];
   const sizes = new Map();
@@ -73,7 +89,7 @@ function tables(p, links) {
     '<tbody><tr><th scope="row">Tamanhos do modelo</th><td>' + [...sizes.values()].map(esc).join(', ') + '</td></tr></tbody>';
   const table = sizes.size ? '<div class="st-table"><table>' + caption + grid + '</table></div>' : '';
   return table + (p.measurementNote ? '<p class="st-measure-note">' + esc(p.measurementNote) + '</p>' : '') +
-    '<a class="st-under" href="' + modelGuideURL(p,links) + '">Ver este modelo no guia de medidas</a>';
+    '<a class="st-under" href="' + modelGuideURL(p,links) + '">' + (p.legacy?'Como tirar suas medidas':'Ver este modelo no guia de medidas')+'</a>';
 }
 export function buyBox(p, links, prefix='pdp') {
   const potential = p.variants.some(canBuy);
@@ -91,13 +107,13 @@ export function buyBox(p, links, prefix='pdp') {
     const request = p.priceCents ? 'a disponibilidade de ' : 'o preço e a disponibilidade de ';
     const wa = 'https://wa.me/5521974623058?text=' + encodeURIComponent('Olá, gostaria de consultar '+request+p.name+(p.sku ? ' ('+p.sku+')' : '')+'.');
     const actionStyle = p.status === 'listed' ? 'st-action st-outline st-wide' : 'st-action st-wide';
-    return '<div class="st-buybox">' + attributes + '<a class="' + actionStyle + '" href="' + esc(wa) + '">' + (stockKnown ? 'Consultar reposição' : 'Consultar disponibilidade') + '</a><a href="' + modelGuideURL(p,links) + '" class="st-under">Guia de medidas deste modelo</a></div>';
+    return '<div class="st-buybox">' + attributes + '<a class="' + actionStyle + '" href="' + esc(wa) + '">' + (stockKnown ? 'Consultar reposição' : 'Consultar disponibilidade') + '</a><a href="' + modelGuideURL(p,links) + '" class="st-under">'+guideLabel(p)+'</a></div>';
   }
   const group = (label,key,values) => values.length ? fieldset(label,values.map((v,i)=>'<label class="st-choice"><input type="radio" name="' + key + '" value="' + esc(v) + '" required><span>' + esc(v) + '</span></label>').join('')) : '';
   const colors = sorted(p.variants.map(v=>v.color)); const sizes = sorted(p.variants.map(v=>v.size));
   const select = !colors.length && !sizes.length ? '<label>Variação<select class="st-input" name="variant" required><option value="">Selecione</option>' + p.variants.map(v=>'<option value="' + esc(v.id) + '"' + (!canBuy(v)?' disabled':'') + '>' + esc(v.label||p.name) + '</option>').join('') + '</select></label>' : '';
   return '<form class="st-buybox" data-buybox="' + esc(p.id) + '">' + group('Cor','color',colors) + group('Tamanho','size',sizes) + select +
-    '<a class="st-under" href="'+modelGuideURL(p,links)+'">Guia de medidas deste modelo</a><p class="st-selection" data-selection aria-live="polite">Selecione a variação para adicionar à sacola.</p><div class="st-buy-actions"><label>Quantidade<input name="quantity" class="st-input" type="number" min="1" max="99" step="1" value="1" required></label><button type="submit" class="st-action" disabled>Adicionar à sacola</button></div><p data-buy-message role="status"></p></form>';
+    '<a class="st-under" href="'+modelGuideURL(p,links)+'">'+guideLabel(p)+'</a><p class="st-selection" data-selection aria-live="polite">Selecione a variação para adicionar à sacola.</p><div class="st-buy-actions"><label>Quantidade<input name="quantity" class="st-input" type="number" min="1" max="99" step="1" value="1" required></label><button type="submit" class="st-action" disabled>Adicionar à sacola</button></div><p data-buy-message role="status"></p></form>';
 }
 export function productPage(p, related, links) {
   const info = [['Tecido',p.fabric],['Composição',p.composition],['Modelagem',p.fit],['Cuidados',p.care]].filter(([,v])=>v);

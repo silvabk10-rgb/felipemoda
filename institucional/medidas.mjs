@@ -56,7 +56,8 @@ function modelCard(product) {
     '<div class="sg-model-actions"><a href="' + pdp + '">Ver a peça <span aria-hidden="true">↗</span></a><button type="button" data-baixar-tabela hidden>Baixar tabela em PNG</button></div><span class="sg-status" role="status" data-guia-status></span></section>';
 }
 function sizesByModel(catalogue) {
-  const products = normalizeProducts(catalogue.map(p => ({ ...p, displaySizes: p.displaySizes ?? p.source?.supplierSizes ?? p.sizes })));
+  const products = normalizeProducts(catalogue.map(p => ({ ...p, displaySizes: p.displaySizes ?? p.source?.supplierSizes ?? p.sizes })))
+    .filter(p => !p.legacy || p.measurements.some(row => Object.keys(row.values).length) || Object.keys(p.sizeGuide).length);
   const groups = new Map();
   for (const product of products) {
     const group = groups.get(product.category) ?? [];
