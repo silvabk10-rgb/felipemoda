@@ -13,7 +13,8 @@ Requer Node.js 22.11 ou posterior. Execute `npm ci`, `npm test` e `npm run build
 | `assets/brand/` | Assinaturas PNG, estudos e matriz HTML Canvas da marca |
 | `/arte/` na prévia | Estúdio Canvas de campanhas, edição das camadas e exportação PNG |
 | `/arte/marca.html` na prévia | Ateliê Canvas do logotipo |
-| `data/curadoria.json` e `data/GUIA-CURADORIA.md` | Doze fichas, dados de referência e instruções de importação e ativação |
+| `data/curadoria.json` e `data/GUIA-CURADORIA.md` | Fichas, preços e tabelas dos 12 modelos da curadoria |
+| `catalogo.js` e `data/acervo-loja.mjs` | 235 produtos da vitrine anterior, com 916 variantes originais e estoque próprio |
 | `commerce/config.mjs` | Campanha e modalidades de frete com preço fixo por pedido |
 | `/checkout/` | Finalização em uma página, escolha de frete, cartão de crédito em uma parcela e acompanhamento do pedido |
 | `institucional/build.mjs` | Cadastro da empresa, contato e políticas |
@@ -26,7 +27,9 @@ O preço de cada uma das 12 fichas corresponde ao preço principal de varejo con
 
 As galerias usam fotografias de produto dos fornecedores, com uso autorizado pelo lojista. Os arquivos WebP são servidos pelo próprio site. Cada entrada da galeria conserva a origem para auditoria. As imagens editoriais de campanha têm uso e origem descritos separadamente em `docs/fotografia.md`.
 
-Os 12 modelos possuem variantes ativas. Em 24/11/2026, a loja informou o saldo inicial de 10.000 unidades por combinação de cor e tamanho da grade documentada. As vendas e as reservas são descontadas pelo serviço de pedidos. O guia em `/guia-de-medidas/` reúne as tabelas da coleção e permite baixar cada uma em PNG. O frete é fixo por pedido, com PAC a R$ 23,00 ou SEDEX a R$ 48,00. As 235 referências históricas da Stella Basic permanecem em `catalogo.js` para migrar a seleção do carrinho anterior.
+Em 24/11/2026, a loja confirmou o saldo inicial de 10.000 unidades para cada uma das 70 variantes da curadoria e das 916 variantes restauradas do acervo. As vendas e as reservas são descontadas pelo serviço de pedidos. O guia em `/guia-de-medidas/` reúne as tabelas dos 12 modelos com dados de medidas e permite baixar cada uma em PNG. As fichas do acervo apresentam a grade de tamanhos original. O frete é fixo por pedido, com PAC a R$ 23,00 ou SEDEX a R$ 48,00.
+
+Os produtos do acervo conservam os IDs, os preços das variantes, as fotografias e as categorias da vitrine anterior. A migração da sacola usa os IDs originais de produto e variante. O build baixa as fotos do acervo, valida o WebP e utiliza um endereço local para cada foto. Se o arquivo estiver indisponível durante o build, a Netlify encaminha esse endereço à foto original registrada para o produto.
 
 As prévias de pull requests seguem a configuração de acesso da equipe na Netlify. Confira o cadastro empresarial e os requisitos operacionais em `docs/operacao.md` e `docs/comercio.md` antes da abertura comercial.
 

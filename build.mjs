@@ -1,12 +1,15 @@
 import path from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 import {mkdir,rm,readFile,writeFile,cp,copyFile,readdir,access,realpath,open} from 'node:fs/promises';
-import {buildStore,adaptLegacy,normalizeProducts} from './store/build.mjs';
+import {buildStore,normalizeProducts} from './store/build.mjs';
 import {buildInstitutional,company} from './institucional/build.mjs';
 import {makeLayout} from './theme/layout.mjs';
 import {artworks} from './theme/campaigns.mjs';
 import {home} from './theme/home.mjs';
 import {campaign,shippingRates} from './commerce/config.mjs';
+import archive from './catalogo.js';
+import {archiveProducts} from './data/acervo-loja.mjs';
+import {prepareArchiveImages} from './scripts/fotos-acervo.mjs';
 
 const root=fileURLToPath(new URL('.',import.meta.url));
 
@@ -83,8 +86,6 @@ async function build() {
   const origin=production?'https://felipemodasbr.com':process.env.DEPLOY_PRIME_URL || 'https://felipemodasbr.com';
   const catalogue=JSON.parse(await readFile(path.join(root,'data/curadoria.json'),'utf8'));
   const {products,checkoutEnabled}=await prepareCatalogue(catalogue,{siteRoot:root,production,company,shippingRates,mode:process.env.FM_COMMERCE_MODE});
-  const old=await readFile(path.join(root,'catalogo.js'),'utf8');
-  const archive=JSON.parse(old.replace(/^\s*const\s+catalogo\s*=\s*/,'').replace(/;\s*$/,''));
   await rm(outDir,{force:true,recursive:true});
   await mkdir(outDir,{recursive:true});
   if (/^[a-f0-9]{40}$/i.test(process.env.COMMIT_REF ?? '')) {
@@ -98,6 +99,7 @@ async function build() {
   }
   await Promise.all([copyFlat('assets/brand',/\.png$/),copyFlat('assets/campaign',/\.(webp|json)$/),copyFlat('theme',/^(site.css|site.js|campaigns.mjs)$/)]);
   try{await access(path.join(root,'assets/products'));await cp(path.join(root,'assets/products'),path.join(outDir,'assets/products'),{recursive:true});}catch(e){if(e.code!=='ENOENT')throw e;}
+  const archivePhotos=await prepareArchiveImages(archive,{outDir,download:process.env.NETLIFY==='true'});
   if(!production){
     await cp(path.join(root,'arte'),path.join(outDir,'arte'),{recursive:true,filter:file=>!file.endsWith('.md')});
     await copyFile(path.join(root,'assets/brand/atelier-canvas.html'),path.join(outDir,'arte/marca.html'));
@@ -108,7 +110,7 @@ async function build() {
   headers.novidades=banner(artworks[0]);
   const campaignActive=checkoutEnabled&&campaign.enabled&&(!campaign.startsAt||Date.now()>=Date.parse(campaign.startsAt))&&(!campaign.endsAt||Date.now()<=Date.parse(campaign.endsAt));
   const [store,info]=await Promise.all([
-    buildStore({outDir,products,layout,banners:headers,legacyCatalog:adaptLegacy(archive),shippingRates,checkoutEnabled,couponEnabled:campaignActive,origin:'https://felipemodasbr.com'}),
+    buildStore({outDir,products:[...products,...archiveProducts],layout,banners:headers,legacyCatalog:archiveProducts,shippingRates,checkoutEnabled,couponEnabled:campaignActive,origin:'https://felipemodasbr.com'}),
     buildInstitutional({outDir,layout,checkoutEnabled,shippingRates,remotePhotos:false,products})
   ]);
   await writeFile(path.join(outDir,'index.html'),layout({title:'Felipe Modas',path:'/',description:'Conheça a seleção de vestidos, conjuntos e calças femininas da Felipe Modas.',body:home(normalizeProducts(products),campaignActive?campaign:null)}));
@@ -116,7 +118,7 @@ async function build() {
   const sitemap=['/',...store,...info].filter(p=>!['/busca/','/favoritos/','/sacola/','/checkout/','/politicas.html'].includes(p));
   await writeFile(path.join(outDir,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+sitemap.map(p=>'<url><loc>https://felipemodasbr.com'+p+'</loc></url>').join('')+'</urlset>');
   await writeFile(path.join(outDir,'robots.txt'),production?'User-agent: *\nDisallow: /sacola/\nDisallow: /checkout/\nDisallow: /favoritos/\nDisallow: /.netlify/\nSitemap: https://felipemodasbr.com/sitemap.xml\n':'User-agent: *\nDisallow: /\n');
-  console.log('Felipe Modas — '+(production?'produção':'prévia')+', '+products.length+' fichas, '+archive.length+' referências anteriores, '+(store.length+info.length+2)+' páginas.');
+  console.log('Felipe Modas — '+(production?'produção':'prévia')+', '+products.length+' peças da curadoria, '+archiveProducts.length+' peças do acervo, '+(store.length+info.length+2)+' páginas. Fotos do acervo locais: '+archivePhotos.local+'; via CDN: '+archivePhotos.proxied+'.');
 }
 
 if(process.argv[1] && import.meta.url===pathToFileURL(path.resolve(process.argv[1])).href) await build();

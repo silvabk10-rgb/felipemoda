@@ -37,6 +37,9 @@
 .st-sort { gap:7px; font-size:.83rem; }
 .st-sort select { padding:0 4px; font:inherit; color:inherit; }
 .st-shortcuts { gap:6px; margin-top:20px; }
+.st-collection-index {display:flex;flex-wrap:wrap;gap:4px 18px;border-bottom:1px solid var(--st-line);padding:6px 0 12px;margin-bottom:16px}
+.st-collection-index a {display:inline-flex;align-items:center;min-height:44px;font-size:.88rem;color:var(--st-ink);text-decoration:underline;text-decoration-color:var(--st-line);text-underline-offset:.32em}
+.st-collection-index a:hover {color:var(--st-accent);text-decoration-color:currentColor}
 .st-shortcuts span { font-size:.78rem; color:var(--st-muted); padding-right:8px; }
 .st-shortcuts button { min-width:44px; border:1px solid var(--st-line); font-size:.8rem; }
 .st-shortcuts button[aria-pressed="true"], .st-choice input:checked+span { color:white; background:var(--st-ink); border-color:var(--st-ink); }

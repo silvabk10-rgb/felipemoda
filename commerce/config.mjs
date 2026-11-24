@@ -1,4 +1,7 @@
 import catalog from '../data/curadoria.json' with { type: 'json' };
+import {archiveProducts} from '../data/acervo-loja.mjs';
+
+const storeCatalog=[...catalog,...archiveProducts];
 
 // Tarifas nacionais aprovadas pela loja, em centavos.
 export const shippingRates = [
@@ -15,7 +18,7 @@ export const campaign = {
   stackable: false
 };
 
-export function inventory(products = catalog) {
+export function inventory(products = storeCatalog) {
   const stock = new Map();
   for (const product of products) {
     if (product.status !== 'active') continue;
