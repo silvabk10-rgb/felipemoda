@@ -24,6 +24,8 @@ test('campanha inativa mantém navegação editorial e um único título princip
 });
 
 import {prepareCatalogue} from '../build.mjs';
+import {inventory} from '../commerce/config.mjs';
+import {normalizeProducts,canBuy} from '../store/core.mjs';
 import {mkdtemp,mkdir,writeFile,rm,symlink} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
@@ -55,7 +57,6 @@ test('prévia inclui ficha com preço aprovado e foto sem habilitar a venda',asy
   assert.equal(p.variants[0].stock,null);
   assert.equal(p.source,undefined);
   assert.equal(p.pricingProposal,undefined);
-  await assert.rejects(prepareCatalogue([listed],options),/Publicação comercial pendente/);
 });
 
 test('produção inclui listados com um item vendável e conserva os demais critérios de publicação',async t=>{
@@ -63,12 +64,32 @@ test('produção inclui listados com um item vendável e conserva os demais crit
   const result=await prepareCatalogue([listed,active,draft],options);
   assert.deepEqual(result.products.map(p=>p.status),['listed','active']);
   assert.equal(result.checkoutEnabled,true);
-  for(const invalid of [{mode:'sandbox'},{company:{address:'Fixture'}},{company:{legalName:'Fixture'}},{shippingRates:[]}]) {
-    await assert.rejects(prepareCatalogue([listed,active],{...options,...invalid}),/Publicação comercial pendente/);
+  for(const company of [{address:'Fixture'},{legalName:'Fixture'}]) {
+    await assert.rejects(prepareCatalogue([listed,active],{...options,company}),/Publicação da vitrine pendente/);
+  }
+  await assert.rejects(prepareCatalogue([draft],options),/Publicação da vitrine pendente/);
+  for(const offline of [{mode:undefined},{mode:'sandbox'},{shippingRates:[]}]) {
+    const shop=await prepareCatalogue([listed,active],{...options,...offline});
+    assert.equal(shop.checkoutEnabled,false);
+    assert.equal(shop.products.length,2);
   }
   const soldOut={...active,variants:[{id:'a-m',stock:0}]};
   const emptyStock=await prepareCatalogue([listed,soldOut],options);
   assert.equal(emptyStock.products[1].variants[0].stock,0);
+});
+
+test('produção publica doze produtos listados sem transformar grade desconhecida em estoque vendável',async t=>{
+  const {listed,options}=await productFixture(t);
+  const catalogue=Array.from({length:12},(_,i)=>({
+    ...listed,id:'p-'+i,sku:'FM-'+i,name:'Modelo '+i,variants:[{id:'v-'+i,size:'M',stock:null}]
+  }));
+  const {products,checkoutEnabled}=await prepareCatalogue(catalogue,options);
+  assert.equal(checkoutEnabled,true);
+  assert.equal(products.length,12);
+  const cards=normalizeProducts(products);
+  assert.equal(cards.length,12);
+  assert.ok(cards.every(p=>p.status==='listed' && p.priceCents>0 && p.images.length>0 && p.variants.every(v=>v.stock===null&&!canBuy(v))));
+  assert.equal(inventory(catalogue).size,0);
 });
 
 test('valida fotos locais, formato e preço nas fichas de catálogo',async t=>{

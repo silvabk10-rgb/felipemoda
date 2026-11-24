@@ -53,7 +53,6 @@ async function validatePhoto(siteRoot,photo,sku) {
 
 export async function prepareCatalogue(catalogue,{siteRoot,production,company,shippingRates,mode}) {
   const published=catalogue.filter(p=>p.status==='active'||p.status==='listed');
-  const hasCommercialCatalogue=published.some(p=>p.status==='active');
   for(const p of published) {
     if(!Array.isArray(p.images)||!p.images.length) throw new Error('Confira a galeria própria de '+p.sku);
     await Promise.all(p.images.map(img=>validatePhoto(siteRoot,img,p.sku)));
@@ -63,8 +62,8 @@ export async function prepareCatalogue(catalogue,{siteRoot,production,company,sh
       if(!p.variants?.length || !p.variants.every(v=>Number.isSafeInteger(v.stock)&&v.stock>=0&&priceApproved(v.priceCents??p.priceCents))) throw new Error('Confira as variantes de '+p.sku);
     }
   }
-  if(production && (!company.legalName||!company.address||!hasCommercialCatalogue||!shippingRates.length||mode!=='live')) {
-    throw new Error('Publicação comercial pendente. Confira o cadastro da empresa, catálogo ativo, modalidades de entrega e homologação do pagamento em docs/operacao.md e docs/comercio.md. Deploy Previews estão disponíveis.');
+  if(production && (!company.legalName||!company.address||!published.length)) {
+    throw new Error('Publicação da vitrine pendente. Confira o cadastro da empresa e os produtos com fotos e preços aprovados.');
   }
   const selected=production?published:catalogue;
   const products=selected.map(({source,pricingProposal,...p})=>({
@@ -74,7 +73,7 @@ export async function prepareCatalogue(catalogue,{siteRoot,production,company,sh
     displayColors:p.status==='active'?[]:source?.supplierColors
   }));
   const expectedMode=production?'live':'sandbox';
-  const checkoutEnabled=mode===expectedMode && hasCommercialCatalogue && shippingRates.length>0;
+  const checkoutEnabled=mode===expectedMode && shippingRates.length>0;
   return {products,checkoutEnabled};
 }
 
