@@ -18,7 +18,7 @@ export async function buildStore({outDir,products:raw,layout,banners={},links={}
     urls.push(route);
   }
   await mkdir(path.join(outDir,'store'),{recursive:true});
-  const storeFiles=['core.mjs','views.mjs','store.js','store.css','bag.mjs','commerce-client.mjs','checkout.mjs','checkout-client.mjs','checkout-card.mjs','checkout.css'];
+  const storeFiles=['core.mjs','views.mjs','store.js','store.css','bag.mjs','commerce-client.mjs','checkout.mjs','checkout-client.mjs','checkout-card.mjs','order-status.mjs','checkout.css'];
   await Promise.all(storeFiles.map(f=>copyFile(path.join(from,f),path.join(outDir,'store',f))));
   const legacy = normalizeProducts(legacyCatalog);
   // Keep migration lookups off page payloads, fetched only when an old bag exists.

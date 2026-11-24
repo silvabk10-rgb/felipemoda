@@ -55,13 +55,19 @@ export function providerPayload(order, person) {
     reject('card','Confira a identificação do cartão junto ao provedor.',409);
   }
   const payment={payment_method:'credit_card',credit_card:{card_id:order.providerCardId,operation_type:'auth_and_capture',installments:1,auto_recovery:false}};
+  const phone=order.providerPayloadVersion===2?person.phones.mobile_phone:null;
   return {code:order.id,closed:true,currency:'BRL',customer_id:order.providerCustomerId,items:providerItems(order.quote),
-    shipping:{amount:order.quote.shippingCents,description:order.quote.shippingLabel || 'Entrega',recipient_name:person.name,address:person.address},
+    shipping:{amount:order.quote.shippingCents,description:order.quote.shippingLabel || 'Entrega',
+      recipient_name:person.name,address:person.address,
+      ...(phone?{recipient_phone:phone.country_code+phone.area_code+phone.number}:{})},
     payments:[{...payment,amount:order.quote.totalCents}]};
 }
 
 export class InvalidProviderOrder extends CommerceError {
-  constructor() { super('provider_validation','O provedor não aceitou os dados do pedido.',422); }
+  constructor(status=422) {
+    super('provider_validation','O provedor não aceitou os dados do pedido.',422);
+    this.upstreamStatus=status;
+  }
 }
 
 export async function pagarme(cfg,path,options={}) {
@@ -77,9 +83,10 @@ export async function pagarme(cfg,path,options={}) {
     reject('pending_check','Não foi possível consultar o pagamento agora. Guarde o link do pedido e consulte novamente.',503);
   }
   if (!response.ok) {
-    if (path==='orders' && options.body && response.status===422) {
+    if (path==='orders' && options.body && [400,422].includes(response.status)) {
       const failure=await response.json().catch(()=>null);
-      if (failure?.errors && typeof failure.errors==='object' && Object.keys(failure.errors).length) throw new InvalidProviderOrder();
+      if (failure?.errors && typeof failure.errors==='object' && !Array.isArray(failure.errors) &&
+          Object.keys(failure.errors).length && !failure.id) throw new InvalidProviderOrder(response.status);
     }
     // Timeout, 409 e falhas técnicas são resultados indeterminados.
     const error=new CommerceError('provider','O provedor não confirmou a solicitação. Consulte o pedido novamente ou fale com o atendimento.',503);

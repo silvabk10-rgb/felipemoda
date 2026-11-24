@@ -45,6 +45,13 @@ export function abandonedBeforeDispatch(order,now) {
     now-(order.dispatchedAt??order.submittedAt)>60000;
 }
 
+export function cancelAbandonedBeforeDispatch(order,now) {
+  if (abandonedBeforeDispatch(order,now)) {
+    order.state='canceled';
+    order.paymentFailure='interrupted_before_dispatch';
+  }
+}
+
 const committed = new Set(['sending','pending','paid','refunded','partially_refunded','disputed']);
 export function calculate(input, ledger, cfg, buyer = {}, ignoreId) {
   const others = Object.values(ledger.orders).filter(order => order.id !== ignoreId && committed.has(order.state) && !abandonedBeforeDispatch(order,cfg.now()));
@@ -100,7 +107,7 @@ export function begin(ledger, input, emailKey, id, cfg) {
     return existing;
   }
   for (const draft of Object.values(ledger.orders)) {
-    if (abandonedBeforeDispatch(draft,cfg.now())) draft.state='canceled';
+    cancelAbandonedBeforeDispatch(draft,cfg.now());
     if (draft.state === 'draft' && cfg.now() - draft.createdAt > 24*60*60*1000) delete ledger.orders[draft.id];
   }
   const quote = calculate(input, ledger, cfg, {emailKey});
@@ -111,7 +118,7 @@ export function begin(ledger, input, emailKey, id, cfg) {
 
 export function reserve(ledger,id,buyer,detailsHash,cfg) {
   for(const other of Object.values(ledger.orders)) {
-    if(abandonedBeforeDispatch(other,cfg.now())) other.state='canceled';
+    cancelAbandonedBeforeDispatch(other,cfg.now());
   }
   const order = ledger.orders[id];
   if (!order) reject('missing','Pedido não encontrado.',404);

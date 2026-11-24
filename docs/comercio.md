@@ -8,6 +8,8 @@ O checkout em uma página reúne identificação, endereço, modalidade de entre
 
 Os testes locais percorreram as funções HTTP com um adaptador de provedor controlado. Não houve chamada autenticada de homologação à Pagar.me, cobrança, teste do armazenamento remoto ou validação das credenciais do estabelecimento. A prévia visual não confirma pagamento ou estoque.
 
+Em uma falha confirmada antes da cobrança, a consulta privada identifica a etapa disponível e permite iniciar outra tentativa a partir da mesma sacola. Para consultar a falha na Netlify, filtre os logs da função `commerce` pelo código do pedido Felipe Modas. As entradas de diagnóstico trazem apenas a etapa da integração e, quando disponível, o status HTTP do provedor. Se a criação do pedido ficar indeterminada, consulte o mesmo pedido para preservar a proteção contra cobranças repetidas.
+
 ## Cadastro, frete e campanha
 
 | Dado | Fonte operacional |

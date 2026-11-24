@@ -16,6 +16,7 @@ on:
       - 'institucional/**'
       - 'netlify/**'
       - 'store/**'
+      - 'tests/**'
       - 'theme/**'
 
 permissions:
@@ -36,5 +37,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Testar o fluxo de cartão e a vitrine
+        run: npm test
       - name: Aguardar a Netlify e conferir o domínio público
         run: node scripts/conferir-loja.mjs
