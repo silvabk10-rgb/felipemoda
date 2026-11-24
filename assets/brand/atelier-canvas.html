@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Ateliê de marca • Felipe Modas</title>
+<style>
+:root{font:16px/1.45 system-ui,sans-serif;color:#202020;background:#faf8f1}*{box-sizing:border-box}body{max-width:950px;margin:0 auto;padding:clamp(18px,4vw,55px)}h1{font:normal clamp(32px,6vw,60px)/1.1 Georgia,serif;margin:0 0 28px}form{display:flex;gap:15px;align-items:end;flex-wrap:wrap}label{display:grid;gap:5px}select,input,button{font:inherit;border:1px solid #806e60;border-radius:2px;background:white;padding:8px;min-height:44px}button{background:#955a3a;color:white;padding:9px 18px;cursor:pointer}figure{display:grid;place-items:center;margin:24px 0;border:1px solid #d9c8b7;padding:6%;min-height:240px;background:white}figure.escuro{background:#202020}canvas{max-width:100%;height:auto}
+</style></head><body><h1>Ateliê da marca</h1>
+<form id="controles"><label>Peça<select id="modelo"><option value="logo">Assinatura horizontal</option><option value="wordmark">Nome</option><option value="compact">Assinatura compacta</option><option value="monogram">Monograma</option><option value="favicon">Favicon</option><option value="apple-touch-icon">Ícone de tela inicial</option><option value="aplicacoes">Aplicações</option><option value="exploracoes">Estudos de símbolo</option></select></label>
+<label>Cor<select id="cor"><option value="#202020">Carvão</option><option value="#ffffff">Branco</option><option value="#000000">Preto</option></select></label><label>Largura em pixels<input id="largura" type="number" min="16" max="4800" step="1" value="1800" required></label><button>Exportar PNG</button></form>
+<figure id="fundo"><canvas id="tela" aria-label="Prévia da composição escolhida"></canvas></figure>
+<script id="desenho">
+const letras = {
+  "F": {
+    "w": 47,
+    "d": "M2 65v-1.8c6.1-.4 8.1-1.8 8.1-7.4V13.2c0-5.8-1.7-7.2-8.1-7.8V3.6h43.4l1.2 14.9-1.8.2C41.8 9.4 38.2 6.5 27 6.5H19v27.3h6.9c8.4 0 10.5-2.5 11.2-8.8h1.8v20.4h-1.8c-1-6.8-3.3-9-11.2-9H19v19.5c0 5.2 2.4 6.8 10 7.3V65Z"
+  },
+  "e": {
+    "w": 36.5,
+    "d": "M33.9 54.7c-3.4 7.3-8.3 11.6-16 11.6C7.5 66.3 1 58 1 46.1 1 33 8.3 22.8 19.8 22.8c9.5 0 14.3 6.9 14.3 16.5l-.2 1.1H9.1a28 28 0 0 0-.2 3.4c0 10.1 4.3 17.4 12.7 17.4 4.6 0 8.3-2.7 11.1-7.3Zm-24.6-17h15.3c1.8 0 2.2-.6 2.2-2.4 0-6-2.5-10.1-7.3-10.1-5.3 0-8.9 5-10.2 12.5Z"
+  },
+  "l": {
+    "w": 22,
+    "d": "M1.4 65v-1.7c5-.5 6.1-1.8 6.1-6.3V10.7c0-3.6-.6-4.5-3.9-4.7l-2.4-.2V4.2L14.4 1l.7.6v55.3c0 4.6 1.2 5.9 6 6.4V65Z"
+  },
+  "i": {
+    "w": 21,
+    "d": "M1.5 65v-1.7c4.6-.5 5.7-1.8 5.7-6.3V33.8c0-3.5-.6-4.5-4.2-4.8l-1.7-.1v-1.6l12.9-4.2.7.7V57c0 4.5 1.2 5.8 5.7 6.3V65Zm4.7-53.3c0-2.7 2.1-4.9 4.8-4.9 2.8 0 4.9 2.2 4.9 4.9s-2.1 4.9-4.9 4.9c-2.7 0-4.8-2.2-4.8-4.9Z"
+  },
+  "p": {
+    "w": 43,
+    "d": "M.5 83.2v-1.7c5.1-.6 6.2-1.7 6.2-6.3V34c0-3.5-.5-4.6-3.9-4.8l-2-.2v-1.5l12.5-4.4.9.6v7.4c3.7-5.1 7.7-8.2 13.2-8.2 8.8 0 14.2 8.2 14.2 19.6 0 13.8-8.3 23.8-20.1 23.8-2.6 0-5-.4-7.2-1.2v10c0 4.7 1.6 5.9 7.9 6.4v1.7ZM14.3 60.7c2 2.1 4.5 3.2 7.5 3.2 7.1 0 11.6-7.3 11.6-18.5 0-10.5-3.4-17.3-9.9-17.3-3.3 0-6.3 2.1-9.2 5.6Z"
+  },
+  "M": {
+    "w": 72,
+    "d": "M.8 65v-1.8c6.2-.6 8-3 8.2-9.2l1.4-39.9c.2-6.4-1.2-8.1-8.2-8.7V3.6h17.6l18.1 44 18.5-44h15.7v1.8c-6.8.4-8.2 2-8 8l1.4 42.4c.2 5.6 1.7 6.9 8 7.4V65H48.8v-1.8c6.2-.5 7.8-1.7 7.6-7.4l-1.3-42.3-20 47.2h-1.6L13.8 13.1l-1.4 40.7c-.2 6.3 1.7 8.7 8.6 9.4V65Z"
+  },
+  "o": {
+    "w": 40,
+    "d": "M19 66.4C8.3 66.4 1.3 57.6 1.3 45.6c0-13.5 8.3-22.8 19.4-22.8 10.8 0 17.7 8.8 17.7 20.8 0 13.5-8.1 22.8-19.4 22.8Zm1.6-2.6c6.1 0 9.6-7.2 9.6-17.1 0-11.5-4.1-21.3-11.1-21.3-6 0-9.5 7.2-9.5 17.2 0 11.4 4.1 21.2 11 21.2Z"
+  },
+  "d": {
+    "w": 44,
+    "d": "M30.8 66.1l-.9-.8v-6.7c-3.1 4.4-7 7.8-12.8 7.8-9.2 0-15-8.3-15-20 0-13.6 8.3-23.6 20-23.6 2.9 0 5.3.5 7.8 1.7V10.7c0-3.7-.7-4.5-4-4.7l-2.4-.2V4.2L36.9 1l.6.5v54.7c0 3.7.7 4.7 4 4.9l2 .2v1.6Zm-.9-10V28.5c-2-2.2-4.4-3.3-7.6-3.3-7.4 0-12 7.3-12 18.6 0 10.5 3.7 17.6 10.2 17.6 3.4 0 6.6-1.9 9.4-5.3Z"
+  },
+  "a": {
+    "w": 37,
+    "d": "M36.7 61.3c-1.6 3-3.8 4.8-7.3 4.8-3.7 0-5.9-2.3-6.5-6.2-3.3 4-7 6.4-11.8 6.4-5.7 0-9.4-3.8-9.4-9.2 0-7.7 6.5-12.6 21-17.1v-4c0-6.9-2.7-10.7-7.7-10.7-2.9 0-5.3 1-6.8 3 .2 1.4 1.7 2.8 1.7 4.9 0 2.4-1.6 4-3.9 4-2.4 0-4.1-1.7-4.1-4.1 0-5.1 7.7-10.3 15.8-10.3 8.4 0 12.6 4.4 12.6 12.7v21.7c0 3.5 1 4.9 2.8 4.9 1 0 1.8-.5 2.6-1.7Zm-14-4.3V42.4C12.7 46 9 49.8 9 55.1c0 4.1 2.4 6.3 5.8 6.3 2.8 0 5.5-1.5 7.9-4.4Z"
+  },
+  "s": {
+    "w": 31,
+    "d": "M2.1 63.6l-.7-11.4 1.7-.3c2.4 7.9 6.2 12 12 12 4.8 0 8-2.7 8-7.1 0-4.2-3.2-6.8-9-9.6C6.8 43.6 2.4 40 2.4 33.9c0-6.5 5.6-11.1 13.1-11.1 4.2 0 8 .9 11.1 2.4l.6 9.8-1.6.3c-2.1-6.5-5.2-10.1-10.3-10.1-4.2 0-7 2.6-7 6.3 0 4 3.3 6.4 9.2 9.3 7.4 3.7 11.8 7.2 11.8 13.7 0 7.3-6 11.9-14.4 11.9-4.7 0-9.3-1-12.8-2.8Z"
+  }
+};
+const iniciais = {
+  "f": "M7 63.5 17.7 14.2Q18.8 9.1 14.3 7.4L15 5h37.5L49 16.5l-1.7-.2C47 10.6 43.5 8 35.3 8h-8.8l-5.2 23.9h7.1c5.4 0 8.1-1.6 10.2-6.4l1.6.3-3.4 16-1.8-.1c-.1-4.7-1.6-7.2-7.2-7.2h-7l-6.2 29Z",
+  "m": "M21.7 63.5 30 41l2.8 5.6-6.5 16.9Zm8-42.3 8.2.2 9.6 24.4L65.2 18h5.9L60.8 63.5h-8.2l8.7-36.3L44.2 54.4h-2.3L30 23.7Z"
+};
+const propostas = [
+  ["M4 67C18 40 14 5 55 4 34 11 22 27 19 45 32 33 44 29 57 30 34 39 23 50 16 67Z","M20 67Q31 44 65 36 43 49 32 67Z"],
+  ["m4 64 13-58 19 50 28-50-13 58","m10 37 39-30H18M12 39l25-2"],
+  [iniciais.f, iniciais.m]
+];
+const nome = "Felipe Modas";
+const larguraNome = Object.values([...nome].map(c => c === " " ? 15 : letras[c].w)).reduce((a,b) => a+b, 0);
+const quadros = {
+  logo: [larguraNome + 90, 88],
+  wordmark: [larguraNome + 3, 88],
+  monogram: [70,65],
+  compact: [235,126],
+  favicon: [80,80],
+  "apple-touch-icon": [80,80],
+  aplicacoes: [940,450],
+  exploracoes: [480,150]
+};
+function grupo(ctx,x,y,escala,desenhar) {
+  ctx.save();
+  ctx.translate(x,y);
+  ctx.scale(escala,escala);
+  desenhar();
+  ctx.restore();
+}
+function pintar(ctx, traçado) { ctx.fill(new Path2D(traçado)); }
+function escrever(ctx) {
+  let x = 0;
+  for (const letra of nome) {
+    if (letra === " ") { x += 15; continue; }
+    grupo(ctx,x,0,1,()=>pintar(ctx,letras[letra].d));
+    x += letras[letra].w;
+  }
+}
+function simbolo(ctx) {
+  pintar(ctx,iniciais.f);
+  pintar(ctx,iniciais.m);
+}
+function horizontal(ctx) {
+  grupo(ctx,-4,0,1.05,()=>simbolo(ctx));
+  grupo(ctx,85,0,1,()=>escrever(ctx));
+}
+function amostras(ctx) {
+  ctx.fillStyle = "#faf8f1"; ctx.fillRect(0,0,940,450);
+  ctx.fillStyle = "#202020"; ctx.fillRect(0,245,650,205);
+  ctx.fillStyle = "#955a3a"; ctx.fillRect(650,0,290,450);
+  ctx.fillStyle = "#202020"; grupo(ctx,67,85,.96,()=>horizontal(ctx));
+  ctx.fillStyle = "#ffffff"; grupo(ctx,128,316,.74,()=>horizontal(ctx));
+  grupo(ctx,786,235,1,()=>{
+    ctx.rotate(-Math.PI/18);
+    const fio = new Path2D("M0-244v142");
+    ctx.strokeStyle="#202020"; ctx.lineWidth=3; ctx.stroke(fio);
+    ctx.fillStyle="#e4d7c8"; pintar(ctx,"m-67-93 27-28h80l27 28V99H-67Z");
+    ctx.fillStyle="#955a3a"; ctx.beginPath(); ctx.arc(0,-102,5.5,0,Math.PI*2); ctx.fill();
+    ctx.lineWidth=2; ctx.stroke(fio);
+    ctx.fillStyle="#202020"; grupo(ctx,-38,-23,.99,()=>simbolo(ctx));
+  });
+}
+function estudos(ctx) {
+  ctx.fillStyle = "#faf8f1"; ctx.fillRect(0,0,480,150); ctx.fillStyle = "#202020";
+  propostas.forEach((itens,i)=>grupo(ctx,[39,185,348][i], [37,41,36][i],1,()=>{
+    for (const item of itens) {
+      const traco = new Path2D(item);
+      if (i === 1) {ctx.strokeStyle="#202020"; ctx.lineWidth=3.6; ctx.lineJoin="round"; ctx.stroke(traco);}
+      else ctx.fill(traco);
+    }
+  }));
+}
+function desenhar(tela, formato, cor, largura) {
+  const [w,h] = quadros[formato];
+  tela.width=largura; tela.height=Math.round(largura*h/w);
+  const ctx=tela.getContext("2d"); ctx.scale(tela.width/w,tela.height/h); ctx.fillStyle=cor;
+  switch (formato) {
+    case "logo": horizontal(ctx); break;
+    case "wordmark": grupo(ctx,1,0,1,()=>escrever(ctx)); break;
+    case "monogram": grupo(ctx,-4,-2,1,()=>simbolo(ctx)); break;
+    case "compact": grupo(ctx,78,-1,1,()=>simbolo(ctx)); grupo(ctx,3,81,229/larguraNome,()=>escrever(ctx)); break;
+    case "favicon": case "apple-touch-icon":
+      ctx.fillStyle="#202020"; ctx.beginPath();
+      if (formato === "favicon") ctx.roundRect(0,0,80,80,14); else ctx.rect(0,0,80,80);
+      ctx.fill(); ctx.fillStyle="#faf8f1"; grupo(ctx,4.5,8.5,.91,()=>simbolo(ctx)); break;
+    case "aplicacoes": amostras(ctx); break;
+    case "exploracoes": estudos(ctx); break;
+  }
+}
+</script>
+<script>
+const modelo=document.getElementById("modelo"), cor=document.getElementById("cor"), largura=document.getElementById("largura");
+const tela=document.getElementById("tela"), fundo=document.getElementById("fundo"), controles=document.getElementById("controles");
+function atualizar() {
+  if (!largura.validity.valid) return;
+  desenhar(tela,modelo.value,cor.value,Number(largura.value));
+  fundo.classList.toggle("escuro",cor.value==="#ffffff");
+}
+controles.addEventListener("input",atualizar);
+controles.addEventListener("submit",evento=>{
+  evento.preventDefault(); atualizar();
+  tela.toBlob(blob=>{const url=URL.createObjectURL(blob), a=document.createElement("a"); a.href=url; a.download="felipe-modas-"+modelo.value+"-"+largura.value+".png"; a.click(); setTimeout(()=>URL.revokeObjectURL(url),3000);},"image/png");
+}); atualizar();
+</script></body></html>
