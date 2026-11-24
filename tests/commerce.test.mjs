@@ -215,6 +215,7 @@ test('checkout PSP somente cartão usa token, customer e card_id sem Pix nem dad
   assert.equal(client.opts.body.document,person.cpf);
   assert.deepEqual(Object.keys(card.opts.body).sort(),['billing_address','token']);
   assert.equal(order.opts.body.customer_id,'cus_Example');
+  assert.equal(order.opts.body.shipping.recipient_phone,'55'+person.phone.replace(/[^0-9]/g,''));
   assert.equal(order.opts.body.payments[0].credit_card.card_id,'card_Example');
   assert.equal(order.opts.body.payments[0].credit_card.installments,1);
   assert.equal(JSON.stringify(f.ledger).includes('token_TestHolder'),false);
@@ -269,18 +270,18 @@ test('interrupção antes da cobrança libera a reserva sem cancelar pedido envi
   const order=await reconcile(expired,await f.deps.openLedger(),initial,()=>{throw Error('Nenhum pedido enviado');});
   assert.equal(order.state,'canceled');
 });
-test('422 validado do primeiro envio libera estoque; falha técnica conserva reserva',async t=>{
+test('400 e 422 estruturados no primeiro envio liberam estoque; falha técnica conserva reserva',async t=>{
   const {pagarme}=await import('../commerce/provider.mjs');
   let status=422;
   t.mock.method(globalThis,'fetch',async()=>Response.json({message:'The request is invalid.',errors:{'order.customer.name':['invalid']}},{status}));
-  for(const [http,expected] of [[422,'canceled'],[500,'sending'],[409,'sending']]) {
+  for(const [http,expected] of [[400,'canceled'],[422,'canceled'],[500,'sending'],[409,'sending']]) {
     status=http;
     const f=cardFixture();
     const base=f.deps.pagarme;
     f.deps.pagarme=(cfg,path,opts)=>path==='orders'?pagarme(cfg,path,opts):base(cfg,path,opts);
     const result=await requestJson(directBody('card',{cardToken:'token_ValidationTest'}),f.deps);
     assert.equal(result.orderState,expected);assert.ok(result.orderToken);
-    if(http===422) assert.equal(calculate(normalizeRequest({...input,coupon:''}),f.ledger,initial).lines[0].quantity,2);
+    if(expected==='canceled') assert.equal(calculate(normalizeRequest({...input,coupon:''}),f.ledger,initial).lines[0].quantity,2);
     else assert.throws(()=>calculate(normalizeRequest({...input,coupon:''}),f.ledger,initial),/quantidade/);
   }
 });

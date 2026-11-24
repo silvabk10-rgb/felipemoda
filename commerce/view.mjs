@@ -1,3 +1,6 @@
+import {checkoutFailure} from '../store/order-status.mjs';
+import {paymentFailure} from './payment.mjs';
+
 const escape = value => String(value ?? '').replace(/[<>&"']/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&#39;'}[c]));
 const money = cents => (cents/100).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
 const labels={draft:'Pedido não finalizado',sending:'Aguardando o provedor',pending:'Pagamento pendente',paid:'Pagamento aprovado',declined:'Pagamento recusado',canceled:'Pagamento cancelado',refunded:'Pagamento estornado',partially_refunded:'Estorno parcial',disputed:'Pagamento contestado'};
@@ -10,7 +13,10 @@ function summary(order) {
 export function checkoutPage(order,message='',sandbox=false,location='') {
   let content=message?'<p role="alert">'+escape(message)+'</p>':'';
   if(order) {
-    content+='<small>Pedido '+escape(order.id)+'</small><h1>'+labels[order.state]+'</h1>'+summary(order);
+    const failure=checkoutFailure(order.state,paymentFailure(order));
+    content+='<small>Pedido '+escape(order.id)+'</small><h1>'+(failure?'Pagamento não iniciado':labels[order.state])+'</h1>';
+    if(failure) content+='<p>'+escape(failure)+'</p><p><a href="/sacola/">Voltar à sacola</a></p>';
+    content+=summary(order);
     if(order.state==='draft') content+='<p><a href="/checkout/">Ir para o checkout</a></p>';
     if(['sending','pending'].includes(order.state)) content+='<p><a href="'+escape(location)+'">Atualizar situação do pagamento</a></p>';
     if(order.state==='sending') content+='<p>O pedido está reservado enquanto consultamos a confirmação. Guarde este link.</p>';

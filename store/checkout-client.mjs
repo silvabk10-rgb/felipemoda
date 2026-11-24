@@ -3,6 +3,7 @@ import {esc,money} from './core.mjs';
 import {keys,load,save,cartLines,migrateBag} from './bag.mjs';
 import {commerceRequest as request} from './commerce-client.mjs';
 import {shippingChoices} from './checkout.mjs';
+import {checkoutFailure} from './order-status.mjs';
 
 export const normalizeCep = value => String(value??'').trim().replace(/^(\d{5})-(\d{3})$/,'$1$2');
 export const validCep = value => /^\d{8}$/.test(normalizeCep(value));
@@ -39,7 +40,7 @@ const orderTokenValid=t=>typeof t==='string'&&/^fm_[A-Za-z0-9_-]{26}\.[A-Za-z0-9
 const activeStates=new Set(['pending','sending']);
 const states={draft:'Confira seu pedido',sending:'Verificando seu pagamento',pending:'Pagamento pendente',paid:'Pagamento aprovado',
   declined:'Pagamento recusado',canceled:'Pagamento cancelado',refunded:'Pagamento estornado',partially_refunded:'Estorno parcial',disputed:'Pagamento contestado'};
-const stateText={sending:'Seu pedido foi enviado. A confirmação será consultada automaticamente.',paid:'Recebemos a confirmação do pagamento do seu pedido.',
+const stateText={sending:'Estamos verificando se o pedido foi recebido. Aguarde a confirmação antes de tentar pagar novamente.',paid:'Recebemos a confirmação do pagamento do seu pedido.',
   declined:'O pagamento foi recusado. Você pode voltar à sacola e tentar novamente.',canceled:'O pagamento deste pedido foi cancelado.',
   refunded:'O pagamento deste pedido foi estornado.',partially_refunded:'Parte do valor deste pedido foi estornada.',disputed:'A contestação deste pagamento está em análise.'};
 const digest=async value=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(value))),v=>v.toString(16).padStart(2,'0')).join('');
@@ -148,7 +149,7 @@ export function initCheckout(doc=document,{mountCard=mountCardPayment}={}) {
     controls();
   }
   function statusUrl(t){
-    const url=new URL(location.href);url.search='';url.hash='pedido='+t;history.replaceState(null,'',url.href);
+    const url=new URL(location.href);url.search='';url.hash=t?'pedido='+t:'';history.replaceState(null,'',url.href);
   }
   function persistToken(t){
     activeToken=t;statusUrl(t);mode('order');clearTimeout(timer);++version;
@@ -229,17 +230,19 @@ export function initCheckout(doc=document,{mountCard=mountCardPayment}={}) {
       location.replace('/.netlify/functions/pagamento?t='+encodeURIComponent(activeToken));
       return;
     }
-    const viewState=JSON.stringify([data.orderId,state,data.totalCents,data.shippingCents]);
+    const failure=checkoutFailure(state,data.paymentFailure);
+    const viewState=JSON.stringify([data.orderId,state,data.paymentFailure,data.totalCents,data.shippingCents]);
     clearPoll();
     if(activeStates.has(state)&&!doc.hidden)poll=setTimeout(status,15000);
     if(viewState===displayedStatus)return;
     displayedStatus=viewState;
     const waitText=state==='pending'?'A operadora está analisando o pagamento. A confirmação será consultada automaticamente.':(stateText[state]||'Consulte a situação do pedido.');
-    orderPanel.innerHTML='<p data-order-ref>Pedido '+esc(data.orderId||'')+'</p><h2>'+esc(states[state]||'Situação do pedido')+'</h2><p>'+esc(waitText)+'</p>'+
+    orderPanel.innerHTML='<p data-order-ref>Pedido '+esc(data.orderId||'')+'</p><h2>'+esc(failure?'Pagamento não iniciado':states[state]||'Situação do pedido')+'</h2><p>'+esc(failure||waitText)+'</p>'+
       (validQuote(data)?'<dl><div><dt>Entrega'+(data.shippingLabel?' · '+esc(data.shippingLabel):'')+'</dt><dd>'+money(data.shippingCents)+'</dd></div><div class="co-grand"><dt>Total</dt><dd>'+money(data.totalCents)+'</dd></div></dl>':'')+
       '<nav>'+
       (activeStates.has(state)||state==='draft'?'<button class="co-secondary" type="button" data-refresh>Atualizar pagamento</button>':'')+
-      (['declined','canceled','refunded'].includes(state)?'<button class="co-secondary" type="button" data-retry>Voltar à sacola</button>':'')+
+      (failure?'<button class="co-secondary" type="button" data-restart>Tentar pagamento novamente</button>':
+        ['declined','canceled','refunded'].includes(state)?'<button class="co-secondary" type="button" data-retry>Voltar à sacola</button>':'')+
       '<a class="co-text-link" href="/atendimento/">Atendimento</a></nav><p data-order-notice role="status"></p>';
     if(state==='paid')finishPaidAttempt(activeToken,products);
   }
@@ -258,11 +261,26 @@ export function initCheckout(doc=document,{mountCard=mountCardPayment}={}) {
       clearPoll();if(!doc.hidden && (!order||activeStates.has(order.orderState)) && e.status!==404)poll=setTimeout(status,30000);
     } finally {statusBusy=false;}
   }
-  orderPanel.addEventListener('click',async e=>{
+  function clearFinishedAttempt(){
+    const attempt=load(keys.checkout,null,true);
+    if (activeToken && attempt?.orderToken===activeToken) save(keys.checkout,null,true);
+  }
+  orderPanel.addEventListener('click',e=>{
     const b=e.target.closest('button');if(!b)return;
     if(b.hasAttribute('data-refresh'))return status();
-    if(b.hasAttribute('data-retry')){save(keys.checkout,null,true);location.replace('/sacola/');return;}
-
+    if(b.hasAttribute('data-retry')){clearFinishedAttempt();location.replace('/sacola/');return;}
+    if(!b.hasAttribute('data-restart') || !activeToken || busy || !checkoutFailure(order?.orderState,order?.paymentFailure))return;
+    clearFinishedAttempt();
+    if(!card){location.replace('/checkout/');return;}
+    clearPoll();
+    ++statusSerial;
+    activeToken=null;order=null;displayedStatus='';
+    statusUrl(null);
+    notice('');
+    card.clear?.();
+    updateBag();
+    scheduleQuote();
+    if(rows.length)form.querySelector('[autocomplete="cc-number"]')?.focus();
   });
   form.addEventListener('input',e=>{
     const k=e.target.name;if(addressKeys.includes(k))touched.add(k);

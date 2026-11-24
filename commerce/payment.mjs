@@ -1,5 +1,21 @@
-import {abandonedBeforeDispatch,fingerprint,readToken,reject,reserve} from './domain.mjs';
+import {abandonedBeforeDispatch,cancelAbandonedBeforeDispatch,fingerprint,readToken,reject,reserve} from './domain.mjs';
 import {applyProvider,InvalidProviderOrder,providerPayload} from './provider.mjs';
+
+function upstreamStatus(error) {
+  const status=error?.upstreamStatus;
+  return Number.isInteger(status) && status>=400 && status<=599 ? status : null;
+}
+
+function canDispatch(current,claimed) {
+  return current.state==='sending' && !current.providerId && current.dispatchedAt===claimed.dispatchedAt;
+}
+
+function logPaymentFailure(order,stage,error) {
+  // O detalhe retornado pela adquirente pode conter dados do comprador.
+  console.warn('Felipe Modas · envio de pagamento',JSON.stringify({
+    orderId:order.id,stage,status:upstreamStatus(error)
+  }));
+}
 
 export function reserveForCustomer(state,id,person,cfg,ip='') {
   const buyer={
@@ -46,7 +62,7 @@ export async function reconcile(order,ledger,cfg,provider) {
     if(!abandonedBeforeDispatch(order,cfg.now())) return order;
     return ledger.change(state=>{
       const current=state.orders[order.id];
-      if(abandonedBeforeDispatch(current,cfg.now())) current.state='canceled';
+      cancelAbandonedBeforeDispatch(current,cfg.now());
       return current;
     });
   }
@@ -65,14 +81,17 @@ export async function reconcile(order,ledger,cfg,provider) {
 }
 
 async function prepareCard(order,person,token,ledger,cfg,provider) {
+  const claimed=order;
   const update=patch=>ledger.change(state=>{
-    Object.assign(state.orders[order.id],patch);
-    return state.orders[order.id];
+    const current=state.orders[order.id];
+    if (canDispatch(current,claimed)) Object.assign(current,patch);
+    return current;
   });
   if (!order.providerCustomerId) {
     const record=await provider(cfg,'customers',{id:order.id+'-customer',body:person});
     if (!/^cus_[a-z0-9]+$/i.test(record?.id)) reject('provider','Não foi possível validar o cadastro do comprador.',503);
     order=await update({providerCustomerId:record.id});
+    if (!canDispatch(order,claimed)) return order;
   }
   if (!order.providerCardId) {
     const record=await provider(cfg,'customers/'+order.providerCustomerId+'/cards',{id:order.id+'-card',
@@ -107,19 +126,28 @@ export async function submitPayment(order,person,ledger,cfg,provider,cardToken) 
   try {
     order=await prepareCard(order,person,cardToken,ledger,cfg,provider);
   } catch(error) {
-    // Preparar um cartão na carteira não cria um pedido. Libere a reserva se nenhum envio de cobrança ocorreu.
-    const current=await ledger.change(data=>{
+    // O cadastro na carteira é anterior ao envio do pedido.
+    const result=await ledger.change(data=>{
       const saved=data.orders[order.id];
-      if(saved.state==='sending' && !saved.gatewaySentAt) saved.state='canceled';
-      return saved;
+      if (!canDispatch(saved,claim.order)) return {current:saved,stage:'preparation_inconclusive'};
+      const stage=saved.providerCustomerId
+        ? (upstreamStatus(error)===412?'card_verification':'card_preparation')
+        : 'customer_preparation';
+      if (!saved.gatewaySentAt) {
+        saved.state='canceled';
+        saved.paymentFailure=stage;
+      }
+      return {current:saved,stage};
     });
-    if(current.state==='canceled') return current;
+    logPaymentFailure(order,result.stage,error);
+    if (!canDispatch(result.current,claim.order)) return result.current;
     throw error;
   }
   const dispatch=await ledger.change(data=>{
     const current=data.orders[order.id];
-    if (current.state!=='sending') return {send:false,order:current};
+    if (!canDispatch(current,claim.order)) return {send:false,order:current};
     const firstSend=!current.gatewaySentAt && current.dispatchVersion===2;
+    if (firstSend) current.providerPayloadVersion ??= 2;
     current.gatewaySentAt??=cfg.now();
     current.gatewaySendCount=(current.gatewaySendCount??0)+1;
     return {send:true,firstSend,order:current};
@@ -129,19 +157,37 @@ export async function submitPayment(order,person,ledger,cfg,provider,cardToken) 
     const remote=await provider(cfg,'orders',{id:order.id,body:providerPayload(dispatch.order,person)});
     return await saveRemote(claim.order,remote,ledger,cfg.now());
   } catch(error) {
+    logPaymentFailure(order,error instanceof InvalidProviderOrder?'order_validation':'order_inconclusive',error);
     if (!(error instanceof InvalidProviderOrder) || !dispatch.firstSend) throw error;
     return ledger.change(data=>{
       const current=data.orders[order.id];
-      if (current.state==='sending' && !current.providerId && current.gatewaySendCount===1) current.state='canceled';
+      if (canDispatch(current,claim.order) && current.gatewaySendCount===1) {
+        current.state='canceled';
+        current.paymentFailure='order_validation';
+      }
       return current;
     });
   }
 }
 
+export function paymentFailure(order) {
+  if (order.state!=='canceled') return null;
+  if (order.paymentFailure) return order.paymentFailure;
+  if (order.dispatchVersion!==2 || order.providerId) return null;
+  // Nas versões anteriores, somente a rejeição 422 do primeiro envio encerrava
+  // um pedido cujo POST já fora iniciado, sem criar uma referência remota.
+  if (order.gatewaySentAt) return order.gatewaySendCount===1?'order_validation':null;
+  if (order.providerCardId) return 'interrupted_before_dispatch';
+  if (order.providerCustomerId) return 'card_preparation';
+  return 'not_dispatched';
+}
+
 export function privateStatus(order,token) {
   const quote=order.quote;
+  const failure=paymentFailure(order);
   return {
     orderId:order.id,orderToken:token,orderState:order.state,paymentMethod:order.paymentMethod??'pix',
+    ...(failure?{paymentFailure:failure}:{}),
     subtotalCents:quote.subtotalCents,discountCents:quote.discountCents,
     shippingCents:quote.shippingCents,totalCents:quote.totalCents,
     shippingMethod:quote.shippingMethod ?? null,shippingLabel:quote.shippingLabel ?? 'Entrega'
